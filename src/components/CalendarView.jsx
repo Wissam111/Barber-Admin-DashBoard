@@ -1,11 +1,10 @@
-import { useState } from "react";
+import React, { Component } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-function App() {
-  const [date, setDate] = useState(new Date());
 
+function CalendarView() {
   return (
-    <div className="app">
+    <div className="calendar-container">
       <div className="calendar-container">
         <Calendar
           calendarType={"Hebrew"}
@@ -21,4 +20,4 @@ function App() {
   );
 }
 
-export default App;
+export default CalendarView;
