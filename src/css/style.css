@@ -1,104 +1,208 @@
-.react-calendar {
-  width: 400px;
-  max-width: 100%;
-  background-color: #fff;
-  color: #222;
-  border-radius: 8px;
-  -webkit-box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-          box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.125em;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;1,300&display=swap");
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  border: 2px solid orange;
 }
 
-.react-calendar__navigation button {
-  color: #6f48eb;
-  min-width: 44px;
-  background: none;
-  font-size: 16px;
-  margin-top: 8px;
+.calendar-container {
+  border-right: 2px solid wheat;
+  padding: 1em;
 }
 
-.react-calendar__navigation button:enabled:hover,
-.react-calendar__navigation button:enabled:focus {
-  background-color: #f8f8fa;
+.appointements-container {
+  border: 2px solid red;
+  width: 100%;
+  min-height: 100vh;
+  background-position: center;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(39, 42, 50, 0.7)), to(rgba(35, 37, 45, 0.7))), url("../imgs/back1.jpg");
+  background-image: linear-gradient(rgba(39, 42, 50, 0.7), rgba(35, 37, 45, 0.7)), url("../imgs/back1.jpg");
 }
 
-.react-calendar__navigation button[disabled] {
-  background-color: #f0f0f0;
+.day-container {
+  width: 100%;
+  height: 100%;
+  margin-left: 1em;
 }
 
-abbr[title] {
+.customer-container {
+  width: 20%;
+  height: 30vh;
+  margin: 20px 10px;
+  -webkit-box-shadow: 2px 1px 10px 1px #cdbfbf;
+          box-shadow: 2px 1px 10px 1px #cdbfbf;
+  position: relative;
+  background: white;
+  border-radius: 0.5em;
+}
+
+.customer-container ul {
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+}
+
+.closeBtn {
+  position: absolute;
+  right: 0;
+  margin: 5px;
+  border-radius: 0.5em;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.fa-phone a {
   text-decoration: none;
+  color: black;
+  margin-left: 1em;
+  letter-spacing: 2px;
 }
 
-/* .react-calendar__month-view__days__day--weekend {
-    color: #d10000;
-   } */
-.react-calendar__tile:enabled:hover,
-.react-calendar__tile:enabled:focus {
-  background: #f8f8fa;
-  color: #6f48eb;
-  border-radius: 6px;
+.dateDisplay {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1em;
 }
 
-.react-calendar__tile--now {
-  background: #6f48eb33;
-  border-radius: 6px;
+.dateDisplay .fa-calendar span,
+.dateDisplay .fa-clock-o span {
+  margin-left: 0.5em;
+}
+
+.page-container {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 60vh;
+}
+
+.navbar-container {
+  width: 100%;
+  height: 10vh;
+  background-position: center;
+  -webkit-box-shadow: 0.1px 0.2px 10px 0.2px #edc57d;
+          box-shadow: 0.1px 0.2px 10px 0.2px #edc57d;
+  margin-bottom: 1em;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(39, 42, 50, 0.7)), to(rgba(35, 37, 45, 0.7)));
+  background-image: linear-gradient(rgba(39, 42, 50, 0.7), rgba(35, 37, 45, 0.7));
+  background-position: center;
+  background-size: cover;
+}
+
+.navbar-container ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 2em;
+  list-style: none;
+}
+
+.nav-link {
+  font-size: 1.1rem;
+  color: black;
+  border: 2px solid lightblue;
+  text-decoration: none;
+  padding: 0.5em;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  color: white;
+  background: radial-gradient(ellipse at center, #545252 0, rgba(75, 251, 181, 0) 100%);
+}
+
+.nav-link:hover {
+  background: radial-gradient(ellipse at center, #4bfb68 0, rgba(75, 251, 181, 0) 100%);
+}
+
+.form-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1em;
+  font-size: 1.4rem;
   font-weight: bold;
-  color: #6f48eb;
-}
-
-.react-calendar__tile--now:enabled:hover,
-.react-calendar__tile--now:enabled:focus {
-  background: #6f48eb33;
-  border-radius: 6px;
-  font-weight: bold;
-  color: #6f48eb;
-}
-
-.react-calendar__tile--hasActive:enabled:hover,
-.react-calendar__tile--hasActive:enabled:focus {
-  background: #f8f8fa;
-}
-
-.react-calendar__tile--active {
-  background: #6f48eb;
-  border-radius: 6px;
-  font-weight: bold;
   color: white;
+  width: 30%;
+  margin: 1em;
+  text-align: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-.react-calendar__tile--active:enabled:hover,
-.react-calendar__tile--active:enabled:focus {
-  background: #6f48eb;
-  color: white;
+.form-wrapper .submitBtn {
+  width: 20%;
+  height: 5vh;
+  cursor: pointer;
 }
 
-.react-calendar--selectRange .react-calendar__tile--hover {
-  background-color: #f8f8fa;
+.form-wrapper .start,
+.form-wrapper .end {
+  padding: 1em;
 }
 
-.react-calendar__tile--range {
-  background: #f8f8fa;
-  color: #6f48eb;
-  border-radius: 0;
+.form-wrapper .dateshow {
+  border-bottom: 2px solid black;
+  text-align: center;
+  width: 50%;
+  color: orange;
 }
 
-.react-calendar__tile--rangeStart {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  border-top-left-radius: 6px;
-  border-bottom-left-radius: 6px;
-  background: #6f48eb;
-  color: white;
+.appointsAdded {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1em;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
-.react-calendar__tile--rangeEnd {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
-  background: #6f48eb;
-  color: white;
+.appoint-wrapper {
+  min-width: 100px;
+  height: 5vh;
+  font-size: 1rem;
+  text-align: center;
+  position: relative;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-shadow: 2px 1px 10px 1px #625e5e;
+          box-shadow: 2px 1px 10px 1px #625e5e;
+  background: #766d5b;
+  border-radius: 1em;
+}
+
+.appoint-wrapper .cbtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 50%;
+  background: none;
+  border: none;
+}
+
+.appoint-wrapper .timeDisplay {
+  margin: 0;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
 }
 /*# sourceMappingURL=style.css.map */
