@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
-  border: 2px solid orange;
+  // border: 2px solid orange;
   // height: 100vh;
 }
 .calendar-container {
@@ -11,7 +11,7 @@ body {
   padding: 1em;
 }
 .appointements-container {
-  border: 2px solid red;
+  // border: 2px solid red;
   width: 100%;
   min-height: 100vh;
   // display: flex;
@@ -146,11 +146,6 @@ body {
   text-align: center;
   flex-direction: column;
   align-items: center;
-  .submitBtn {
-    width: 20%;
-    height: 5vh;
-    cursor: pointer;
-  }
 
   .start,
   .end {
@@ -172,8 +167,8 @@ body {
   justify-content: center;
 }
 .appoint-wrapper {
-  min-width: 100px;
-  height: 5vh;
+  min-width: 110px;
+  height: 3vh;
   font-size: 1rem;
   text-align: center;
   position: relative;
@@ -181,6 +176,7 @@ body {
   box-shadow: 2px 1px 10px 1px rgb(98, 94, 94);
   background: rgb(118, 109, 91);
   border-radius: 1em;
+  padding: 10px 0 0 0;
 
   .cbtn {
     position: absolute;
@@ -195,10 +191,66 @@ body {
   }
   .timeDisplay {
     margin: 0;
-
     width: 100%;
-
     position: absolute;
     bottom: 0;
   }
+}
+
+.update-apponits {
+  display: flex;
+  width: 100%;
+  // border: 2px solid red;
+}
+.workingdates-container {
+  // border: 2px solid red;
+  border-right: 4px solid black;
+  margin-right: 2em;
+  width: 40%;
+}
+
+.workingdates-container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1em;
+  align-items: center;
+
+  .dates-ad {
+    display: flex;
+    margin: 2em;
+    color: white;
+    flex-wrap: wrap;
+    gap: 1em;
+    // border: 2px solid red;
+  }
+}
+.addDate {
+  // border: 2px solid red;
+  width: 60%;
+  text-align: center;
+  font-size: 1.4rem;
+  border-bottom: 2px solid black;
+  padding-bottom: 0.3em;
+  label {
+    color: orange;
+    font-weight: bold;
+    margin-right: 0.5em;
+  }
+}
+
+.submitBtn {
+  min-width: 90px;
+  height: 34px;
+  // background: none;
+  background: red;
+  cursor: pointer;
+  color: wheat;
+  background: radial-gradient(
+    ellipse at center,
+    #464746 0,
+    rgba(75, 251, 181, 0) 100%
+  );
+}
+.subBtn {
+  background: rgb(42, 40, 40);
 }

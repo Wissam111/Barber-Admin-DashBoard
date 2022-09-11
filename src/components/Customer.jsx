@@ -1,12 +1,11 @@
-import React, { Component } from "react";
-
+import React, { Component, useContext } from "react";
 function CustomerCard(props) {
   const { appointment, timeFormat, dateFormat } = props;
 
   return (
     <div className="customer-container">
       <button className="closeBtn">
-        <i class="fa fa-times"></i>
+        <i className="fa fa-times"></i>
       </button>
       <ul>
         <li className="cusName">
@@ -15,7 +14,7 @@ function CustomerCard(props) {
         <li>Service: {appointment.service}</li>
         <li className="dateDisplay">
           <i className="fa fa-calendar">
-            <span>{dateFormat(appointment.start_time)}</span>
+            <span>{dateFormat(appointment.start_time, "MM/DD/YYYY")}</span>
           </i>
           <i className="fa fa-clock-o">
             <span>{`${timeFormat(appointment.start_time)} - ${timeFormat(
@@ -24,7 +23,7 @@ function CustomerCard(props) {
           </i>
         </li>
         <li>
-          <i class="fa fa-phone">
+          <i className="fa fa-phone">
             <a href={"tel:" + appointment.customer.phone}>
               {appointment.customer.phone}
             </a>
