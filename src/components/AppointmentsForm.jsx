@@ -1,47 +1,55 @@
+import moment from "moment/moment";
 import React, { Component, useState } from "react";
 import { Fragment } from "react";
 import Appoint from "./Appoint";
 function AppointmentsForm(props) {
-  const { date, timeFormat, dateFormat, PostData } = props;
-  // const [time, setTime] = useState("start - end");
+  const { date, timeFormat, dateFormat, PostTime, workerDates } = props;
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
   const [appointsList, setAppointsList] = useState([]);
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   let start = event.target[0].value;
-  //   let end = event.target[1].value;
-  //   // if (appointsList.find((e) => e.start === start || e.end == end)) {
-  //   //   return;
-  //   // }
-  //   // let momentDate = dateFormat(date, "yyyy-MM-ddTHH:mm:ssZ");
-  //   // let appoint = {
-  //   //   worker: `${appointsList[0].worker._id}`,
-  //   //   workingDate: `${momentDate}`,
-  //   //   start_time: `${start}`,
-  //   //   end_time: `${end}`,
-  //   // };
-  //   // PostData(appoint);
-  // };
 
-  const handleTime = (event) => {
-    event.preventDefault();
+  const handleTime = () => {
     const appList = [...appointsList];
     if (appointsList.find((e) => e.start === start || e.end == end)) {
       return;
     }
-    console.log(start);
-    console.log(end);
     appList.push({ start: start, end: end });
     setAppointsList(appList);
   };
 
-  // const handleStart = (event) => {
-  //   setStart(event.target.value);
-  // };
+  const handleDelete = (start_time) => {
+    let appoints = appointsList.filter((time) => {
+      return time.start != start_time;
+    });
+    setAppointsList(appoints);
+  };
+
+  function handleSubmit() {
+    if (workerDates.length == 0) {
+      return;
+    }
+    appointsList.forEach((appoint) => {
+      addTime(appoint.start, appoint.end);
+    });
+  }
+
+  function addTime(startTime, endTime) {
+    let format = "yyyy-MM-DDTHH:mm:ssZ";
+    let currDate = dateFormat(date, "yyyy-MM-DD");
+    let startDate = dateFormat(moment(currDate + " " + startTime), format);
+    let endDate = dateFormat(moment(currDate + " " + endTime), format);
+    let appoint = {
+      worker: "631b85b67fb916263fd33c34",
+      workingDate: `${workerDates[0]._id}`,
+      start_time: `${startDate}`,
+      end_time: `${endDate}`,
+    };
+
+    PostTime(appoint);
+  }
 
   return (
-    <form className="form-wrapper">
+    <div className="form-wrapper">
       {/* <div className="dateshow">{dateFormat(date, "MM/DD/YYYY")}</div> */}
       <div className="addDate">
         <label>{start + " - " + end}</label>
@@ -69,7 +77,9 @@ function AppointmentsForm(props) {
       </div>
 
       <div className="appointsAdded">
-        {appointsList.length > 0
+        {workerDates.length == 0
+          ? "This Date not Selected"
+          : appointsList.length > 0
           ? appointsList.map((appoint, id) => {
               return (
                 <Appoint
@@ -77,13 +87,16 @@ function AppointmentsForm(props) {
                   start_time={appoint.start}
                   end_time={appoint.end}
                   isDate={false}
+                  handleDelete={handleDelete}
                 />
               );
             })
           : "No Selected Times"}
       </div>
-      <button className="submitBtn subBtn">Submit</button>
-    </form>
+      <button className="submitBtn subBtn" onClick={handleSubmit}>
+        Submit
+      </button>
+    </div>
   );
 }
 

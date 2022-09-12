@@ -4,6 +4,7 @@ const APIContext = createContext();
 
 export function APIContextProvider({ children }) {
   const [data, setData] = useState([]);
+  const [workerDates, setWorkerDates] = useState([]);
 
   React.useEffect(() => {
     async function fetchData() {
@@ -18,24 +19,30 @@ export function APIContextProvider({ children }) {
         },
       };
       const res = await fetch(
-        "https://saloon-ibra-api.herokuapp.com/api/appointments?workerId=" +
+        "https://saloon-ibra-api.herokuapp.com/api/appointments",
+        config
+      );
+      const workerRes = await fetch(
+        "https://saloon-ibra-api.herokuapp.com/api/workers/working-dates?workerId=" +
           "631b85b67fb916263fd33c34",
         config
       );
       const _data = await res.json();
+      const workerDates = await workerRes.json();
       setData(_data.appointments);
+      setWorkerDates(workerDates.workingDates);
     }
     fetchData();
   }, []);
 
   return (
-    <APIContext.Provider value={{ data, PostData, PostDates }}>
+    <APIContext.Provider value={{ data, workerDates, PostTime, PostDates }}>
       {children}
     </APIContext.Provider>
   );
 }
 
-async function PostData(appoint) {
+async function PostTime(appoint) {
   let res = await fetch(
     "https://saloon-ibra-api.herokuapp.com/api/appointments",
     {
@@ -50,6 +57,7 @@ async function PostData(appoint) {
     }
   );
   const g = await res.json();
+  console.log(g);
 }
 
 async function PostDates(appoint) {
