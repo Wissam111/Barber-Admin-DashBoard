@@ -3,7 +3,7 @@ import React, { Component, useState } from "react";
 import { Fragment } from "react";
 import Appoint from "./Appoint";
 function AppointmentsForm(props) {
-  const { date, timeFormat, dateFormat, PostTime, workerDates } = props;
+  const { date, worker, timeFormat, dateFormat, PostTime, workerDates } = props;
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
   const [appointsList, setAppointsList] = useState([]);
@@ -39,7 +39,7 @@ function AppointmentsForm(props) {
     let startDate = dateFormat(moment(currDate + " " + startTime), format);
     let endDate = dateFormat(moment(currDate + " " + endTime), format);
     let appoint = {
-      worker: "631b85b67fb916263fd33c34",
+      worker: worker._id,
       workingDate: `${workerDates[0]._id}`,
       start_time: `${startDate}`,
       end_time: `${endDate}`,

@@ -1,7 +1,12 @@
 import React, { Component, useContext } from "react";
 function CustomerCard(props) {
   const { appointment, timeFormat, dateFormat } = props;
-
+  function isInThePast() {
+    const today = new Date();
+    const currentD = new Date(appointment.start_time);
+    today.setHours(0, 0, 0, 0);
+    return currentD < today;
+  }
   return (
     <div className="customer-container">
       <button className="closeBtn">
@@ -30,6 +35,9 @@ function CustomerCard(props) {
           </i>
         </li>
         <li>Status: {appointment.isActive ? "Started" : "not Started"}</li>
+        <li className="isPast-cta">
+          {isInThePast() ? "Appointment Over" : ""}
+        </li>
       </ul>
     </div>
   );

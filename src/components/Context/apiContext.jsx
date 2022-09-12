@@ -5,6 +5,7 @@ const APIContext = createContext();
 export function APIContextProvider({ children }) {
   const [data, setData] = useState([]);
   const [workerDates, setWorkerDates] = useState([]);
+  const [workers, setWorkers] = useState([]);
 
   React.useEffect(() => {
     async function fetchData() {
@@ -22,21 +23,51 @@ export function APIContextProvider({ children }) {
         "https://saloon-ibra-api.herokuapp.com/api/appointments",
         config
       );
-      const workerRes = await fetch(
-        "https://saloon-ibra-api.herokuapp.com/api/workers/working-dates?workerId=" +
-          "631b85b67fb916263fd33c34",
+      const workers = await fetch(
+        "https://saloon-ibra-api.herokuapp.com/api/workers",
+
         config
       );
       const _data = await res.json();
-      const workerDates = await workerRes.json();
+      const workersD = await workers.json();
       setData(_data.appointments);
-      setWorkerDates(workerDates.workingDates);
+      setWorkers(workersD.workers);
     }
     fetchData();
   }, []);
 
+  async function updateWorkerDates(workerId) {
+    const config = {
+      headers: {
+        Accept: "application/json",
+        phone: "0547973441",
+        password: "12345",
+        Authorization:
+          "Bearer " +
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFiODViNjdmYjkxNjI2M2ZkMzNjMzQiLCJpYXQiOjE2NjI4MDE0MTAsImV4cCI6MTY2MzA2MDYxMH0.wNMRzUIeYoFoSyiUiYyQzlj5shtQ-k0cGIIw-smnn9g",
+      },
+    };
+
+    const workerRes = await fetch(
+      "https://saloon-ibra-api.herokuapp.com/api/workers/working-dates?workerId=" +
+        workerId,
+      config
+    );
+    const workerDates = await workerRes.json();
+    setWorkerDates(workerDates.workingDates);
+  }
+
   return (
-    <APIContext.Provider value={{ data, workerDates, PostTime, PostDates }}>
+    <APIContext.Provider
+      value={{
+        data,
+        workerDates,
+        workers,
+        PostTime,
+        PostDates,
+        updateWorkerDates,
+      }}
+    >
       {children}
     </APIContext.Provider>
   );

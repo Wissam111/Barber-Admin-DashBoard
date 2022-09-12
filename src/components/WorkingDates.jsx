@@ -1,12 +1,9 @@
 import React, { Component, useState } from "react";
-import moment from "moment/moment";
-//date
 import Appoint from "./Appoint";
 
 function WorkingDates(props) {
-  const { date, dateFormat, PostDates } = props;
+  const { date, worker, dateFormat, PostDates } = props;
   const [datesList, setDatesList] = useState([]);
-
   function handleDate() {
     let datesL = [...datesList];
     let d = dateFormat(date, "MM/DD/YYYY");
@@ -23,16 +20,15 @@ function WorkingDates(props) {
 
     setDatesList(_dates);
   }
-
   function handleSubmit() {
+    console.log(worker);
     datesList.forEach((date) => {
       let d = dateFormat(date, "yyyy-MM-DDTHH:mm:ssZ");
-      PostDates({ workerId: "631b85b67fb916263fd33c34", date: d });
+      PostDates({ workerId: worker._id, date: d });
     });
 
     setDatesList([]);
   }
-
   return (
     <div className="workingdates-container">
       <div className="addDate">

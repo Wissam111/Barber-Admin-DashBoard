@@ -1,16 +1,22 @@
 import React, { Component, useContext, useState } from "react";
 import AppointmentsForm from "../AppointmentsForm";
-import APIContext from "../Context/apiContext";
-import FORMATContext from "../Context/formatContext";
 import moment from "moment/moment";
-import WorkingDates from "../WorkingDates";
+import WorkerView from "../WorkerView";
+import WorkingDates from "../WorkingDates.jsx";
+
 function AddAppointments(props) {
-  const { data, workerDates, PostTime, PostDates } = useContext(APIContext);
-  const { timeFormat, dateFormat } = useContext(FORMATContext);
   const [currentAppoints, setCurrentAppoints] = useState([]);
   const [datesList, setDatesList] = useState([]);
-  const { date } = props;
-
+  const {
+    date,
+    worker,
+    data,
+    workerDates,
+    PostTime,
+    PostDates,
+    timeFormat,
+    dateFormat,
+  } = props;
   React.useEffect(() => {
     function filterCurrentDayData() {
       let format = "MM/DD/YYYY";
@@ -30,15 +36,21 @@ function AddAppointments(props) {
   }, [date]);
   return (
     <div className="update-apponits">
-      <WorkingDates date={date} dateFormat={dateFormat} PostDates={PostDates} />
+      <WorkingDates
+        date={date}
+        worker={worker}
+        dateFormat={dateFormat}
+        PostDates={PostDates}
+      />
       <AppointmentsForm
         date={date}
-        appointsList={currentAppoints}
+        worker={worker}
         timeFormat={timeFormat}
         dateFormat={dateFormat}
         PostTime={PostTime}
         workerDates={datesList}
       />
+      <WorkerView worker={worker} />
     </div>
   );
 }

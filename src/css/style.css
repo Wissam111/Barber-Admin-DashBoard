@@ -18,15 +18,48 @@ body {
   background-image: linear-gradient(rgba(39, 42, 50, 0.7), rgba(35, 37, 45, 0.7)), url("../imgs/back1.jpg");
 }
 
-.day-container {
+.days-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   width: 100%;
   height: 100%;
+  gap: 3em;
   margin-left: 1em;
+  padding: 10px 0;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.day-container {
+  width: 24em;
+  height: 60vh;
+  overflow: scroll;
+  margin-left: 1em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow-x: hidden;
+  /* Hide horizontal scrollbar */
+  -webkit-box-shadow: 1px 2px 10px 1px #2b2b2a;
+          box-shadow: 1px 2px 10px 1px #2b2b2a;
+}
+
+.day-container h2 {
+  border-bottom: 2px solid orange;
+  color: white;
 }
 
 .customer-container {
-  width: 20%;
-  height: 30vh;
+  width: 80%;
+  min-height: 25vh;
   margin: 20px 10px;
   -webkit-box-shadow: 2px 1px 10px 1px #cdbfbf;
           box-shadow: 2px 1px 10px 1px #cdbfbf;
@@ -262,5 +295,50 @@ body {
 
 .subBtn {
   background: #2a2828;
+}
+
+.activeWorker {
+  background: radial-gradient(ellipse at center, #d69841 0, rgba(75, 251, 181, 0) 100%);
+}
+
+.chooseWorker {
+  font-size: 1.5rem;
+  color: #bd8b2d;
+  border-bottom: 2px solid black;
+}
+
+.workerView-container {
+  width: 20%;
+  height: 20vh;
+  position: relative;
+  -webkit-box-shadow: 1px 2px 10px 1px #2b2b2a;
+          box-shadow: 1px 2px 10px 1px #2b2b2a;
+}
+
+.workerView-container .workerImg {
+  width: 80px;
+  height: 70px;
+  position: absolute;
+  border-radius: 50%;
+  right: 1em;
+}
+
+.workerView-container .worker-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  list-style: none;
+  color: white;
+  gap: 1em;
+  letter-spacing: 1px;
+}
+
+.isPast-cta {
+  color: red;
+  text-align: center;
 }
 /*# sourceMappingURL=style.css.map */
