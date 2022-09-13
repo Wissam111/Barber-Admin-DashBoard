@@ -12,7 +12,7 @@ function AppointmentsView(props) {
         <th>Customer</th>
         <th>More Info</th>
       </tr>
-
+    
       {appointements.map((appoint) => {
         return (
           <CustomerRow
