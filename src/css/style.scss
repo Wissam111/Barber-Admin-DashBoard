@@ -31,6 +31,7 @@ body {
   margin-left: 1em;
   padding: 10px 0;
   flex-wrap: wrap;
+  position: relative;
 }
 .day-container {
   // border: 2px solid orange;
@@ -52,12 +53,12 @@ body {
 }
 
 .customer-container {
-  // border: 2px solid yellow;
-  width: 80%;
+  width: 20%;
   min-height: 25vh;
   margin: 20px 10px;
   box-shadow: 2px 1px 10px 1px rgb(205, 191, 191);
-  position: relative;
+
+  position: absolute;
   background: white;
   border-radius: 0.5em;
 
@@ -95,6 +96,17 @@ body {
     span {
       margin-left: 0.5em;
     }
+  }
+}
+.deleteAppoint-cta {
+  // border: 2px solid red;
+  text-align: center;
+  button {
+    color: white;
+    background: rgb(129, 17, 17);
+    border-radius: 0.5em;
+    height: 4vh;
+    width: 10em;
   }
 }
 
@@ -142,7 +154,6 @@ body {
   transition: 0.5s;
   color: white;
 
-
   background: radial-gradient(
     ellipse at center,
     #545252 0,
@@ -175,6 +186,7 @@ body {
 
   .start,
   .end {
+    color: white;
     padding: 1em;
   }
   .dateshow {
@@ -335,10 +347,10 @@ body {
   color: black !important;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 
-  tr {
-    background-color: #009879;
+  .mainRow {
+    background-color: #009879 !important;
     // color: #ffffff;
-    text-align: left;
+    // text-align: left;
   }
   th,
   td {
@@ -347,23 +359,29 @@ body {
 
   tr {
     border-bottom: 1px solid #dddddd;
-  }
-  tr:nth-of-type(even) {
     background-color: #f3f3f3;
   }
+
   tr:last-of-type {
     border-bottom: 2px solid #009879;
   }
 }
-.workerName{
+.workerName {
   background: rgb(152, 127, 102);
 }
-.noAppointsDay{
+.noAppointsDay {
   width: 20em;
   // border: 2px solid red;
   font-size: 1.2rem;
   text-align: center;
-  color:  white;
+  color: white;
   margin: 0;
   padding: 0;
 }
+
+.infoBtn {
+  cursor: pointer;
+  position: relative;
+}
+
+//------------------------------- Time Picker --------------------------//

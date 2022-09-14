@@ -26,6 +26,7 @@ body {
   padding: 10px 0;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  position: relative;
 }
 
 .day-container {
@@ -55,12 +56,12 @@ body {
 }
 
 .customer-container {
-  width: 80%;
+  width: 20%;
   min-height: 25vh;
   margin: 20px 10px;
   -webkit-box-shadow: 2px 1px 10px 1px #cdbfbf;
           box-shadow: 2px 1px 10px 1px #cdbfbf;
-  position: relative;
+  position: absolute;
   background: white;
   border-radius: 0.5em;
 }
@@ -104,6 +105,18 @@ body {
 .dateDisplay .fa-calendar span,
 .dateDisplay .fa-clock-o span {
   margin-left: 0.5em;
+}
+
+.deleteAppoint-cta {
+  text-align: center;
+}
+
+.deleteAppoint-cta button {
+  color: white;
+  background: #811111;
+  border-radius: 0.5em;
+  height: 4vh;
+  width: 10em;
 }
 
 .page-container {
@@ -177,6 +190,7 @@ body {
 
 .form-wrapper .start,
 .form-wrapper .end {
+  color: white;
   padding: 1em;
 }
 
@@ -354,9 +368,8 @@ body {
           box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
-.appointsview tr {
-  background-color: #009879;
-  text-align: left;
+.appointsview .mainRow {
+  background-color: #009879 !important;
 }
 
 .appointsview th,
@@ -366,9 +379,6 @@ body {
 
 .appointsview tr {
   border-bottom: 1px solid #dddddd;
-}
-
-.appointsview tr:nth-of-type(even) {
   background-color: #f3f3f3;
 }
 
@@ -387,5 +397,10 @@ body {
   color: white;
   margin: 0;
   padding: 0;
+}
+
+.infoBtn {
+  cursor: pointer;
+  position: relative;
 }
 /*# sourceMappingURL=style.css.map */

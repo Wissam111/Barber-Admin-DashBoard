@@ -22,10 +22,8 @@ function NavBar(props) {
         <label className="chooseWorker">Choose a Worker:</label>
         {props.workers.map((_worker) => {
           return (
-            <li>
+            <li key={_worker._id}>
               <Link
-                key={_worker._id}
-                id={_worker._id}
                 onClick={() => props.handleWorker(_worker)}
                 to="/add-appointments"
                 className={

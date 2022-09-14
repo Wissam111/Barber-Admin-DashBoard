@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect, createContext } from "react";
 
 const APIContext = createContext();
-
+const token =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFiODViNjdmYjkxNjI2M2ZkMzNjMzQiLCJpYXQiOjE2NjMwNjk1NDYsImV4cCI6MTY2NDc5NzU0Nn0.tHV03EvkHq95V_x3lDDLjZAo4xWf6g-qp5vG5zn_kEM";
 export function APIContextProvider({ children }) {
   const [data, setData] = useState([]);
   const [workerDates, setWorkerDates] = useState([]);
@@ -14,9 +15,7 @@ export function APIContextProvider({ children }) {
           Accept: "application/json",
           phone: "0547973441",
           password: "12345",
-          Authorization:
-            "Bearer " +
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFiODViNjdmYjkxNjI2M2ZkMzNjMzQiLCJpYXQiOjE2NjMwNjk1NDYsImV4cCI6MTY2NDc5NzU0Nn0.tHV03EvkHq95V_x3lDDLjZAo4xWf6g-qp5vG5zn_kEM",
+          Authorization: "Bearer " + token,
         },
       };
       const res = await fetch(
@@ -42,9 +41,7 @@ export function APIContextProvider({ children }) {
         Accept: "application/json",
         phone: "0547973441",
         password: "12345",
-        Authorization:
-          "Bearer " +
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFiODViNjdmYjkxNjI2M2ZkMzNjMzQiLCJpYXQiOjE2NjI4MDE0MTAsImV4cCI6MTY2MzA2MDYxMH0.wNMRzUIeYoFoSyiUiYyQzlj5shtQ-k0cGIIw-smnn9g",
+        Authorization: "Bearer " + token,
       },
     };
 
@@ -79,9 +76,7 @@ async function PostTime(appoint) {
     {
       headers: {
         "Content-Type": "application/json",
-        Authorization:
-          "Bearer " +
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFiODViNjdmYjkxNjI2M2ZkMzNjMzQiLCJpYXQiOjE2NjI4MDE0MTAsImV4cCI6MTY2MzA2MDYxMH0.wNMRzUIeYoFoSyiUiYyQzlj5shtQ-k0cGIIw-smnn9g",
+        Authorization: "Bearer " + token,
       },
       body: JSON.stringify(appoint),
       method: "POST",
@@ -97,9 +92,7 @@ async function PostDates(appoint) {
     {
       headers: {
         "Content-Type": "application/json",
-        Authorization:
-          "Bearer " +
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFiODViNjdmYjkxNjI2M2ZkMzNjMzQiLCJpYXQiOjE2NjI4MDE0MTAsImV4cCI6MTY2MzA2MDYxMH0.wNMRzUIeYoFoSyiUiYyQzlj5shtQ-k0cGIIw-smnn9g",
+        Authorization: "Bearer " + token,
       },
       body: JSON.stringify(appoint),
       method: "POST",

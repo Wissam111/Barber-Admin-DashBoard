@@ -1,15 +1,29 @@
 import React, { Component, useContext } from "react";
 function CustomerCard(props) {
-  const { appointment, timeFormat, dateFormat } = props;
+  const {
+    appointment,
+    timeFormat,
+    dateFormat,
+    handleCloseInfo,
+    position,
+    handleDeleteAppoint,
+  } = props;
   function isInThePast() {
     const today = new Date();
     const currentD = new Date(appointment.start_time);
     today.setHours(0, 0, 0, 0);
     return currentD < today;
   }
+
   return (
-    <div className="customer-container">
-      <button className="closeBtn">
+    <div
+      className="customer-container"
+      style={{
+        left: `${position.current.offsetLeft - 250}px`,
+        top: `${position.current.offsetTop - 20}px`,
+      }}
+    >
+      <button className="closeBtn" onClick={handleCloseInfo}>
         <i className="fa fa-times"></i>
       </button>
       <ul>
@@ -37,6 +51,9 @@ function CustomerCard(props) {
         <li>Status: {appointment.isActive ? "Started" : "not Started"}</li>
         <li className="isPast-cta">
           {isInThePast() ? "Appointment Over" : ""}
+        </li>
+        <li className="deleteAppoint-cta">
+          <button onClick={handleDeleteAppoint}>Delete</button>
         </li>
       </ul>
     </div>

@@ -8,7 +8,6 @@ function CalendarView(props) {
       <Calendar
         calendarType={"Hebrew"}
         onChange={props.setDate}
-        // onClickDay={handleChange}
         value={props.date}
         minDate={new Date(2022, 6, 1)}
       />

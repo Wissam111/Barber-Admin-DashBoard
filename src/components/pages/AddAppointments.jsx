@@ -1,11 +1,10 @@
 import React, { Component, useContext, useState } from "react";
-import AppointmentsForm from "../AppointmentsForm";
+import AppointmentsForm from "../WorkerForm/AppointmentsForm";
 import moment from "moment/moment";
-import WorkerView from "../WorkerView";
-import WorkingDates from "../WorkingDates.jsx";
+import WorkerView from "../WorkerForm/WorkerView";
+import WorkingDates from "../WorkerForm/WorkingDates.jsx";
 
 function AddAppointments(props) {
-  const [currentAppoints, setCurrentAppoints] = useState([]);
   const [datesList, setDatesList] = useState([]);
   const {
     date,
@@ -21,15 +20,11 @@ function AddAppointments(props) {
     function filterCurrentDayData() {
       let format = "MM/DD/YYYY";
       let d = moment.utc(date.toDateString()).format(format);
-      let _currAppointsList = data.filter((appoint) => {
-        let appDate = dateFormat(appoint.start_time, format);
-        return appDate == d && appoint.customer == null;
-      });
+
       let datesList = workerDates.filter((objDate) => {
         let appDate = dateFormat(objDate.date, format);
         return appDate == d;
       });
-      setCurrentAppoints(_currAppointsList);
       setDatesList(datesList);
     }
     filterCurrentDayData();

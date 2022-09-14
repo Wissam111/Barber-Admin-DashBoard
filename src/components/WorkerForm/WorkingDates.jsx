@@ -39,10 +39,10 @@ function WorkingDates(props) {
       </div>
       <div className="dates-ad">
         {datesList.length > 0
-          ? datesList.map((d, id) => {
+          ? datesList.map((d) => {
               return (
                 <Appoint
-                  key={id}
+                  key={d.id}
                   date={d}
                   handleDelete={handleDelete}
                   isDate={true}

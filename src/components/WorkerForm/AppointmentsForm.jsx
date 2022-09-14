@@ -2,6 +2,13 @@ import moment from "moment/moment";
 import React, { Component, useState } from "react";
 import { Fragment } from "react";
 import Appoint from "./Appoint";
+// import StaticTimePicker from "react-time-picker";
+import { Dayjs } from "dayjs";
+import TextField from "@mui/material/TextField";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+
 function AppointmentsForm(props) {
   const { date, worker, timeFormat, dateFormat, PostTime, workerDates } = props;
   const [start, setStart] = useState("");
@@ -10,10 +17,13 @@ function AppointmentsForm(props) {
 
   const handleTime = () => {
     const appList = [...appointsList];
-    if (appointsList.find((e) => e.start === start || e.end == end)) {
+    let _s = timeFormat(start);
+    let _e = timeFormat(end);
+    if (appointsList.find((e) => e.start === _s || e.end == _e)) {
       return;
     }
-    appList.push({ start: start, end: end });
+
+    appList.push({ start: _s, end: _e });
     setAppointsList(appList);
   };
 
@@ -51,39 +61,46 @@ function AppointmentsForm(props) {
   return (
     <div className="form-wrapper">
       {/* <div className="dateshow">{dateFormat(date, "MM/DD/YYYY")}</div> */}
+
+      <div className="start">
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <TimePicker
+            value={start}
+            onChange={(newValue) => {
+              setStart(newValue);
+            }}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
+      </div>
+      <div className="end">
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <TimePicker
+            id="timepicker"
+            cssClass="e-custom-style"
+            placeholder="Select a Time"
+            label="End Time"
+            value={end}
+            onChange={setEnd}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
+      </div>
       <div className="addDate">
-        <label>{start + " - " + end}</label>
+        <label>{timeFormat(start) + " - " + timeFormat(end)}</label>
         <button onClick={handleTime} className="submitBtn">
           Add Time
         </button>
-      </div>
-      <div className="start">
-        <label htmlFor="startTime">start time:</label>
-        <input
-          onChange={(event) => setStart(event.target.value)}
-          type="time"
-          id="startTime"
-          name="startTime"
-        />
-      </div>
-      <div className="end">
-        <label htmlFor="endTime">end time:</label>
-        <input
-          onChange={(event) => setEnd(event.target.value)}
-          type="time"
-          id="endTime"
-          name="endTime"
-        />
       </div>
 
       <div className="appointsAdded">
         {workerDates.length == 0
           ? "This Date not Selected"
           : appointsList.length > 0
-          ? appointsList.map((appoint, id) => {
+          ? appointsList.map((appoint) => {
               return (
                 <Appoint
-                  key={id}
+                  key={appoint.id}
                   start_time={appoint.start}
                   end_time={appoint.end}
                   isDate={false}
