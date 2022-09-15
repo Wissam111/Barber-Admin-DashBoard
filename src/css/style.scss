@@ -3,340 +3,137 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
-  // border: 2px solid orange;
-  // height: 100vh;
 }
-.calendar-container {
-  border-right: 2px solid wheat;
-  padding: 1em;
+
+//************************* HomeView ***********************//
+
+.home-containerBack {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid red;
+  background: #ff7e5f; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #feb47b,
+    #ff7e5f
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #feb47b,
+    #ff7e5f
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-.appointements-container {
+.homeView-container {
+  width: 70%;
+  height: 88vh;
   // border: 2px solid red;
-  width: 100%;
-  min-height: 100vh;
-  // display: flex;
-  // background-image: url("../imgs/back1.jpg");
-  background-position: center;
-  background-image: linear-gradient(
-      rgba(39, 42, 50, 0.7),
-      rgba(35, 37, 45, 0.7)
-    ),
-    url("../imgs/back1.jpg");
-}
-.days-container {
-  // display: flex;
-  width: 100%;
-  height: 100%;
-  gap: 3em;
-  margin-left: 1em;
-  padding: 10px 0;
-  flex-wrap: wrap;
-  position: relative;
-}
-.day-container {
-  // border: 2px solid orange;
-  width: 24em;
-  height: 60vh;
-  // border-left: 1px solid rgb(230, 189, 42);
-  overflow: scroll;
-  margin-left: 1em;
+  border-radius: 1em;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  // overflow-y: hidden; /* Hide vertical scrollbar */
-  overflow-x: hidden; /* Hide horizontal scrollbar */
-  box-shadow: 1px 2px 10px 1px rgb(43, 43, 42);
-  h2 {
-    border-bottom: 2px solid orange;
-    color: white;
-  }
+  //go back to this
+  background-color: rgb(245, 240, 240);
+  box-shadow: 1px 2px 10px 1.5px rgb(82, 80, 80);
 }
-
-.customer-container {
-  width: 20%;
-  min-height: 25vh;
-  margin: 20px 10px;
-  box-shadow: 2px 1px 10px 1px rgb(205, 191, 191);
-
-  position: absolute;
-  background: white;
-  border-radius: 0.5em;
-
-  ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    padding: 1em;
-  }
-}
-.closeBtn {
-  position: absolute;
-  right: 0;
-  margin: 5px;
-  border-radius: 0.5em;
-  cursor: pointer;
-  overflow: hidden;
-}
-
-.fa-phone {
-  a {
-    text-decoration: none;
-    color: black;
-    margin-left: 1em;
-    letter-spacing: 2px;
-  }
-}
-.dateDisplay {
+.statusCards-container {
   display: flex;
+  // border: 2px solid black;
+  width: 100%;
   gap: 1em;
+  justify-content: center;
+  margin: 2em 0;
+  .status-container {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    display: flex;
 
-  .fa-calendar,
-  .fa-clock-o {
-    span {
+    width: 15em;
+    border-radius: 1em;
+    position: relative;
+    // justify-content: space-between;
+    text-align: center;
+    // border: 2px solid red;
+    img {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
+    h2 {
       margin-left: 0.5em;
     }
   }
 }
-.deleteAppoint-cta {
-  // border: 2px solid red;
-  text-align: center;
-  button {
-    color: white;
-    background: rgb(129, 17, 17);
-    border-radius: 0.5em;
-    height: 4vh;
-    width: 10em;
-  }
-}
 
-.page-container {
-  // border: 2px solid yellow;
-  width: 100%;
+.homeSection-primary {
   display: flex;
-
-  min-height: 60vh;
-}
-
-//-----------------------NavBar-----------------------//
-
-.navbar-container {
-  width: 100%;
-  min-height: 10vh;
-  background-position: center;
-  box-shadow: 0.1px 0.2px 10px 0.2px rgb(237, 197, 125);
-  margin-bottom: 1em;
   // border: 2px solid red;
-
-  background-image: linear-gradient(
-    rgba(39, 42, 50, 0.7),
-    rgba(35, 37, 45, 0.7)
-  );
-  background-position: center;
-  background-size: cover;
-  ul {
-    display: flex;
-    gap: 2em;
-    list-style: none;
-    // border: 2px solid red;
-    width: 100%;
-    height: 100%;
-    padding: 0.8em;
-    margin: 0;
-  }
-}
-.nav-link {
-  font-size: 1.1rem;
-  color: black;
-  border: 2px solid lightblue;
-  text-decoration: none;
-  padding: 0.5em;
-  transition: 0.5s;
-  color: white;
-
-  background: radial-gradient(
-    ellipse at center,
-    #545252 0,
-    rgba(75, 251, 181, 0) 100%
-  );
-
-  &:hover {
-    background: radial-gradient(
-      ellipse at center,
-      #4bfb68 0,
-      rgba(75, 251, 181, 0) 100%
-    );
-  }
-}
-
-//-------------------form----------------//
-
-.form-wrapper {
-  display: flex;
-  gap: 1em;
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: white;
-  width: 30%;
-  margin: 1em;
-  // justify-content: center;
-  text-align: center;
-  flex-direction: column;
-  align-items: center;
-
-  .start,
-  .end {
-    color: white;
-    padding: 1em;
-  }
-  .dateshow {
-    border-bottom: 2px solid black;
-    text-align: center;
-    width: 50%;
-    color: orange;
-  }
-}
-.appointsAdded {
-  // border: 2px solid red;
-  width: 100%;
   height: 100%;
-  display: flex;
-  gap: 1em;
-  justify-content: center;
-}
-.appoint-wrapper {
-  min-width: 110px;
-  height: 3vh;
-  font-size: 1rem;
-  text-align: center;
-  position: relative;
-  flex-wrap: wrap;
-  box-shadow: 2px 1px 10px 1px rgb(98, 94, 94);
-  background: rgb(118, 109, 91);
-  border-radius: 1em;
-  padding: 10px 0 0 0;
-
-  .cbtn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 20%;
-    cursor: pointer;
-    text-align: center;
-    border-radius: 50%;
-    background: none;
-    border: none;
-  }
-  .timeDisplay {
-    margin: 0;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-  }
-}
-
-.update-apponits {
-  display: flex;
   width: 100%;
-  // border: 2px solid red;
+  margin: 0;
 }
-.workingdates-container {
+.active-appoints {
+  width: 80%;
+
   // border: 2px solid red;
-  border-right: 4px solid black;
-  margin-right: 2em;
-  width: 40%;
 }
 
-.workingdates-container {
+.statusPrect-container {
   display: flex;
   flex-direction: column;
-  padding-top: 1em;
+  width: 30%;
+  // border: 2px solid yellow;
+  height: 100%;
+  gap: 1em;
   align-items: center;
-
-  .dates-ad {
+  margin-top: 1em;
+  // justify-content: space-between;
+  // margin-right: 5em;
+  .status-container {
+    width: 15em;
+    height: 8vh;
     display: flex;
-    margin: 2em;
-    color: white;
-    flex-wrap: wrap;
+    position: relative;
+    // flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
     gap: 1em;
+    padding: 1em;
     // border: 2px solid red;
+    border-radius: 0.5em;
+    h2 {
+      font-size: 1.1rem;
+    }
+    img {
+      width: 60px;
+      height: 50px;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
   }
 }
-.addDate {
+.topStyles {
+  height: 35vh;
+
+  img {
+    width: 15em;
+    height: 100%;
+  }
+}
+.date-container {
+  width: 100%;
   // border: 2px solid red;
-  width: 60%;
-  text-align: center;
-  font-size: 1.4rem;
-  border-bottom: 2px solid black;
-  padding-bottom: 0.3em;
-  label {
-    color: orange;
-    font-weight: bold;
-    margin-right: 0.5em;
-  }
+  padding: 1em;
+}
+.table-container {
+  position: absolute;
+  left: 20%;
 }
 
-.submitBtn {
-  min-width: 90px;
-  height: 34px;
-  // background: none;
-  background: red;
-  cursor: pointer;
-  color: wheat;
-  background: radial-gradient(
-    ellipse at center,
-    #464746 0,
-    rgba(75, 251, 181, 0) 100%
-  );
-}
-.subBtn {
-  background: rgb(42, 40, 40);
-}
-
-.activeWorker {
-  background: radial-gradient(
-    ellipse at center,
-    #d69841 0,
-    rgba(75, 251, 181, 0) 100%
-  );
-}
-.chooseWorker {
-  font-size: 1.5rem;
-  color: rgb(189, 139, 45);
-  border-bottom: 2px solid black;
-}
-
-//------------------------ WorkerView ------------------//
-
-.workerView-container {
-  width: 20em;
-  height: 20vh;
-  position: relative;
-  box-shadow: 1px 2px 10px 1px rgb(43, 43, 42);
-  .workerImg {
-    width: 80px;
-    height: 70px;
-
-    position: absolute;
-    border-radius: 50%;
-    right: 1em;
-  }
-  .worker-info {
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-    color: white;
-    gap: 1em;
-    letter-spacing: 1px;
-    // margin: 15px;
-  }
-}
-.isPast-cta {
-  color: red;
-  text-align: center;
-}
-
-//------------------table------------------//
+//************************************** Table *********************************//
 
 .appointsview {
   border-collapse: collapse;
@@ -348,9 +145,7 @@ body {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 
   .mainRow {
-    background-color: #009879 !important;
-    // color: #ffffff;
-    // text-align: left;
+    background-color: #f0ac2e !important;
   }
   th,
   td {
@@ -363,25 +158,6 @@ body {
   }
 
   tr:last-of-type {
-    border-bottom: 2px solid #009879;
+    border-bottom: 1px solid #c5b642;
   }
 }
-.workerName {
-  background: rgb(152, 127, 102);
-}
-.noAppointsDay {
-  width: 20em;
-  // border: 2px solid red;
-  font-size: 1.2rem;
-  text-align: center;
-  color: white;
-  margin: 0;
-  padding: 0;
-}
-
-.infoBtn {
-  cursor: pointer;
-  position: relative;
-}
-
-//------------------------------- Time Picker --------------------------//

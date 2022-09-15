@@ -3,21 +3,18 @@ import moment from "moment/moment";
 import AppointmentsTable from "../LiveAppointmentsTable/AppointmentsTable";
 import CustomerCard from "../LiveAppointmentsTable/CustomerCard";
 function ActiveAppointments(props) {
-  const {
-    date,
-    appointmentsData,
-    timeFormat,
-    dateFormat,
-    workers,
-    DeleteAppoint,
-  } = props;
+  const { date, appointmentsData, timeFormat, dateFormat, DeleteAppoint } =
+    props;
   const [appointements, setAppointements] = useState([]);
   const [currAppoint, setCurrAppoint] = useState({});
   const [positionRef, setPositionRef] = useState({});
+
   React.useEffect(() => {
     function filterCurrentDayData() {
       let format = "MM/DD/YYYY";
-      let d = moment.utc(date.toDateString()).format("MM/DD/YYYY");
+      let d = moment.utc(date).format("MM/DD/YYYY");
+      console.log(date);
+      console.log(d);
       let _currDayData = appointmentsData.filter((appoint) => {
         let appDate = dateFormat(appoint.start_time, format);
         return appDate == d && appoint.customer != null;
@@ -41,7 +38,7 @@ function ActiveAppointments(props) {
   }
 
   return (
-    <div className="days-container">
+    <div className="table-container">
       <AppointmentsTable
         appointements={appointements}
         dateFormat={dateFormat}

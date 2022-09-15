@@ -5,69 +5,31 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-.calendar-container {
-  border-right: 2px solid wheat;
-  padding: 1em;
-}
-
-.appointements-container {
+.home-containerBack {
   width: 100%;
-  min-height: 100vh;
-  background-position: center;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(39, 42, 50, 0.7)), to(rgba(35, 37, 45, 0.7))), url("../imgs/back1.jpg");
-  background-image: linear-gradient(rgba(39, 42, 50, 0.7), rgba(35, 37, 45, 0.7)), url("../imgs/back1.jpg");
-}
-
-.days-container {
-  width: 100%;
-  height: 100%;
-  gap: 3em;
-  margin-left: 1em;
-  padding: 10px 0;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  position: relative;
-}
-
-.day-container {
-  width: 24em;
-  height: 60vh;
-  overflow: scroll;
-  margin-left: 1em;
+  height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  overflow-x: hidden;
-  /* Hide horizontal scrollbar */
-  -webkit-box-shadow: 1px 2px 10px 1px #2b2b2a;
-          box-shadow: 1px 2px 10px 1px #2b2b2a;
+  border: 2px solid red;
+  background: #ff7e5f;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-gradient(linear, left top, right top, from(#feb47b), to(#ff7e5f));
+  background: linear-gradient(to right, #feb47b, #ff7e5f);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.day-container h2 {
-  border-bottom: 2px solid orange;
-  color: white;
-}
-
-.customer-container {
-  width: 20%;
-  min-height: 25vh;
-  margin: 20px 10px;
-  -webkit-box-shadow: 2px 1px 10px 1px #cdbfbf;
-          box-shadow: 2px 1px 10px 1px #cdbfbf;
-  position: absolute;
-  background: white;
-  border-radius: 0.5em;
-}
-
-.customer-container ul {
-  list-style: none;
+.homeView-container {
+  width: 70%;
+  height: 88vh;
+  border-radius: 1em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -75,192 +37,61 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 1em;
-  padding: 1em;
+  background-color: #f5f0f0;
+  -webkit-box-shadow: 1px 2px 10px 1.5px #525050;
+          box-shadow: 1px 2px 10px 1.5px #525050;
 }
 
-.closeBtn {
-  position: absolute;
-  right: 0;
-  margin: 5px;
-  border-radius: 0.5em;
-  cursor: pointer;
-  overflow: hidden;
-}
-
-.fa-phone a {
-  text-decoration: none;
-  color: black;
-  margin-left: 1em;
-  letter-spacing: 2px;
-}
-
-.dateDisplay {
+.statusCards-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  gap: 1em;
-}
-
-.dateDisplay .fa-calendar span,
-.dateDisplay .fa-clock-o span {
-  margin-left: 0.5em;
-}
-
-.deleteAppoint-cta {
-  text-align: center;
-}
-
-.deleteAppoint-cta button {
-  color: white;
-  background: #811111;
-  border-radius: 0.5em;
-  height: 4vh;
-  width: 10em;
-}
-
-.page-container {
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  min-height: 60vh;
-}
-
-.navbar-container {
-  width: 100%;
-  min-height: 10vh;
-  background-position: center;
-  -webkit-box-shadow: 0.1px 0.2px 10px 0.2px #edc57d;
-          box-shadow: 0.1px 0.2px 10px 0.2px #edc57d;
-  margin-bottom: 1em;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(39, 42, 50, 0.7)), to(rgba(35, 37, 45, 0.7)));
-  background-image: linear-gradient(rgba(39, 42, 50, 0.7), rgba(35, 37, 45, 0.7));
-  background-position: center;
-  background-size: cover;
-}
-
-.navbar-container ul {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  gap: 2em;
-  list-style: none;
-  width: 100%;
-  height: 100%;
-  padding: 0.8em;
-  margin: 0;
-}
-
-.nav-link {
-  font-size: 1.1rem;
-  color: black;
-  border: 2px solid lightblue;
-  text-decoration: none;
-  padding: 0.5em;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
-  color: white;
-  background: radial-gradient(ellipse at center, #545252 0, rgba(75, 251, 181, 0) 100%);
-}
-
-.nav-link:hover {
-  background: radial-gradient(ellipse at center, #4bfb68 0, rgba(75, 251, 181, 0) 100%);
-}
-
-.form-wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  gap: 1em;
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: white;
-  width: 30%;
-  margin: 1em;
-  text-align: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.form-wrapper .start,
-.form-wrapper .end {
-  color: white;
-  padding: 1em;
-}
-
-.form-wrapper .dateshow {
-  border-bottom: 2px solid black;
-  text-align: center;
-  width: 50%;
-  color: orange;
-}
-
-.appointsAdded {
-  width: 100%;
-  height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   gap: 1em;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  margin: 2em 0;
 }
 
-.appoint-wrapper {
-  min-width: 110px;
-  height: 3vh;
-  font-size: 1rem;
-  text-align: center;
-  position: relative;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-shadow: 2px 1px 10px 1px #625e5e;
-          box-shadow: 2px 1px 10px 1px #625e5e;
-  background: #766d5b;
-  border-radius: 1em;
-  padding: 10px 0 0 0;
-}
-
-.appoint-wrapper .cbtn {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 20%;
-  cursor: pointer;
-  text-align: center;
-  border-radius: 50%;
-  background: none;
-  border: none;
-}
-
-.appoint-wrapper .timeDisplay {
-  margin: 0;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-}
-
-.update-apponits {
+.statusCards-container .status-container {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+          box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  width: 15em;
+  border-radius: 1em;
+  position: relative;
+  text-align: center;
+}
+
+.statusCards-container .status-container img {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.statusCards-container .status-container h2 {
+  margin-left: 0.5em;
+}
+
+.homeSection-primary {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
   width: 100%;
+  margin: 0;
 }
 
-.workingdates-container {
-  border-right: 4px solid black;
-  margin-right: 2em;
-  width: 40%;
+.active-appoints {
+  width: 80%;
 }
 
-.workingdates-container {
+.statusPrect-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -268,93 +99,58 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  padding-top: 1em;
+  width: 30%;
+  height: 100%;
+  gap: 1em;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin-top: 1em;
 }
 
-.workingdates-container .dates-ad {
+.statusPrect-container .status-container {
+  width: 15em;
+  height: 8vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin: 2em;
-  color: white;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  gap: 1em;
-}
-
-.addDate {
-  width: 60%;
-  text-align: center;
-  font-size: 1.4rem;
-  border-bottom: 2px solid black;
-  padding-bottom: 0.3em;
-}
-
-.addDate label {
-  color: orange;
-  font-weight: bold;
-  margin-right: 0.5em;
-}
-
-.submitBtn {
-  min-width: 90px;
-  height: 34px;
-  background: red;
-  cursor: pointer;
-  color: wheat;
-  background: radial-gradient(ellipse at center, #464746 0, rgba(75, 251, 181, 0) 100%);
-}
-
-.subBtn {
-  background: #2a2828;
-}
-
-.activeWorker {
-  background: radial-gradient(ellipse at center, #d69841 0, rgba(75, 251, 181, 0) 100%);
-}
-
-.chooseWorker {
-  font-size: 1.5rem;
-  color: #bd8b2d;
-  border-bottom: 2px solid black;
-}
-
-.workerView-container {
-  width: 20em;
-  height: 20vh;
   position: relative;
-  -webkit-box-shadow: 1px 2px 10px 1px #2b2b2a;
-          box-shadow: 1px 2px 10px 1px #2b2b2a;
-}
-
-.workerView-container .workerImg {
-  width: 80px;
-  height: 70px;
-  position: absolute;
-  border-radius: 50%;
-  right: 1em;
-}
-
-.workerView-container .worker-info {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  list-style: none;
-  color: white;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+          box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   gap: 1em;
-  letter-spacing: 1px;
+  padding: 1em;
+  border-radius: 0.5em;
 }
 
-.isPast-cta {
-  color: red;
-  text-align: center;
+.statusPrect-container .status-container h2 {
+  font-size: 1.1rem;
+}
+
+.statusPrect-container .status-container img {
+  width: 60px;
+  height: 50px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.topStyles {
+  height: 35vh;
+}
+
+.topStyles img {
+  width: 15em;
+  height: 100%;
+}
+
+.date-container {
+  width: 100%;
+  padding: 1em;
+}
+
+.table-container {
+  position: absolute;
+  left: 20%;
 }
 
 .appointsview {
@@ -369,7 +165,7 @@ body {
 }
 
 .appointsview .mainRow {
-  background-color: #009879 !important;
+  background-color: #f0ac2e !important;
 }
 
 .appointsview th,
@@ -383,24 +179,6 @@ body {
 }
 
 .appointsview tr:last-of-type {
-  border-bottom: 2px solid #009879;
-}
-
-.workerName {
-  background: #987f66;
-}
-
-.noAppointsDay {
-  width: 20em;
-  font-size: 1.2rem;
-  text-align: center;
-  color: white;
-  margin: 0;
-  padding: 0;
-}
-
-.infoBtn {
-  cursor: pointer;
-  position: relative;
+  border-bottom: 1px solid #c5b642;
 }
 /*# sourceMappingURL=style.css.map */
