@@ -3,15 +3,22 @@ import moment from "moment/moment";
 import AppointmentsTable from "../LiveAppointmentsTable/AppointmentsTable";
 import CustomerCard from "../LiveAppointmentsTable/CustomerCard";
 function ActiveAppointments(props) {
-  const { date, data, timeFormat, dateFormat, workers } = props;
+  const {
+    date,
+    appointmentsData,
+    timeFormat,
+    dateFormat,
+    workers,
+    DeleteAppoint,
+  } = props;
   const [appointements, setAppointements] = useState([]);
-  const [showAppoint, setShowApoint] = useState({});
+  const [currAppoint, setCurrAppoint] = useState({});
   const [positionRef, setPositionRef] = useState({});
   React.useEffect(() => {
     function filterCurrentDayData() {
       let format = "MM/DD/YYYY";
       let d = moment.utc(date.toDateString()).format("MM/DD/YYYY");
-      let _currDayData = data.filter((appoint) => {
+      let _currDayData = appointmentsData.filter((appoint) => {
         let appDate = dateFormat(appoint.start_time, format);
         return appDate == d && appoint.customer != null;
       });
@@ -21,15 +28,16 @@ function ActiveAppointments(props) {
   }, [date]);
 
   const handleMoreInfo = (ref, appoint) => {
-    setShowApoint(appoint);
+    setCurrAppoint(appoint);
     setPositionRef(ref);
   };
   function handleCloseInfo() {
-    setShowApoint({});
+    setCurrAppoint({});
   }
 
   function handleDeleteAppoint() {
-    console.log("lol");
+    console.log(currAppoint);
+    DeleteAppoint(currAppoint._id);
   }
 
   return (
@@ -44,9 +52,9 @@ function ActiveAppointments(props) {
         <h1 className="noAppointsDay">No Appointements on this day</h1>
       )}
 
-      {Object.keys(showAppoint).length != 0 && (
+      {Object.keys(currAppoint).length != 0 && (
         <CustomerCard
-          appointment={showAppoint}
+          appointment={currAppoint}
           timeFormat={timeFormat}
           dateFormat={dateFormat}
           handleCloseInfo={handleCloseInfo}

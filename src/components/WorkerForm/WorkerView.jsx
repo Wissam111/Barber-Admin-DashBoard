@@ -2,11 +2,16 @@ import React, { Component } from "react";
 
 function WorkerView(props) {
   const { worker } = props;
+
   return (
     <div className="workerView-container">
       <img
         className="workerImg"
-        src={`https://saloon-ibra-api.herokuapp.com/imgs/${worker.image}`}
+        src={
+          worker.image != null
+            ? `https://saloon-ibra-api.herokuapp.com/imgs/${worker.image}`
+            : ""
+        }
         alt=""
       />
       <ul className="worker-info">

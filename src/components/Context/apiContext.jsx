@@ -1,39 +1,24 @@
 import React, { useContext, useState, useEffect, createContext } from "react";
-
+import useFetch from "./useFetch";
 const APIContext = createContext();
 const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFiODViNjdmYjkxNjI2M2ZkMzNjMzQiLCJpYXQiOjE2NjMwNjk1NDYsImV4cCI6MTY2NDc5NzU0Nn0.tHV03EvkHq95V_x3lDDLjZAo4xWf6g-qp5vG5zn_kEM";
 export function APIContextProvider({ children }) {
-  const [data, setData] = useState([]);
+  const [appointmentsData, setAppointmentsData] = useState([]);
   const [workerDates, setWorkerDates] = useState([]);
   const [workers, setWorkers] = useState([]);
 
-  React.useEffect(() => {
-    async function fetchData() {
-      const config = {
-        headers: {
-          Accept: "application/json",
-          phone: "0547973441",
-          password: "12345",
-          Authorization: "Bearer " + token,
-        },
-      };
-      const res = await fetch(
-        "https://saloon-ibra-api.herokuapp.com/api/appointments",
-        config
-      );
-      const workers = await fetch(
-        "https://saloon-ibra-api.herokuapp.com/api/workers",
+  useFetch(
+    "https://saloon-ibra-api.herokuapp.com/api/appointments",
+    setAppointmentsData,
+    token
+  );
 
-        config
-      );
-      const _data = await res.json();
-      const workersD = await workers.json();
-      setData(_data.appointments);
-      setWorkers(workersD.workers);
-    }
-    fetchData();
-  }, []);
+  const { loading, error } = useFetch(
+    "https://saloon-ibra-api.herokuapp.com/api/workers",
+    setWorkers,
+    token
+  );
 
   async function updateWorkerDates(workerId) {
     const config = {
@@ -57,12 +42,14 @@ export function APIContextProvider({ children }) {
   return (
     <APIContext.Provider
       value={{
-        data,
+        appointmentsData,
         workerDates,
         workers,
         PostTime,
         PostDates,
         updateWorkerDates,
+        DeleteAppoint,
+        loading,
       }}
     >
       {children}
@@ -99,6 +86,20 @@ async function PostDates(appoint) {
     }
   );
   console.log(appoint);
+  const g = await res.json();
+  console.log(g);
+}
+async function DeleteAppoint(workerId) {
+  let res = await fetch(
+    `https://saloon-ibra-api.herokuapp.com/api/appointments/${workerId}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      method: "DELETE",
+    }
+  );
   const g = await res.json();
   console.log(g);
 }

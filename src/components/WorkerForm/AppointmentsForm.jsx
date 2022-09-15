@@ -1,8 +1,6 @@
 import moment from "moment/moment";
 import React, { Component, useState } from "react";
-import { Fragment } from "react";
 import Appoint from "./Appoint";
-// import StaticTimePicker from "react-time-picker";
 import { Dayjs } from "dayjs";
 import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";

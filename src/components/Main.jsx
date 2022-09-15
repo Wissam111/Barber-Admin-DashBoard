@@ -7,11 +7,19 @@ import NavBar from "./NavBar";
 import ActiveAppointments from "./pages/ActiveAppointments";
 import AddAppointments from "./pages/AddAppointments";
 import CalendarView from "./CalendarView";
-
+import CircularProgress from "@mui/material/CircularProgress";
 function Main() {
   const [date, setDate] = useState(new Date());
-  const { data, workerDates, updateWorkerDates, workers, PostTime, PostDates } =
-    useContext(APIContext);
+  const {
+    appointmentsData,
+    workerDates,
+    updateWorkerDates,
+    workers,
+    PostTime,
+    PostDates,
+    DeleteAppoint,
+    loading,
+  } = useContext(APIContext);
   const { timeFormat, dateFormat } = useContext(FORMATContext);
   const [worker, setWorker] = useState({});
   const handleWorker = (worker) => {
@@ -22,6 +30,7 @@ function Main() {
       updateWorkerDates(worker._id);
     }
   };
+  if (loading) return <CircularProgress />;
 
   return (
     <div className="appointements-container">
@@ -36,13 +45,14 @@ function Main() {
               element={
                 <ActiveAppointments
                   date={date}
-                  data={data}
+                  appointmentsData={appointmentsData}
                   workerDates={workerDates}
                   PostTime={PostTime}
                   PostDates={PostDates}
                   timeFormat={timeFormat}
                   dateFormat={dateFormat}
                   workers={workers}
+                  DeleteAppoint={DeleteAppoint}
                 />
               }
             />
@@ -53,7 +63,7 @@ function Main() {
                 <AddAppointments
                   date={date}
                   worker={worker}
-                  data={data}
+                  appointmentsData={appointmentsData}
                   workerDates={workerDates}
                   PostTime={PostTime}
                   PostDates={PostDates}
