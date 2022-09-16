@@ -8,7 +8,7 @@ body {
 .outerAdmin-container {
   width: 100%;
   height: 100vh;
-  border: 2px solid red;
+  border: 2px solid yellow;
   background: linear-gradient(87.4deg, #fff1a5 1.9%, #c87d4c 49.7%, #533636 100.5%);
 }
 
@@ -27,9 +27,10 @@ body {
           justify-content: center;
 }
 
-.homeView-container {
-  min-width: 75%;
-  height: 88vh;
+.homeView-container,
+.workinghours-container {
+  width: 70%;
+  min-height: 88vh;
   border-radius: 1em;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -62,6 +63,7 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  height: 8vh;
   width: 15em;
   border-radius: 1em;
   position: relative;
@@ -268,7 +270,7 @@ body {
   border-bottom-left-radius: 0.5em;
   background: #c7ab77;
   position: relative;
-  height: 88vh;
+  min-height: 88vh;
   left: 10px;
   width: 5em;
 }
@@ -304,5 +306,106 @@ body {
 
 .navbar-container .logo {
   width: 4em;
+}
+
+.workinghours-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.staff-container {
+  width: 27%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 1em;
+}
+
+.workerView-container {
+  width: 20em;
+  min-height: 14vh;
+  padding: 0.2em 0.2em;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+          box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  font-weight: bold;
+  letter-spacing: 0.011ch;
+  margin-left: 1em;
+}
+
+.workerView-container img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.workerView-container .worker-info {
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1em;
+  margin: 0;
+}
+
+.staff-logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.5em;
+  margin: 0.5em;
+}
+
+.staff-logo h2 {
+  border-bottom: 2px solid #cea65b;
+}
+
+.staff-logo img {
+  width: 50px;
+  height: 50px;
+}
+
+.workerhours-cta {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: right;
+      -ms-flex-pack: right;
+          justify-content: right;
+  gap: 1em;
+}
+
+.workerhours-cta button {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  background: none;
+  border-radius: 0.5em;
+}
+
+.seheduler-container {
+  height: 10%;
+  overflow: scroll;
+  width: 100%;
 }
 /*# sourceMappingURL=style.css.map */

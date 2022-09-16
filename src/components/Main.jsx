@@ -7,7 +7,7 @@ import NavBar from "./NavBar";
 import AddAppointments from "./pages/AddAppointments";
 import CircularProgress from "@mui/material/CircularProgress";
 import HomeView from "./HomeView";
-
+import StaffWorkingHours from "./StaffWorkingHours";
 function Main() {
   const {
     appointmentsData,
@@ -23,23 +23,26 @@ function Main() {
   const { timeFormat, dateFormat } = useContext(FORMATContext);
   const [worker, setWorker] = useState({});
   const handleWorker = (worker) => {
-    setWorker(worker);
-    if (worker == "1") {
-      updateWorkerDates(workers[0]._id);
-    } else {
-      updateWorkerDates(worker._id);
-    }
-    console.log("lol");
+    // setWorker(worker);
+    // if (worker == "1") {
+    //   updateWorkerDates(workers[0]._id);
+    // } else {
+    //   updateWorkerDates(worker._id);
+    // }
+    console.log("hh");
   };
 
   if (loading) return <CircularProgress />;
 
   return (
     <div className="outerAdmin-container">
-    <div className="admindashb-container">
-      <Router>
-        <NavBar workers={workers} handleWorker={handleWorker} active={worker} />
-        <div className="page-container">
+      <div className="admindashb-container">
+        <Router>
+          <NavBar
+            workers={workers}
+            handleWorker={handleWorker}
+            active={worker}
+          />
           <Routes>
             <Route
               path="/"
@@ -53,26 +56,31 @@ function Main() {
                 />
               }
             />
-            {/* <Route
-              path="/add-appointments"
+            <Route
+              path="/staff-hours"
               exact
               element={
-                <AddAppointments
-                  date={date}
-                  worker={worker}
+                <StaffWorkingHours
+                  workers={workers}
                   appointmentsData={appointmentsData}
-                  workerDates={workerDates}
-                  PostTime={PostTime}
-                  PostDates={PostDates}
                   timeFormat={timeFormat}
                   dateFormat={dateFormat}
                 />
+                // <AddAppointments
+                //   date={date}
+                //   worker={worker}
+                //   appointmentsData={appointmentsData}
+                //   workerDates={workerDates}
+                //   PostTime={PostTime}
+                //   PostDates={PostDates}
+                //   timeFormat={timeFormat}
+                //   dateFormat={dateFormat}
+                // />
               }
-            /> */}
+            />
           </Routes>
-        </div>
-      </Router>
-    </div>
+        </Router>
+      </div>
     </div>
   );
 }
