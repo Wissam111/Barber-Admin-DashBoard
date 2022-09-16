@@ -13,8 +13,6 @@ function ActiveAppointments(props) {
     function filterCurrentDayData() {
       let format = "MM/DD/YYYY";
       let d = moment.utc(date).format("MM/DD/YYYY");
-      console.log(date);
-      console.log(d);
       let _currDayData = appointmentsData.filter((appoint) => {
         let appDate = dateFormat(appoint.start_time, format);
         return appDate == d && appoint.customer != null;
@@ -27,13 +25,13 @@ function ActiveAppointments(props) {
   const handleMoreInfo = (ref, appoint) => {
     setCurrAppoint(appoint);
     setPositionRef(ref);
+    console.log(ref)
   };
   function handleCloseInfo() {
     setCurrAppoint({});
   }
 
   function handleDeleteAppoint() {
-    console.log(currAppoint);
     DeleteAppoint(currAppoint._id);
   }
 

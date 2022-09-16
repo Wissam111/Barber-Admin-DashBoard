@@ -23,21 +23,22 @@ function Main() {
   const { timeFormat, dateFormat } = useContext(FORMATContext);
   const [worker, setWorker] = useState({});
   const handleWorker = (worker) => {
-    // setWorker(worker);
-    // if (worker == "1") {
-    //   updateWorkerDates(workers[0]._id);
-    // } else {
-    //   updateWorkerDates(worker._id);
-    // }
+    setWorker(worker);
+    if (worker == "1") {
+      updateWorkerDates(workers[0]._id);
+    } else {
+      updateWorkerDates(worker._id);
+    }
     console.log("lol");
   };
 
   if (loading) return <CircularProgress />;
 
   return (
-    <div className="appointements-container">
+    <div className="outerAdmin-container">
+    <div className="admindashb-container">
       <Router>
-        {/* <NavBar workers={workers} handleWorker={handleWorker} active={worker} /> */}
+        <NavBar workers={workers} handleWorker={handleWorker} active={worker} />
         <div className="page-container">
           <Routes>
             <Route
@@ -71,6 +72,7 @@ function Main() {
           </Routes>
         </div>
       </Router>
+    </div>
     </div>
   );
 }

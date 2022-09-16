@@ -11,7 +11,6 @@ function HomeView(props) {
   const { appointmentsData, timeFormat, dateFormat, DeleteAppoint } = props;
 
   return (
-    <div className="home-containerBack">
       <div className="homeView-container">
         <div className="date-container">
           <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -67,7 +66,6 @@ function HomeView(props) {
           </div>
         </div>
       </div>
-    </div>
   );
 }
 

@@ -8,10 +8,11 @@ function AppointmentsTable(props) {
       <tbody>
         <tr className="mainRow">
           <th>Date</th>
-          <th>Worker</th>
-          <th>Time</th>
           <th>Customer</th>
-          <th>More Info</th>
+          <th>Time</th>
+          <th>Worker</th>
+      
+          <th className="moreinfoBtn">More Info</th>
         </tr>
 
         {appointements.map((appoint) => {
