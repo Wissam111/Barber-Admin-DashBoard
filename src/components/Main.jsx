@@ -4,20 +4,19 @@ import FORMATContext from "./Context/formatContext";
 import "react-calendar/dist/Calendar.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./NavBar";
-import AddAppointments from "./pages/AddAppointments";
+// import AddAppointments from "./pages/AddAppointments";
 import CircularProgress from "@mui/material/CircularProgress";
 import HomeView from "./HomeView";
 import StaffWorkingHours from "./StaffWorkingHours";
 function Main() {
   const {
     appointmentsData,
-    workerDates,
-    updateWorkerDates,
     workers,
     PostTime,
-    PostDates,
     DeleteAppoint,
     loading,
+    UnBookAppoint,
+    BookAppoint,
   } = useContext(APIContext);
 
   const { timeFormat, dateFormat } = useContext(FORMATContext);
@@ -29,10 +28,10 @@ function Main() {
     // } else {
     //   updateWorkerDates(worker._id);
     // }
-    console.log("hh");
   };
-
+  // React.useEffect(() => {
   if (loading) return <CircularProgress />;
+  // }, []);
 
   return (
     <div className="outerAdmin-container">
@@ -65,6 +64,10 @@ function Main() {
                   appointmentsData={appointmentsData}
                   timeFormat={timeFormat}
                   dateFormat={dateFormat}
+                  PostTime={PostTime}
+                  DeleteAppoint={DeleteAppoint}
+                  UnBookAppoint={UnBookAppoint}
+                  BookAppoint={BookAppoint}
                 />
                 // <AddAppointments
                 //   date={date}

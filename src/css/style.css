@@ -29,7 +29,7 @@ body {
 
 .homeView-container,
 .workinghours-container {
-  width: 70%;
+  width: 80%;
   min-height: 88vh;
   border-radius: 1em;
   display: -webkit-box;
@@ -404,8 +404,35 @@ body {
 }
 
 .seheduler-container {
-  height: 10%;
-  overflow: scroll;
   width: 100%;
+}
+
+.btnhh {
+  background: red;
+}
+
+.bookBtn {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+}
+
+.unbookBtn {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+}
+
+.unbookBtn,
+.bookBtn {
+  width: 18%;
+  min-height: 2vh;
+  padding: 0;
+  border-radius: 0.5em;
+}
+
+.unbookBtn img,
+.bookBtn img {
+  width: 90%;
 }
 /*# sourceMappingURL=style.css.map */

@@ -5,7 +5,7 @@ import axios from "axios";
 function useFetch(url, setFunction, token) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [data, setData] = useState({});
+  const [currId, setCurrId] = useState("");
   try {
     useEffect(() => {
       setLoading(true);
@@ -37,12 +37,12 @@ function useFetch(url, setFunction, token) {
           });
       }
       fetchData();
-    }, [url]);
+    }, [currId]);
   } catch (e) {
     console.log(e);
   }
 
-  return { loading, error };
+  return { loading, error, setCurrId };
 }
 
 export default useFetch;

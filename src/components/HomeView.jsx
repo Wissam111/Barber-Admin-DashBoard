@@ -19,6 +19,7 @@ function HomeView(props) {
             value={date}
             // minDate={dayjs("2022-01-01")}
             onChange={(newValue) => {
+              // console.log(newValue["$d"]);
               setDate(newValue["$d"]);
             }}
             renderInput={(params) => <TextField {...params} />}

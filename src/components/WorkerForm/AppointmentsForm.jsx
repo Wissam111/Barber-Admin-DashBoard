@@ -48,7 +48,6 @@ function AppointmentsForm(props) {
     let endDate = dateFormat(moment(currDate + " " + endTime), format);
     let appoint = {
       worker: worker._id,
-      workingDate: `${workerDates[0]._id}`,
       start_time: `${startDate}`,
       end_time: `${endDate}`,
     };

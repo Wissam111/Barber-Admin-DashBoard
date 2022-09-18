@@ -34,7 +34,7 @@ body {
 
 .homeView-container,
 .workinghours-container {
-  width: 70%;
+  width: 80%;
   min-height: 88vh;
   // border: 2px solid red;
   border-radius: 1em;
@@ -141,6 +141,7 @@ body {
 .table-container {
   position: absolute;
   left: 15px;
+  // margin-left: 10em;
 }
 .appointsview {
   border-collapse: collapse;
@@ -150,7 +151,7 @@ body {
   min-width: 400px;
   color: black !important;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-
+  // border: 2px solid red;
   .mainRow {
     background-color: #f0ac2e !important;
   }
@@ -349,7 +350,39 @@ body {
 }
 .seheduler-container {
   // border: 2px solid red;
-  height: 10%;
-  overflow: scroll;
   width: 100%;
+}
+.btnhh {
+  // width: 50em;
+  // height: 100em;
+  // background: red;
+  // position: absolute;
+  background: red;
+}
+.bookBtn {
+  // background: green;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+}
+.unbookBtn {
+  // background: red;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  // top: 0;
+}
+.unbookBtn,
+.bookBtn {
+  width: 18%;
+  min-height: 2vh;
+  padding: 0;
+  border-radius: 0.5em;
+  // background: none;
+  img {
+    // width: 1.4em;
+    width: 90%;
+    // border: 2px solid red;
+    // background: red;
+  }
 }

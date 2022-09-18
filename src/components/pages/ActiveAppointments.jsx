@@ -8,24 +8,26 @@ function ActiveAppointments(props) {
   const [appointements, setAppointements] = useState([]);
   const [currAppoint, setCurrAppoint] = useState({});
   const [positionRef, setPositionRef] = useState({});
-
+  // console.log(date);
   React.useEffect(() => {
     function filterCurrentDayData() {
       let format = "MM/DD/YYYY";
       let d = moment.utc(date).format("MM/DD/YYYY");
+      // console.log(d);
       let _currDayData = appointmentsData.filter((appoint) => {
         let appDate = dateFormat(appoint.start_time, format);
         return appDate == d && appoint.customer != null;
       });
       setAppointements(_currDayData);
     }
+    // console.log(date);
     filterCurrentDayData();
   }, [date]);
 
   const handleMoreInfo = (ref, appoint) => {
     setCurrAppoint(appoint);
     setPositionRef(ref);
-    console.log(ref)
+    console.log(ref);
   };
   function handleCloseInfo() {
     setCurrAppoint({});
