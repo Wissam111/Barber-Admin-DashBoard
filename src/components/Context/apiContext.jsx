@@ -1,36 +1,36 @@
 import React, { useContext, useState, useEffect, createContext } from "react";
 import useFetch from "./useFetch";
 const APIContext = createContext();
+const ApiUrl = "https://saloon-ibra-api.herokuapp.com/api/";
 const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFiODViNjdmYjkxNjI2M2ZkMzNjMzQiLCJpYXQiOjE2NjMwNjk1NDYsImV4cCI6MTY2NDc5NzU0Nn0.tHV03EvkHq95V_x3lDDLjZAo4xWf6g-qp5vG5zn_kEM";
 export function APIContextProvider({ children }) {
   const [appointmentsData, setAppointmentsData] = useState([]);
   const [workers, setWorkers] = useState([]);
   const { setCurrId } = useFetch(
-    "https://saloon-ibra-api.herokuapp.com/api/appointments",
+    // "https://saloon-ibra-api.herokuapp.com/api/appointments",
+    ApiUrl + "appointments",
     setAppointmentsData,
     token
   );
 
   const { loading, error } = useFetch(
-    "https://saloon-ibra-api.herokuapp.com/api/workers",
+    // "https://saloon-ibra-api.herokuapp.com/api/workers",
+    ApiUrl + "workers",
     setWorkers,
     token
   );
 
   async function PostTime(appoint) {
     try {
-      let res = await fetch(
-        "https://saloon-ibra-api.herokuapp.com/api/appointments",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-          },
-          body: JSON.stringify(appoint),
-          method: "POST",
-        }
-      );
+      let res = await fetch(ApiUrl + "appointments", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(appoint),
+        method: "POST",
+      });
       const g = await res.json();
       console.log(g);
       setCurrId(g.appointment._id);
@@ -42,7 +42,8 @@ export function APIContextProvider({ children }) {
   async function DeleteAppoint(appointId) {
     try {
       let res = await fetch(
-        `https://saloon-ibra-api.herokuapp.com/api/appointments/${appointId}`,
+        // `https://saloon-ibra-api.herokuapp.com/api/appointments/${appointId}`
+        ApiUrl + "appointments/${appointId}",
         {
           headers: {
             "Content-Type": "application/json",
@@ -62,7 +63,8 @@ export function APIContextProvider({ children }) {
   async function UnBookAppoint(appointId) {
     try {
       let res = await fetch(
-        "https://saloon-ibra-api.herokuapp.com/api/appointments/unbook",
+        // "https://saloon-ibra-api.herokuapp.com/api/appointments/unbook",
+        ApiUrl + "appointments/unbook",
         {
           headers: {
             "Content-Type": "application/json",
@@ -82,7 +84,8 @@ export function APIContextProvider({ children }) {
   async function BookAppoint(appoint) {
     try {
       let res = await fetch(
-        "https://saloon-ibra-api.herokuapp.com/api/appointments/book",
+        // "https://saloon-ibra-api.herokuapp.com/api/appointments/book",
+        ApiUrl + "appointments/book",
         {
           headers: {
             "Content-Type": "application/json",

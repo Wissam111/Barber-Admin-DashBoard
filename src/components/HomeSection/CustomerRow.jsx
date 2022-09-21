@@ -7,7 +7,7 @@ function CustomerRow(props) {
   return (
     <tr className="customerow-container">
       <td>{dateFormat(appoint.start_time, "MM/DD/YYYY")}</td>
-      <td>{appoint.customer.firstName + " - " + appoint.customer.lastName}</td>
+      <td>{appoint.customer.firstName + " " + appoint.customer.lastName}</td>
       <td>
         {timeFormat(appoint.start_time) + " - " + timeFormat(appoint.end_time)}
       </td>

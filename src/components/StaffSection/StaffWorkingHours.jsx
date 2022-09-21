@@ -9,13 +9,9 @@ import {
 } from "@devexpress/dx-react-scheduler";
 import {
   Scheduler,
-  DayView,
   WeekView,
   Appointments,
   AppointmentForm,
-
-  // AppointmentTooltip,
-  // ConfirmationDialog,
 } from "@devexpress/dx-react-scheduler-material-ui";
 
 function StaffWorkingHours(props) {
@@ -72,7 +68,6 @@ function StaffWorkingHours(props) {
 
   function Button(props) {
     let isBooked = props.color == "orange" ? false : true;
-    // let tempschData = [...schedulerData];
     function handleUnBook() {
       let objAppo = {
         appointmentId: props.id,
@@ -110,11 +105,10 @@ function StaffWorkingHours(props) {
         className={isBooked ? "unbookBtn" : "bookBtn"}
         onClick={isBooked ? handleUnBook : handleBook}
       >
-        {/* <i class="fa fa-calendar"></i> */}
         {isBooked ? (
-          <img src={require("../imgs/unBook.png")}></img>
+          <img src={require("./../../imgs/unBook.png")}></img>
         ) : (
-          <img src={require("../imgs/book.png")}></img>
+          <img src={require("./../../imgs/book.png")}></img>
         )}
       </button>
     );

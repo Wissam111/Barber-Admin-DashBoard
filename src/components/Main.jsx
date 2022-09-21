@@ -4,10 +4,10 @@ import FORMATContext from "./Context/formatContext";
 import "react-calendar/dist/Calendar.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./NavBar";
-// import AddAppointments from "./pages/AddAppointments";
 import CircularProgress from "@mui/material/CircularProgress";
-import HomeView from "./HomeView";
-import StaffWorkingHours from "./StaffWorkingHours";
+import Home from "./pages/Home";
+import Staff from "./pages/Staff";
+import Form from "./pages/Form";
 function Main() {
   const {
     appointmentsData,
@@ -20,34 +20,20 @@ function Main() {
   } = useContext(APIContext);
 
   const { timeFormat, dateFormat } = useContext(FORMATContext);
-  const [worker, setWorker] = useState({});
-  const handleWorker = (worker) => {
-    // setWorker(worker);
-    // if (worker == "1") {
-    //   updateWorkerDates(workers[0]._id);
-    // } else {
-    //   updateWorkerDates(worker._id);
-    // }
-  };
-  // React.useEffect(() => {
+
   if (loading) return <CircularProgress />;
-  // }, []);
 
   return (
     <div className="outerAdmin-container">
       <div className="admindashb-container">
         <Router>
-          <NavBar
-            workers={workers}
-            handleWorker={handleWorker}
-            active={worker}
-          />
+          <NavBar workers={workers} />
           <Routes>
             <Route
               path="/"
               exact
               element={
-                <HomeView
+                <Home
                   appointmentsData={appointmentsData}
                   timeFormat={timeFormat}
                   dateFormat={dateFormat}
@@ -56,10 +42,10 @@ function Main() {
               }
             />
             <Route
-              path="/staff-hours"
+              path="/staff"
               exact
               element={
-                <StaffWorkingHours
+                <Staff
                   workers={workers}
                   appointmentsData={appointmentsData}
                   timeFormat={timeFormat}
@@ -69,18 +55,9 @@ function Main() {
                   UnBookAppoint={UnBookAppoint}
                   BookAppoint={BookAppoint}
                 />
-                // <AddAppointments
-                //   date={date}
-                //   worker={worker}
-                //   appointmentsData={appointmentsData}
-                //   workerDates={workerDates}
-                //   PostTime={PostTime}
-                //   PostDates={PostDates}
-                //   timeFormat={timeFormat}
-                //   dateFormat={dateFormat}
-                // />
               }
             />
+            <Route path="/form" exact element={<Form />} />
           </Routes>
         </Router>
       </div>

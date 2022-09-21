@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import WorkerView from "./WorkerForm/WorkerView";
+import WorkerView from "./WorkerView";
 
 function StaffView(props) {
   const { workers, handleStaffScheduler } = props;
@@ -8,7 +8,7 @@ function StaffView(props) {
     <div className="staff-container">
       <div className="staff-logo">
         <h2>Staff</h2>
-        <img src={require("../imgs/employee.png")} alt="" />
+        <img src={require("./../../imgs/employee.png")} alt="" />
       </div>
       {workers.map((worker) => {
         return (

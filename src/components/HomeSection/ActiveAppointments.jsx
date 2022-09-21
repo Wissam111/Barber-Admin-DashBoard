@@ -1,26 +1,23 @@
 import React, { Component, useContext, useState } from "react";
 import moment from "moment/moment";
-import AppointmentsTable from "../LiveAppointmentsTable/AppointmentsTable";
-import CustomerCard from "../LiveAppointmentsTable/CustomerCard";
+import AppointmentsTable from "./AppointmentsTable";
+import CustomerCard from "./CustomerCard";
 function ActiveAppointments(props) {
   const { date, appointmentsData, timeFormat, dateFormat, DeleteAppoint } =
     props;
   const [appointements, setAppointements] = useState([]);
   const [currAppoint, setCurrAppoint] = useState({});
   const [positionRef, setPositionRef] = useState({});
-  // console.log(date);
   React.useEffect(() => {
     function filterCurrentDayData() {
       let format = "MM/DD/YYYY";
       let d = moment.utc(date).format("MM/DD/YYYY");
-      // console.log(d);
       let _currDayData = appointmentsData.filter((appoint) => {
         let appDate = dateFormat(appoint.start_time, format);
         return appDate == d && appoint.customer != null;
       });
       setAppointements(_currDayData);
     }
-    // console.log(date);
     filterCurrentDayData();
   }, [date]);
 

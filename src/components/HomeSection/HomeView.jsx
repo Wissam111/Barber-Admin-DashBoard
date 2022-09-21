@@ -1,11 +1,12 @@
 import React, { Component, useState } from "react";
-import ActiveAppointments from "./pages/ActiveAppointments";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import dayjs, { Dayjs } from "dayjs";
 import TextField from "@mui/material/TextField";
 import StatusCard from "./StatusCard";
+import ActiveAppointments from "./ActiveAppointments";
+
 function HomeView(props) {
   const [date, setDate] = useState(new Date());
   const { appointmentsData, timeFormat, dateFormat, DeleteAppoint } = props;
@@ -17,9 +18,7 @@ function HomeView(props) {
           <DesktopDatePicker
             label="Pick a date"
             value={date}
-            // minDate={dayjs("2022-01-01")}
             onChange={(newValue) => {
-              // console.log(newValue["$d"]);
               setDate(newValue["$d"]);
             }}
             renderInput={(params) => <TextField {...params} />}
@@ -29,14 +28,17 @@ function HomeView(props) {
       <div className="homeSection-primary">
         <div className="active-appoints">
           <div className="statusCards-container">
-            <StatusCard imgUrl={require("../imgs/done.png")} status={"Done"} />
             <StatusCard
-              imgUrl={require("../imgs/clock.png")}
+              imgUrl={require("./../../imgs/done.png")}
+              status={"Done"}
+            />
+            <StatusCard
+              imgUrl={require("./../../imgs/clock.png")}
               status={"Pending"}
               cs={"done"}
             />
             <StatusCard
-              imgUrl={require("../imgs/cancelled.png")}
+              imgUrl={require("./../../imgs/cancelled.png")}
               status={"Canceled"}
             />
           </div>
@@ -51,15 +53,15 @@ function HomeView(props) {
 
         <div className="statusPrect-container">
           <StatusCard
-            imgUrl={require("../imgs/percentage.png")}
+            imgUrl={require("./../../imgs/percentage.png")}
             status={"Number of deals: 1200"} //need number here
           />
           <StatusCard
-            imgUrl={require("../imgs/cd-scetch.png")}
+            imgUrl={require("./../../imgs/cd-scetch.png")}
             status={"Total number of users : 100"} //need number here
           />
           <div className="topStyles">
-            <img src={require("../imgs/barberStyle.png")} alt="" />
+            <img src={require("./../../imgs/barberStyle.png")} alt="" />
           </div>
         </div>
       </div>

@@ -18,7 +18,6 @@ function useFetch(url, setFunction, token) {
             Authorization: "Bearer " + token,
           },
         };
-
         await axios
           .get(url, config)
           .then((response) => {

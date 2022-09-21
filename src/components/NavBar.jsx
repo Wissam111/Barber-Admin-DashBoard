@@ -3,30 +3,27 @@ import { useState } from "react";
 import { act } from "react-dom/test-utils";
 import { Link } from "react-router-dom";
 function NavBar(props) {
-  const { active } = props;
+  // const { active } = props;
 
   return (
     <div className="navbar-container">
+      <img className="logo" src={require("../imgs/logobarb.png")} alt="" />
       <ul className="nav-links">
-        <img className="logo" src={require("../imgs/logobarb.png")} alt="" />
         <li>
-          <Link
-            to="/"
-            className={active == "1" ? "nav-link activeWorker" : "nav-link"}
-            id="1"
-            onClick={() => props.handleWorker("1")}
-          >
-            <i class="fa fa-home"></i>
+          <Link to="/" className="nav-link">
+            <i class="fa fa-home navLogo"></i>
           </Link>
         </li>
         <li>
-          <Link
-            to="/staff-hours"
-            className={active == "1" ? "nav-link activeWorker" : "nav-link"}
-            id="1"
-            onClick={() => props.handleWorker("1")}
-          >
-            <i className="fa-solid fa-users"></i>
+          <Link to="/staff" className="nav-link">
+            <i className="fa-solid fa-users navLogo"></i>
+          </Link>
+        </li>
+        <li>
+          <Link to="/form" className="nav-link">
+            {/* <i className="fa fa-wpforms"></i>
+             */}
+            <i class="fa-brands fa-wpforms navLogo"></i>
           </Link>
         </li>
       </ul>
