@@ -21,10 +21,13 @@ function useFetch(url, setFunction, token) {
         await axios
           .get(url, config)
           .then((response) => {
+            // need to change this
             let _data =
               response.data.appointments != null
                 ? response.data.appointments
-                : response.data.workers;
+                : response.data.workers != null
+                ? response.data.workers
+                : response.data.users;
 
             setFunction(_data);
           })

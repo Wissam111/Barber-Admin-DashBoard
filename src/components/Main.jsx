@@ -17,6 +17,7 @@ function Main() {
     loading,
     UnBookAppoint,
     BookAppoint,
+    users,
   } = useContext(APIContext);
 
   const { timeFormat, dateFormat } = useContext(FORMATContext);
@@ -38,6 +39,7 @@ function Main() {
                   timeFormat={timeFormat}
                   dateFormat={dateFormat}
                   DeleteAppoint={DeleteAppoint}
+                  users={users}
                 />
               }
             />

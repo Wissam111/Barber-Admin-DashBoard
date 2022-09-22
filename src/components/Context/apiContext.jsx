@@ -7,20 +7,16 @@ const token =
 export function APIContextProvider({ children }) {
   const [appointmentsData, setAppointmentsData] = useState([]);
   const [workers, setWorkers] = useState([]);
+  const [users, setUsers] = useState([]);
   const { setCurrId } = useFetch(
-    // "https://saloon-ibra-api.herokuapp.com/api/appointments",
     ApiUrl + "appointments",
     setAppointmentsData,
     token
   );
+  useFetch(ApiUrl + "users", setUsers, token);
 
-  const { loading, error } = useFetch(
-    // "https://saloon-ibra-api.herokuapp.com/api/workers",
-    ApiUrl + "workers",
-    setWorkers,
-    token
-  );
-
+  const { loading, error } = useFetch(ApiUrl + "workers", setWorkers, token);
+  // console.log(users);
   async function PostTime(appoint) {
     try {
       let res = await fetch(ApiUrl + "appointments", {
@@ -113,6 +109,7 @@ export function APIContextProvider({ children }) {
         loading,
         UnBookAppoint,
         BookAppoint,
+        users,
       }}
     >
       {children}

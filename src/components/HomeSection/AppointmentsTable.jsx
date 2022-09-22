@@ -11,8 +11,8 @@ function AppointmentsTable(props) {
           <th>Customer</th>
           <th>Time</th>
           <th>Worker</th>
-      
-          <th className="moreinfoBtn">More Info</th>
+
+          <th className="moreinfoBtn">status</th>
         </tr>
 
         {appointements.map((appoint) => {

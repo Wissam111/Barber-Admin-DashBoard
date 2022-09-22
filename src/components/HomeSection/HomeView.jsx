@@ -6,10 +6,12 @@ import dayjs, { Dayjs } from "dayjs";
 import TextField from "@mui/material/TextField";
 import StatusCard from "./StatusCard";
 import ActiveAppointments from "./ActiveAppointments";
+import Customers from "../CustomerSection/Customers";
 
 function HomeView(props) {
   const [date, setDate] = useState(new Date());
-  const { appointmentsData, timeFormat, dateFormat, DeleteAppoint } = props;
+  const { appointmentsData, timeFormat, dateFormat, DeleteAppoint, users } =
+    props;
 
   return (
     <div className="homeView-container">
@@ -50,7 +52,14 @@ function HomeView(props) {
             DeleteAppoint={DeleteAppoint}
           />
         </div>
-
+        <div className="recent-customers">
+          <h3 className="recentLogo">Recent Customers</h3>
+          <Customers
+            customers={users
+              .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+              .slice(0, 5)}
+          />
+        </div>
         <div className="statusPrect-container">
           <StatusCard
             imgUrl={require("./../../imgs/percentage.png")}

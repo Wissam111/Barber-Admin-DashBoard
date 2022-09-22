@@ -52,10 +52,7 @@ body {
   display: flex;
   width: 100%;
   gap: 1em;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  margin: 2em 0;
+  margin: 1em 0;
 }
 
 .statusCards-container .status-container {
@@ -93,8 +90,9 @@ body {
 }
 
 .active-appoints {
-  width: 80%;
+  width: 50%;
   margin-right: 2em;
+  margin-left: 2em;
 }
 
 .statusPrect-container {
@@ -155,9 +153,13 @@ body {
   padding: 1em;
 }
 
-.table-container {
-  position: absolute;
-  left: 15px;
+.table-info {
+  width: 100%;
+}
+
+.table-info h2 {
+  width: 20%;
+  border-bottom: 2px solid peru;
 }
 
 .appointsview {
@@ -165,7 +167,7 @@ body {
   margin: 25px 0;
   font-size: 0.9em;
   font-family: sans-serif;
-  min-width: 400px;
+  min-width: 650px;
   color: black !important;
   -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
           box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
@@ -178,6 +180,7 @@ body {
 .appointsview th,
 .appointsview td {
   padding: 12px 15px;
+  text-align: center;
 }
 
 .appointsview tr {
@@ -187,32 +190,6 @@ body {
 
 .appointsview tr:last-of-type {
   border-bottom: 1px solid #c5b642;
-}
-
-.customer-container {
-  width: 70%;
-  min-height: 25vh;
-  margin: 20px 10px;
-  color: #dbd8d8;
-  position: absolute;
-  background: white;
-  border-radius: 0.5em;
-  font-weight: bold;
-  background: -webkit-gradient(linear, left top, left bottom, from(#d1851b), to(rgba(92, 86, 64, 0.7)));
-  background: linear-gradient(#d1851b, rgba(92, 86, 64, 0.7));
-}
-
-.customer-container ul {
-  list-style: none;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  gap: 1em;
-  padding: 1em;
 }
 
 .closeBtn {
@@ -310,14 +287,27 @@ body {
 
 .navbar-container .nav-link {
   color: black;
+  position: relative;
 }
 
-.navbar-container .nav-link:hover {
-  color: white;
+.navbar-container .nav-link:before {
+  content: "";
+  width: 0%;
+  height: 2px;
+  position: absolute;
+  background: wheat;
+  bottom: 0;
+  left: 0;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
 .navbar-container .logo {
   width: 4em;
+}
+
+.nav-link:hover::before {
+  width: 100%;
 }
 
 .workinghours-container {
@@ -444,6 +434,54 @@ body {
   width: 90%;
 }
 
+.recent-customers {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1em;
+}
+
+.recent-customers .recentLogo {
+  width: 60%;
+  border-bottom: 1px solid orange;
+}
+
+.customer-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1em;
+  -webkit-box-shadow: rgba(246, 194, 6, 0.16) 2px 2.2px 4px;
+          box-shadow: rgba(246, 194, 6, 0.16) 2px 2.2px 4px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  padding: 0.3em;
+  font-size: 0.8rem;
+}
+
+.customer-container h3 {
+  margin: 0;
+}
+
+.customer-container img {
+  width: 13%;
+  border-radius: 50%;
+}
+
+.customer-container .fa-phone {
+  color: orange;
+  margin-right: 1em;
+  position: absolute;
+  right: 0;
+  font-size: 1rem;
+}
+
 .navLogo {
   font-weight: bold;
   font-size: 1.3rem;
@@ -451,5 +489,11 @@ body {
 
 .form-container {
   border: 2px solid red;
+}
+
+.staffLogo,
+.chartLogo {
+  width: 10px;
+  font-size: 0.9rem;
 }
 /*# sourceMappingURL=style.css.map */

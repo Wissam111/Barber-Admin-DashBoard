@@ -50,8 +50,9 @@ body {
   // border: 2px solid black;
   width: 100%;
   gap: 1em;
-  justify-content: center;
-  margin: 2em 0;
+  // justify-content: center;
+  margin: 1em 0;
+  // border: 2px solid red;
   .status-container {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     display: flex;
@@ -82,8 +83,14 @@ body {
   margin: 0;
 }
 .active-appoints {
-  width: 80%;
+  width: 50%;
   margin-right: 2em;
+  margin-left: 2em;
+  // display: flex;
+  // flex-direction: column;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
 
   // border: 2px solid red;
 }
@@ -92,6 +99,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 30%;
+
   // border: 2px solid yellow;
   height: 100%;
   gap: 1em;
@@ -140,25 +148,46 @@ body {
 
 //************************************** Table *********************************//
 .table-container {
-  position: absolute;
-  left: 15px;
+  // position: absolute;
+  // left: 15px;
   // margin-left: 10em;
+  // border: 2px solid red;
+  // margin-left: 2em;
+}
+.table-info {
+  width: 100%;
+  h2 {
+    width: 20%;
+    border-bottom: 2px solid peru;
+  }
+  // border: 2px solid red;
+  // display: flex;
+  // justify-content: space-between;
+  // align-items: center;
+  // button {
+  //   background: none;
+  //   width: 80px;
+  //   height: 40px;
+  //   margin-right: 1em;
+  // }
 }
 .appointsview {
   border-collapse: collapse;
   margin: 25px 0;
   font-size: 0.9em;
   font-family: sans-serif;
-  min-width: 400px;
+  min-width: 650px;
   color: black !important;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   // border: 2px solid red;
+  // margin-left: 2em;
   .mainRow {
     background-color: #f0ac2e !important;
   }
   th,
   td {
     padding: 12px 15px;
+    text-align: center;
   }
 
   tr {
@@ -171,26 +200,26 @@ body {
   }
 }
 //customer more info
-.customer-container {
-  width: 70%;
-  min-height: 25vh;
-  margin: 20px 10px;
-  // box-shadow: 2px 1px 10px 1px rgb(205, 191, 191);
-  color: rgb(219, 216, 216);
-  position: absolute;
-  background: white;
-  border-radius: 0.5em;
-  font-weight: bold;
-  // opacity: 0.9999;
-  background: linear-gradient(rgba(209, 133, 27, 1), rgba(92, 86, 64, 0.7));
-  ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    padding: 1em;
-  }
-}
+// .customer-container {
+//   width: 70%;
+//   min-height: 25vh;
+//   margin: 20px 10px;
+//   // box-shadow: 2px 1px 10px 1px rgb(205, 191, 191);
+//   color: rgb(219, 216, 216);
+//   position: absolute;
+//   background: white;
+//   border-radius: 0.5em;
+//   font-weight: bold;
+//   // opacity: 0.9999;
+//   background: linear-gradient(rgba(209, 133, 27, 1), rgba(92, 86, 64, 0.7));
+//   ul {
+//     list-style: none;
+//     display: flex;
+//     flex-direction: column;
+//     gap: 1em;
+//     padding: 1em;
+//   }
+// }
 .closeBtn {
   position: absolute;
   right: 0;
@@ -273,8 +302,19 @@ body {
   }
   .nav-link {
     color: black;
-    &:hover {
-      color: white;
+
+    position: relative;
+    // border: 2px solid red;
+
+    &:before {
+      content: "";
+      width: 0%;
+      height: 2px;
+      position: absolute;
+      background: wheat;
+      bottom: 0;
+      left: 0;
+      transition: 0.5s;
     }
   }
 
@@ -282,6 +322,9 @@ body {
     width: 4em;
     //  border: 2px solid red;
   }
+}
+.nav-link:hover::before {
+  width: 100%;
 }
 
 //************************* Staff-Working-Hours ***********************//
@@ -383,6 +426,45 @@ body {
     // background: red;
   }
 }
+//************************* Recent Customer ***********************//
+
+.recent-customers {
+  // border: 2px solid red;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  .recentLogo {
+    width: 60%;
+    border-bottom: 1px solid orange;
+  }
+}
+
+.customer-container {
+  display: flex;
+  // border: 2px solid red;
+  // justify-content: space-between;
+  gap: 1em;
+  box-shadow: rgba(246, 194, 6, 0.16) 2px 2.2px 4px;
+  align-items: center;
+  position: relative;
+  padding: 0.3em;
+  font-size: 0.8rem;
+  h3 {
+    margin: 0;
+  }
+  img {
+    width: 13%;
+    border-radius: 50%;
+  }
+  .fa-phone {
+    color: orange;
+    margin-right: 1em;
+    position: absolute;
+    right: 0;
+    font-size: 1rem;
+  }
+}
+
 //************************* Form ***********************//
 
 .navLogo {
@@ -391,4 +473,11 @@ body {
 }
 .form-container {
   border: 2px solid red;
+}
+.staffLogo,
+.chartLogo {
+  // background: white;
+  width: 10px;
+  font-size: 0.9rem;
+  // background: red;
 }

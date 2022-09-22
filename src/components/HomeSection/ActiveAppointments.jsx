@@ -2,6 +2,7 @@ import React, { Component, useContext, useState } from "react";
 import moment from "moment/moment";
 import AppointmentsTable from "./AppointmentsTable";
 import CustomerCard from "./CustomerCard";
+import { Link } from "react-router-dom";
 function ActiveAppointments(props) {
   const { date, appointmentsData, timeFormat, dateFormat, DeleteAppoint } =
     props;
@@ -21,32 +22,28 @@ function ActiveAppointments(props) {
     filterCurrentDayData();
   }, [date]);
 
-  const handleMoreInfo = (ref, appoint) => {
-    setCurrAppoint(appoint);
-    setPositionRef(ref);
-    console.log(ref);
-  };
-  function handleCloseInfo() {
-    setCurrAppoint({});
-  }
-
-  function handleDeleteAppoint() {
-    DeleteAppoint(currAppoint._id);
-  }
+  // const handleMoreInfo = (ref, appoint) => {
+  //   setCurrAppoint(appoint);
+  //   setPositionRef(ref);
+  //   console.log(ref);
+  // };
 
   return (
     <div className="table-container">
+      <div className="table-info">
+        <h2>Reservation</h2>
+      </div>
       <AppointmentsTable
         appointements={appointements}
         dateFormat={dateFormat}
         timeFormat={timeFormat}
-        handleMoreInfo={handleMoreInfo}
+        // handleMoreInfo={handleMoreInfo}
       />
       {appointements.length == 0 && (
-        <h1 className="noAppointsDay">No Appointements on this day</h1>
+        <h2 className="noAppointsDay">No Appointements on this day</h2>
       )}
 
-      {Object.keys(currAppoint).length != 0 && (
+      {/* {Object.keys(currAppoint).length != 0 && (
         <CustomerCard
           appointment={currAppoint}
           timeFormat={timeFormat}
@@ -55,7 +52,7 @@ function ActiveAppointments(props) {
           position={positionRef}
           handleDeleteAppoint={handleDeleteAppoint}
         />
-      )}
+      )} */}
     </div>
   );
 }

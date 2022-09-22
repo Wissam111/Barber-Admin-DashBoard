@@ -11,18 +11,35 @@ function NavBar(props) {
       <ul className="nav-links">
         <li>
           <Link to="/" className="nav-link">
-            <i class="fa fa-home navLogo"></i>
+            <i class="fa-solid fa-shop navLogo"></i>
           </Link>
         </li>
         <li>
           <Link to="/staff" className="nav-link">
+            <img
+              className="staffLogo"
+              src={require("../imgs/service.png")}
+              alt=""
+            />
+          </Link>
+        </li>
+        <li>
+          <Link to="/customers" className="nav-link">
             <i className="fa-solid fa-users navLogo"></i>
           </Link>
         </li>
         <li>
+          <Link to="/chart" className="nav-link">
+            <img
+              class="chartLogo"
+              src={require("../imgs/line-chart.png")}
+              alt=""
+            />
+          </Link>
+        </li>
+
+        <li>
           <Link to="/form" className="nav-link">
-            {/* <i className="fa fa-wpforms"></i>
-             */}
             <i class="fa-brands fa-wpforms navLogo"></i>
           </Link>
         </li>

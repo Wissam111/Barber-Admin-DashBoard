@@ -14,7 +14,9 @@ function CustomerRow(props) {
       <td className="workerName">
         {appoint.worker.firstName + " " + appoint.worker.lastName}
       </td>
-      <td>
+
+      <td>{"Canceled"}</td>
+      {/* <td>
         <button
           ref={ref}
           className="infoBtn"
@@ -22,7 +24,7 @@ function CustomerRow(props) {
         >
           <i className="fa fa-info-circle"></i>
         </button>
-      </td>
+      </td> */}
     </tr>
   );
 }
