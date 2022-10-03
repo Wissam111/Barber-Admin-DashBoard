@@ -52,14 +52,14 @@ function HomeView(props) {
             DeleteAppoint={DeleteAppoint}
           />
         </div>
-        <div className="recent-customers">
+        {/* <div className="recent-customers">
           <h3 className="recentLogo">Recent Customers</h3>
           <Customers
             customers={users
               .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
               .slice(0, 5)}
           />
-        </div>
+        </div> */}
         <div className="statusPrect-container">
           <StatusCard
             imgUrl={require("./../../imgs/percentage.png")}
@@ -69,9 +69,17 @@ function HomeView(props) {
             imgUrl={require("./../../imgs/cd-scetch.png")}
             status={"Total number of users : 100"} //need number here
           />
-          <div className="topStyles">
+          <div className="recent-customers">
+          <h3 className="recentLogo">Recent Customers</h3>
+          <Customers
+            customers={users
+              .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+              .slice(0, 5)}
+          />
+        </div>
+          {/* <div className="topStyles">
             <img src={require("./../../imgs/barberStyle.png")} alt="" />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
