@@ -496,8 +496,11 @@ body {
   gap: 0.6em;
   margin: 1em;
   padding: 0.6em;
+<<<<<<< HEAD
   width: 19em;
   min-height: 10vh;
+=======
+>>>>>>> 2cabdfae5388689def8c1a862e08504721dc1c8b
   border-radius: 0.3em;
   -webkit-box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
           box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -550,8 +553,12 @@ body {
   border-radius: 50%;
 }
 
+<<<<<<< HEAD
 .customer-container .fa-phone,
 .customer-container .moreInfoBtn {
+=======
+.customer-container .fa-phone {
+>>>>>>> 2cabdfae5388689def8c1a862e08504721dc1c8b
   color: #10bb22;
   margin-right: 1em;
   position: absolute;

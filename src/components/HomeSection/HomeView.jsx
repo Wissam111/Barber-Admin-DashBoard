@@ -7,30 +7,15 @@ import TextField from "@mui/material/TextField";
 import StatusCard from "./StatusCard";
 import ActiveAppointments from "./ActiveAppointments";
 import Customers from "../CustomerSection/Customers";
-import CircularProgress from "@mui/material/CircularProgress";
-import AppointChart from "../AppointsChart/AppointChart";
-import { Link } from "react-router-dom";
+
 function HomeView(props) {
   const [date, setDate] = useState(new Date());
-  const {
-    appointmentsData,
-    timeFormat,
-    dateFormat,
-    DeleteAppoint,
-    users,
-    refetch,
-    loading,
-  } = props;
-  // console.log(date);
-  // console.log(appointmentsData);
-  // if (loading) return <CircularProgress />;
+  const { appointmentsData, timeFormat, dateFormat, DeleteAppoint, users } =
+    props;
+
   return (
     <div className="homeView-container">
       <div className="date-container">
-        <button onClick={() => refetch()} className="refreshBtn">
-          <i class="fa fa-refresh" aria-hidden="true"></i>
-        </button>
-
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DesktopDatePicker
             label="Pick a date"
@@ -65,11 +50,16 @@ function HomeView(props) {
             timeFormat={timeFormat}
             dateFormat={dateFormat}
             DeleteAppoint={DeleteAppoint}
-            sliceNumb={5}
           />
-          <AppointChart appointmentsData={appointmentsData} date={date} />
         </div>
-
+        {/* <div className="recent-customers">
+          <h3 className="recentLogo">Recent Customers</h3>
+          <Customers
+            customers={users
+              .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+              .slice(0, 5)}
+          />
+        </div> */}
         <div className="statusPrect-container">
           <StatusCard
             imgUrl={require("./../../imgs/percentage.png")}
@@ -80,15 +70,9 @@ function HomeView(props) {
             status={"Total number of users : 100"} //need number here
           />
           <div className="recent-customers">
-            <div className="recent-cta">
-              <h3 className="recentLogo">Recent Customers</h3>
-              <Link className="viewAll" to="/users">
-                View all
-              </Link>
-            </div>
-
+            <h3 className="recentLogo">Recent Customers</h3>
             <Customers
-              users={users
+              customers={users
                 .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
                 .slice(0, 5)}
             />
