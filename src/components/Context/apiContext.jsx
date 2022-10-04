@@ -3,20 +3,23 @@ import useFetch from "./useFetch";
 const APIContext = createContext();
 const ApiUrl = "https://saloon-ibra-api.herokuapp.com/api/";
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFiODViNjdmYjkxNjI2M2ZkMzNjMzQiLCJpYXQiOjE2NjMwNjk1NDYsImV4cCI6MTY2NDc5NzU0Nn0.tHV03EvkHq95V_x3lDDLjZAo4xWf6g-qp5vG5zn_kEM";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFiODViNjdmYjkxNjI2M2ZkMzNjMzQiLCJpYXQiOjE2NjQ4MDA5MzQsImV4cCI6MTY2NTA2MDEzNH0.3hDxDEpa1mXkCaB4NqjUXbM4JbzavInMDaHBQNsgnG4";
 export function APIContextProvider({ children }) {
   const [appointmentsData, setAppointmentsData] = useState([]);
   const [workers, setWorkers] = useState([]);
   const [users, setUsers] = useState([]);
-  const { setCurrId } = useFetch(
-    ApiUrl + "appointments",
-    setAppointmentsData,
-    token
-  );
-  useFetch(ApiUrl + "users", setUsers, token);
 
-  const { loading, error } = useFetch(ApiUrl + "workers", setWorkers, token);
-  // console.log(users);
+  const { loading, error, setCurrId, data, refetch } = useFetch();
+
+  useEffect(() => {
+    if (data.length == 0) {
+      return;
+    }
+    setAppointmentsData(data[0].appointments);
+    setUsers(data[1].users);
+    setWorkers(data[2].workers);
+  }, [data]);
+
   async function PostTime(appoint) {
     try {
       let res = await fetch(ApiUrl + "appointments", {
@@ -29,7 +32,8 @@ export function APIContextProvider({ children }) {
       });
       const g = await res.json();
       console.log(g);
-      setCurrId(g.appointment._id);
+      // setCurrId(g.appointment._id);
+      refetch();
       return g;
     } catch (e) {
       console.log(e);
@@ -39,7 +43,7 @@ export function APIContextProvider({ children }) {
     try {
       let res = await fetch(
         // `https://saloon-ibra-api.herokuapp.com/api/appointments/${appointId}`
-        ApiUrl + "appointments/${appointId}",
+        ApiUrl + `appointments/${appointId}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -49,8 +53,9 @@ export function APIContextProvider({ children }) {
         }
       );
       const g = await res.json();
-      setCurrId(appointId);
-      // console.log(g);
+      // setCurrId(appointId);
+      refetch();
+      console.log(g);
     } catch (e) {
       console.log(e);
     }
@@ -72,7 +77,8 @@ export function APIContextProvider({ children }) {
       );
       const g = await res.json();
       console.log(g);
-      setCurrId(appointId);
+      // setCurrId(appointId);
+      refetch();
     } catch (e) {
       console.log(e);
     }
@@ -92,8 +98,33 @@ export function APIContextProvider({ children }) {
         }
       );
       const g = await res.json();
+      // console.log(g);
+      // setCurrId(appoint.appointmentId);
+      refetch();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async function UpdateStatus(appoint) {
+    try {
+      let res = await fetch(
+        // "https://saloon-ibra-api.herokuapp.com/api/appointments/book",
+        ApiUrl + "appointments/update-status",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+          body: JSON.stringify(appoint),
+          method: "PATCH",
+        }
+      );
+      const g = await res.json();
       console.log(g);
-      setCurrId(appoint.appointmentId);
+      console.log("lool");
+      // setCurrId(appoint.appointmentId);
+      refetch();
     } catch (e) {
       console.log(e);
     }
@@ -110,6 +141,8 @@ export function APIContextProvider({ children }) {
         UnBookAppoint,
         BookAppoint,
         users,
+        UpdateStatus,
+        refetch,
       }}
     >
       {children}

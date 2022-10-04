@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 function Customer(props) {
-  const { customer } = props;
+  const { customer, showUserInfo, handleMoreInfo } = props;
   return (
     <div className="customer-container">
       <img
@@ -13,7 +13,18 @@ function Customer(props) {
         alt=""
       />
       <h3>{customer.firstName + " " + customer.lastName}</h3>
-      <i className="fa-solid fa-phone"></i>
+      {showUserInfo ? (
+        <button
+          className="moreInfoBtn"
+          onClick={() => handleMoreInfo(customer)}
+        >
+          <i className="fa fa-info-circle"></i>
+        </button>
+      ) : (
+        <i className="fa fa-phone">
+          <a href={"tel:" + customer.phone}></a>
+        </i>
+      )}
     </div>
   );
 }

@@ -12,6 +12,10 @@ import {
   WeekView,
   Appointments,
   AppointmentForm,
+  DateNavigator,
+  TodayButton,
+  Toolbar,
+  CurrentTimeIndicator,
 } from "@devexpress/dx-react-scheduler-material-ui";
 
 function StaffWorkingHours(props) {
@@ -25,6 +29,7 @@ function StaffWorkingHours(props) {
     DeleteAppoint,
     UnBookAppoint,
     BookAppoint,
+    UpdateStatus,
   } = props;
   const [currWorker, setCurrWorker] = useState({});
   const handleStaffScheduler = (worker) => {
@@ -40,7 +45,7 @@ function StaffWorkingHours(props) {
   };
 
   function createSchAppoint(appoint) {
-    let isBooked = appoint.customer;
+    let isBooked = appoint.customer || appoint.status == "hold";
     let _appoint = {
       id: appoint._id,
       startDate: appoint.start_time,
@@ -71,6 +76,7 @@ function StaffWorkingHours(props) {
     function handleUnBook() {
       let objAppo = {
         appointmentId: props.id,
+        status: "free",
       };
       let newschData = schedulerData.map((appoint) => {
         if (appoint.id == props.id) {
@@ -79,15 +85,13 @@ function StaffWorkingHours(props) {
         }
         return appoint;
       });
-
-      UnBookAppoint(objAppo);
+      UpdateStatus(objAppo);
       setSchedulerData(newschData);
     }
     function handleBook() {
       let objAppo = {
         appointmentId: props.id,
-        userId: currWorker._id,
-        service: "Hair Cut",
+        status: "hold",
       };
       let newschData = schedulerData.map((appoint) => {
         if (appoint.id == props.id) {
@@ -96,7 +100,7 @@ function StaffWorkingHours(props) {
         }
         return appoint;
       });
-      BookAppoint(objAppo);
+      UpdateStatus(objAppo);
       setSchedulerData(newschData);
     }
 
@@ -117,7 +121,8 @@ function StaffWorkingHours(props) {
   async function commitChanges({ added, changed, deleted }) {
     let _tempSchData = [...schedulerData];
     if (added) {
-      let format = "yyyy-MM-DDTHH:mm:ssZ";
+      // yyyy-MM-DDTHH:mm:ssZZ
+      let format = "yyyy-MM-DDTHH:mm:ssZZ";
       let currDate = dateFormat(added.startDate, "yyyy-MM-DD");
       let startDate = dateFormat(
         moment(currDate + " " + timeFormat(added.startDate)),
@@ -159,13 +164,22 @@ function StaffWorkingHours(props) {
         ) : (
           <h2>Select Worker</h2>
         )}
+
         <Paper>
           <Scheduler height={680} data={schedulerData}>
-            <ViewState />
-            <EditingState onCommitChanges={commitChanges} />
-            <IntegratedEditing />
+            <ViewState defaultCurrentDate={new Date()} />
+            <Toolbar />
+            <DateNavigator />
             <WeekView startDayHour={8} endDayHour={24} />
             <Appointments appointmentComponent={Appointment} />
+
+            <CurrentTimeIndicator
+              shadePreviousCells={true}
+              shadePreviousAppointments={true}
+            />
+            <TodayButton />
+            <EditingState onCommitChanges={commitChanges} />
+            <IntegratedEditing />
             <AppointmentForm />
           </Scheduler>
         </Paper>

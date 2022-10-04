@@ -34,7 +34,9 @@ body {
 
 .homeView-container,
 .workinghours-container,
-.form-container {
+.form-container,
+.users-container,
+.agenda-container {
   width: 80%;
   min-height: 88vh;
   // border: 2px solid red;
@@ -83,18 +85,21 @@ body {
   margin: 0;
 }
 .active-appoints {
-  width: 50%;
+  width: 70%;
   margin-right: 2em;
   margin-left: 2em;
-  // display: flex;
-  // flex-direction: column;
-  // display: flex;
+  display: flex;
+  flex-direction: column;
   // justify-content: center;
   // align-items: center;
 
   // border: 2px solid red;
 }
-
+.appointChart-container {
+  // border: 2px solid red;
+  // height: 5vh;
+  width: 50%;
+}
 .statusPrect-container {
   display: flex;
   flex-direction: column;
@@ -141,9 +146,22 @@ body {
   }
 }
 .date-container {
-  width: 100%;
+  width: 95%;
   // border: 2px solid red;
   padding: 1em;
+  position: relative;
+  display: flex;
+  align-items: center;
+  .refreshBtn {
+    position: absolute;
+    right: 0;
+    font-size: 1.5em;
+    margin-right: 2em;
+    background: none;
+    border-radius: 50%;
+    box-shadow: rgba(243, 174, 55, 0.24) 0px 3px 8px;
+    cursor: pointer;
+  }
 }
 
 //************************************** Table *********************************//
@@ -152,13 +170,30 @@ body {
   // left: 15px;
   // margin-left: 10em;
   // border: 2px solid red;
+  // height: 50%;
+  height: 40vh;
+  // margin-bottom: 1em;
+  // position: relative;
   // margin-left: 2em;
 }
+// .viewallTable {
+//   border: 2px solid red;
+//   position: absolute;
+//   left: 50%;
+//   top: 0;
+//   transform: translateY(-50%, -50%);
+// }
 .table-info {
-  width: 100%;
+  width: 60%;
+  // border: 2px solid red;
+  display: flex;
+  align-items: center;
+  margin-top: 2em;
+  justify-content: space-between;
   h2 {
     width: 20%;
-    border-bottom: 2px solid peru;
+    margin: 0;
+    // border-bottom: 2px solid peru;
   }
   // border: 2px solid red;
   // display: flex;
@@ -176,10 +211,14 @@ body {
   margin: 25px 0;
   font-size: 0.9em;
   font-family: sans-serif;
-  min-width: 650px;
+  min-width: 600px;
+  // height: 50vh;
+  // border: 2px solid red;
+
   color: black !important;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   // border: 2px solid red;
+  // overflow: scroll;
   // margin-left: 2em;
   .mainRow {
     background-color: #f0ac2e !important;
@@ -198,7 +237,20 @@ body {
   tr:last-of-type {
     border-bottom: 1px solid #c5b642;
   }
+  tr:nth-child(even) {
+    background-color: rgb(249, 244, 233);
+  }
 }
+.table-rows {
+  width: 100%;
+}
+
+// #table-scroll {
+//   height: 150px;
+//   overflow: auto;
+//   margin-top: 20px;
+// }
+
 //customer more info
 // .customer-container {
 //   width: 70%;
@@ -430,21 +482,42 @@ body {
 
 .recent-customers {
   // border: 2px solid red;
-  display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 0.6em;
+  margin: 1em;
+  padding: 0.6em;
+  // border: 2px solid red;
+  width: 19em;
+  min-height: 10vh;
+  // color: white;
+  border-radius: 0.3em;
+  // background-image: linear-gradient(rgba(83, 52, 3, 0.7) ,rgba(222, 194, 100, 0.7)) ,url( "./../imgs/barberStyle.png");
+  // background-position: center;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  background-size: cover;
   .recentLogo {
     width: 60%;
-    border-bottom: 1px solid orange;
+    // border-bottom: 1px solid orange;ta
   }
 }
-
+.recent-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.viewAll {
+  // text-decoration: none;
+  color: orange;
+  font-weight: bold;
+  margin-right: 1em;
+}
 .customer-container {
   display: flex;
   // border: 2px solid red;
   // justify-content: space-between;
   gap: 1em;
-  box-shadow: rgba(246, 194, 6, 0.16) 2px 2.2px 4px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
   align-items: center;
   position: relative;
   padding: 0.3em;
@@ -456,15 +529,176 @@ body {
     width: 13%;
     border-radius: 50%;
   }
-  .fa-phone {
-    color: orange;
+  .fa-phone,
+  .moreInfoBtn {
+    color: rgb(16, 187, 34);
     margin-right: 1em;
     position: absolute;
     right: 0;
     font-size: 1rem;
+    cursor: pointer;
+  }
+}
+.moreInfoBtn {
+  color: orange !important;
+}
+
+//************************* Update Status ***********************//
+.updateStatus-container {
+  // border: 2px solid red;
+  position: absolute;
+  min-width: 15em;
+  height: 5vh;
+  padding: 10px;
+  img {
+    width: 20px;
+  }
+  .updateStatus-list {
+    display: flex;
+    gap: 1em;
+    position: relative;
+    // border: 2px solid red;
+    border-radius: 0.4em;
+    padding: 10px;
+
+    background: rgb(238, 225, 201);
+  }
+  .closeBtn {
+    position: absolute;
+    right: 0;
+  }
+  .statBtn {
+    cursor: pointer;
+  }
+}
+.PendingState {
+  // font-size: 150px;
+  color: orange;
+  animation: beat 0.25s infinite alternate;
+  transform-origin: center;
+}
+
+/* Heart beat animation */
+@keyframes beat {
+  to {
+    transform: scale(1.1);
   }
 }
 
+.CanceledState {
+  color: #e00;
+}
+.notStartedState {
+  color: rgb(9, 88, 107);
+}
+.DoneState {
+  color: green;
+}
+//************************* users ***********************//
+.users-container {
+  border: 2px solid red;
+  display: flex;
+
+  // background: #bdc3c7; /* fallback for old browsers */
+  // background: -webkit-linear-gradient(
+  //   to right,
+  //   #2c3e50,
+  //   #bdc3c7
+  // ); /* Chrome 10-25, Safari 5.1-6 */
+  // background: linear-gradient(
+  //   to right,
+  //   #2c3e50,
+  //   #bdc3c7
+  // ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  // border: 2px solid red;
+  .staff-logo {
+    display: flex;
+    .fa-users {
+      font-size: 1.5rem;
+    }
+  }
+
+  .users-cta {
+    // border: 2px solid red;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0.5em;
+    // box-shadow: rgba(223, 192, 88, 0.25) 0px 30px 60px -12px,
+    //   rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+  }
+  .customers-container {
+    width: 100%;
+    height: 60vh;
+    // border: 2px solid red;
+    overflow-y: scroll;
+    padding-right: 40px;
+    padding-left: 20px;
+    box-sizing: content-box;
+    border: 2px solid red($color: #000000);
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+
+    gap: 1em;
+    .customer-container {
+      width: 80%;
+      img {
+        width: 60px;
+      }
+    }
+  }
+
+  .search-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: left;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    width: 100%;
+    height: 4vh;
+    // border: 2px solid red;
+    input {
+      width: 50%;
+      height: 100%;
+      // border: 2px solid red;
+      background: none;
+      font-weight: bold;
+      // outline: none;
+    }
+  }
+}
+.usersLogo {
+  font-size: 2.5rem;
+}
+//************************* Agenda ***********************//
+.agenda-container {
+  .table-container {
+    margin-left: 2em;
+    overflow: hidden;
+    height: 100%;
+  }
+  .table-wrapper {
+    width: 100%;
+    // border: 2px solid red;
+    overflow-y: scroll;
+    padding-right: 17px;
+    box-sizing: content-box;
+    height: 70vh;
+    position: relative;
+  }
+  .appointsview {
+    width: 90%;
+    // border: 2px solid red;
+  }
+  .noAppointsDay {
+    position: absolute;
+    top: 10em;
+  }
+}
 //************************* Form ***********************//
 
 .navLogo {

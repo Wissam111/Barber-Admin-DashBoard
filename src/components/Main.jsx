@@ -8,6 +8,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Home from "./pages/Home";
 import Staff from "./pages/Staff";
 import Form from "./pages/Form";
+import Users from "./pages/Users";
+import Agenda from "./pages/Agenda";
 function Main() {
   const {
     appointmentsData,
@@ -18,11 +20,14 @@ function Main() {
     UnBookAppoint,
     BookAppoint,
     users,
+    UpdateStatus,
+    refetch,
   } = useContext(APIContext);
 
   const { timeFormat, dateFormat } = useContext(FORMATContext);
-
+  // React.useEffect(() => {
   if (loading) return <CircularProgress />;
+  // }, []);
 
   return (
     <div className="outerAdmin-container">
@@ -35,6 +40,21 @@ function Main() {
               exact
               element={
                 <Home
+                  appointmentsData={appointmentsData}
+                  timeFormat={timeFormat}
+                  dateFormat={dateFormat}
+                  DeleteAppoint={DeleteAppoint}
+                  users={users}
+                  refetch={refetch}
+                  loading={loading}
+                />
+              }
+            />
+            <Route
+              path="/agenda"
+              exact
+              element={
+                <Agenda
                   appointmentsData={appointmentsData}
                   timeFormat={timeFormat}
                   dateFormat={dateFormat}
@@ -56,10 +76,12 @@ function Main() {
                   DeleteAppoint={DeleteAppoint}
                   UnBookAppoint={UnBookAppoint}
                   BookAppoint={BookAppoint}
+                  UpdateStatus={UpdateStatus}
                 />
               }
             />
             <Route path="/form" exact element={<Form />} />
+            <Route path="/users" exact element={<Users users={users} />} />
           </Routes>
         </Router>
       </div>

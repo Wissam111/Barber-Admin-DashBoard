@@ -3,8 +3,14 @@ import Customer from "./Customer";
 function Customers(props) {
   return (
     <div className="customers-container">
-      {props.customers.map((customer) => {
-        return <Customer customer={customer} />;
+      {props.users.map((customer) => {
+        return (
+          <Customer
+            customer={customer}
+            showUserInfo={props.showUserInfo}
+            handleMoreInfo={props.handleMoreInfo}
+          />
+        );
       })}
     </div>
   );

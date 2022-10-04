@@ -10,6 +10,7 @@ function Staff(props) {
     DeleteAppoint,
     UnBookAppoint,
     BookAppoint,
+    UpdateStatus,
   } = props;
   return (
     <StaffWorkingHours
@@ -21,6 +22,7 @@ function Staff(props) {
       DeleteAppoint={DeleteAppoint}
       UnBookAppoint={UnBookAppoint}
       BookAppoint={BookAppoint}
+      UpdateStatus={UpdateStatus}
     />
   );
 }

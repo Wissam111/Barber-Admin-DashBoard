@@ -11,7 +11,15 @@ function NavBar(props) {
       <ul className="nav-links">
         <li>
           <Link to="/" className="nav-link">
-            <i class="fa-solid fa-shop navLogo"></i>
+            <i className="fa-solid fa-shop navLogo"></i>
+          </Link>
+        </li>
+        <li>
+          <Link to="/agenda" className="nav-link">
+            <i
+              class="fa-solid fa-calendar-days"
+              style={{ fontSize: "1.5rem" }}
+            ></i>
           </Link>
         </li>
         <li>
@@ -24,14 +32,14 @@ function NavBar(props) {
           </Link>
         </li>
         <li>
-          <Link to="/customers" className="nav-link">
+          <Link to="/users" className="nav-link">
             <i className="fa-solid fa-users navLogo"></i>
           </Link>
         </li>
         <li>
           <Link to="/chart" className="nav-link">
             <img
-              class="chartLogo"
+              className="chartLogo"
               src={require("../imgs/line-chart.png")}
               alt=""
             />
@@ -40,7 +48,7 @@ function NavBar(props) {
 
         <li>
           <Link to="/form" className="nav-link">
-            <i class="fa-brands fa-wpforms navLogo"></i>
+            <i className="fa-brands fa-wpforms navLogo"></i>
           </Link>
         </li>
       </ul>
