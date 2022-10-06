@@ -1,33 +1,25 @@
 import React, { Component, useRef, useState, useContext } from "react";
-import APIContext from "../Context/apiContext";
 function CustomerRow(props) {
-  const { appoint, dateFormat, timeFormat, handleMoreInfo } = props;
-  const ref = useRef();
-  const { UpdateStatus } = useContext(APIContext);
+  const { appoint, dateFormat, timeFormat, handleDelete, handleDone } = props;
+
   const updateCurrState = () => {
     const today = new Date();
     const startDate = new Date(appoint.start_time);
     const endDate = new Date(appoint.end_time);
 
-    if (appoint.state == "canceled") {
+    if (appoint.status == "canceled") {
       return "canceled";
-    }
-    //17:30 18:00  18:01
-    if (today >= startDate && today <= endDate) {
-      return "Pending";
-    } else if (today < startDate) {
-      return "Not Started";
-    } else if (today >= endDate) {
-      // if (appoint.status != "done") {
-      //   let objAppo = {
-      //     appointmentId: appoint._id,
-      //     status: "done",
-      //   };
-      //   UpdateStatus(objAppo);
-      // }
+    } else if (appoint.status == "done") {
       return "Done";
     }
+    // 17:30 18:00  18:01
+    if (today >= startDate && today <= endDate) {
+      return "In Progress";
+    } else if (today < startDate || appoint.status == "in-progress") {
+      return "Pending";
+    }
   };
+
   return (
     <tr className="customerow-container">
       <td>
@@ -44,28 +36,32 @@ function CustomerRow(props) {
 
       <td
         className={
-          updateCurrState() == "Done"
+          appoint.status == "done"
             ? "DoneState"
             : updateCurrState() == "canceled"
             ? "CanceledState"
-            : updateCurrState() == "Not Started"
+            : updateCurrState() == "Pending"
             ? "notStartedState"
-            : "PendingState"
+            : "ProgresState"
         }
       >
         {updateCurrState()}
       </td>
       <td className="workerName">
-        {appoint.worker.firstName + " " + appoint.worker.lastName}
+        {appoint.worker
+          ? appoint.worker.firstName + " " + appoint.worker.lastName
+          : "non"}
       </td>
       <td>
-        <button
-          ref={ref}
-          className="infoBtn"
-          onClick={() => handleMoreInfo(ref, appoint)}
-        >
-          <i className="fa fa-info-circle"></i>
+        <button className="moreInfoBtn" onClick={() => handleDelete(appoint)}>
+          <i className="fa-solid fa-trash-can"></i>
         </button>
+
+        <input
+          type="checkbox"
+          checked={appoint.status == "done"}
+          onChange={(event) => handleDone(event, appoint)}
+        ></input>
       </td>
     </tr>
   );

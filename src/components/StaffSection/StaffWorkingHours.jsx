@@ -31,6 +31,7 @@ function StaffWorkingHours(props) {
     BookAppoint,
     UpdateStatus,
   } = props;
+
   const [currWorker, setCurrWorker] = useState({});
   const handleStaffScheduler = (worker) => {
     const currWorkerAppoints = appointmentsData.filter((appoint) => {
@@ -45,7 +46,8 @@ function StaffWorkingHours(props) {
   };
 
   function createSchAppoint(appoint) {
-    let isBooked = appoint.customer || appoint.status == "hold";
+    // let isBooked = appoint.customer || appoint.status == "hold";
+    let isBooked = !(appoint.status == "free" || appoint.status == "canceled");
     let _appoint = {
       id: appoint._id,
       startDate: appoint.start_time,
@@ -98,8 +100,10 @@ function StaffWorkingHours(props) {
           appoint.title = "Booked";
           appoint.color = "green";
         }
+
         return appoint;
       });
+
       UpdateStatus(objAppo);
       setSchedulerData(newschData);
     }

@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useContext } from "react";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
@@ -9,20 +9,61 @@ import ActiveAppointments from "./ActiveAppointments";
 import Customers from "../CustomerSection/Customers";
 import CircularProgress from "@mui/material/CircularProgress";
 import AppointChart from "../AppointsChart/AppointChart";
+import APIContext from "../Context/apiContext";
 import { Link } from "react-router-dom";
 function HomeView(props) {
   const [date, setDate] = useState(new Date());
+  const [done, setDone] = useState(0);
+  const [pending, setPending] = useState(0);
+  const [canceled, setCanceled] = useState(0);
   const {
     appointmentsData,
     timeFormat,
     dateFormat,
     DeleteAppoint,
-    users,
     refetch,
     loading,
+    stats,
   } = props;
-  // console.log(date);
-  // console.log(appointmentsData);
+  const { users, setUsers } = useContext(APIContext);
+  function UpdateStats(appointments) {
+    let done = 0;
+    let pending = 0;
+    let canceled = 0;
+    appointments.forEach((appoint) => {
+      let d = dateFormat(new Date(appoint.start_time), "MM/DD/YYYY");
+      let appD = dateFormat(new Date(date), "MM/DD/YYYY");
+      if (d == appD) {
+        if (appoint.status == "done") {
+          done++;
+        } else if (appoint.status == "canceled") {
+          canceled++;
+        } else if (
+          appoint.status == "in-progress" ||
+          appoint.status == "hold"
+        ) {
+          pending++;
+        }
+      }
+    });
+    setPending(pending);
+    setCanceled(canceled);
+    setDone(done);
+  }
+  React.useEffect(() => {
+    UpdateStats(appointmentsData);
+  }, [date]);
+
+  const handleDeleteUser = (customerId) => {
+    if (window.confirm("Are you sure you wish to delete this item?")) {
+      let tempUsers = users.filter((user) => {
+        return user._id != customerId;
+      });
+      setUsers(tempUsers);
+      props.DeleteUser(customerId);
+    }
+  };
+
   // if (loading) return <CircularProgress />;
   return (
     <div className="homeView-container">
@@ -46,17 +87,19 @@ function HomeView(props) {
         <div className="active-appoints">
           <div className="statusCards-container">
             <StatusCard
-              imgUrl={require("./../../imgs/done.png")}
+              imgUrl={require("./../../imgs/delivery-box.png")}
               status={"Done"}
+              statsNumber={done}
             />
             <StatusCard
-              imgUrl={require("./../../imgs/clock.png")}
+              imgUrl={require("./../../imgs/pending.png")}
               status={"Pending"}
-              cs={"done"}
+              statsNumber={pending}
             />
             <StatusCard
-              imgUrl={require("./../../imgs/cancelled.png")}
+              imgUrl={require("./../../imgs/delivery-cancelled.png")}
               status={"Canceled"}
+              statsNumber={canceled}
             />
           </div>
           <ActiveAppointments
@@ -65,6 +108,7 @@ function HomeView(props) {
             timeFormat={timeFormat}
             dateFormat={dateFormat}
             DeleteAppoint={DeleteAppoint}
+            UpdateStats={UpdateStats}
             sliceNumb={5}
           />
           <AppointChart appointmentsData={appointmentsData} date={date} />
@@ -73,11 +117,13 @@ function HomeView(props) {
         <div className="statusPrect-container">
           <StatusCard
             imgUrl={require("./../../imgs/percentage.png")}
-            status={"Number of deals: 1200"} //need number here
+            status={"Number of deals: "}
+            statsNumber={stats.appointmentsCount}
           />
           <StatusCard
             imgUrl={require("./../../imgs/cd-scetch.png")}
-            status={"Total number of users : 100"} //need number here
+            status={"Total number of users:"}
+            statsNumber={stats.customersCount}
           />
           <div className="recent-customers">
             <div className="recent-cta">
@@ -91,6 +137,7 @@ function HomeView(props) {
               users={users
                 .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
                 .slice(0, 5)}
+              handleDeleteUser={handleDeleteUser}
             />
           </div>
           {/* <div className="topStyles">

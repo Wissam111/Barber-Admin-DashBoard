@@ -7,9 +7,9 @@ function Home(props) {
     timeFormat,
     dateFormat,
     DeleteAppoint,
-    users,
     refetch,
     loading,
+    stats,
   } = props;
   return (
     <HomeView
@@ -17,9 +17,10 @@ function Home(props) {
       timeFormat={timeFormat}
       dateFormat={dateFormat}
       DeleteAppoint={DeleteAppoint}
-      users={users}
+      // users={users}
       refetch={refetch}
       loading={loading}
+      stats={stats}
     />
   );
 }

@@ -10,10 +10,12 @@ import Staff from "./pages/Staff";
 import Form from "./pages/Form";
 import Users from "./pages/Users";
 import Agenda from "./pages/Agenda";
+import Login from "./LoginSection/Login";
 function Main() {
   const {
     appointmentsData,
     workers,
+    stats,
     PostTime,
     DeleteAppoint,
     loading,
@@ -22,11 +24,13 @@ function Main() {
     users,
     UpdateStatus,
     refetch,
+    DeleteUser,
+    CreateUser,
   } = useContext(APIContext);
 
   const { timeFormat, dateFormat } = useContext(FORMATContext);
   // React.useEffect(() => {
-  if (loading) return <CircularProgress />;
+  // if (loading) return <CircularProgress />;
   // }, []);
 
   return (
@@ -44,9 +48,10 @@ function Main() {
                   timeFormat={timeFormat}
                   dateFormat={dateFormat}
                   DeleteAppoint={DeleteAppoint}
-                  users={users}
+                  // users={users}
                   refetch={refetch}
                   loading={loading}
+                  stats={stats}
                 />
               }
             />
@@ -60,6 +65,7 @@ function Main() {
                   dateFormat={dateFormat}
                   DeleteAppoint={DeleteAppoint}
                   users={users}
+                  loading={loading}
                 />
               }
             />
@@ -81,7 +87,19 @@ function Main() {
               }
             />
             <Route path="/form" exact element={<Form />} />
-            <Route path="/users" exact element={<Users users={users} />} />
+            <Route
+              path="/users"
+              exact
+              element={
+                <Users
+                  users={users}
+                  dateFormat={dateFormat}
+                  DeleteUser={DeleteUser}
+                  CreateUser={CreateUser}
+                  loading={loading}
+                />
+              }
+            />
           </Routes>
         </Router>
       </div>

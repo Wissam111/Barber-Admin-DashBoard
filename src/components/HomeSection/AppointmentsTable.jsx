@@ -4,17 +4,23 @@ import CustomerRow from "./CustomerRow";
 import UpdateStatus from "./UpdateStatus";
 function AppointmentsTable(props) {
   // const { appointements, dateFormat, timeFormat, handleMoreInfo } = props;
-  const { appointements, dateFormat, timeFormat } = props;
+  const {
+    appointements,
+    dateFormat,
+    timeFormat,
+    DeleteAppoint,
+    handleDelete,
+    handleDone,
+    UpdateStats,
+  } = props;
   const [position, setPosition] = useState({});
   const [showUpdateStatus, setShowUpdateStatus] = useState(false);
   const [currStatus, setCurrStatus] = useState("");
+
   const handleMoreInfo = (ref, appoint) => {
     setPosition(ref);
     setShowUpdateStatus(true);
     setCurrStatus(appoint.status);
-  };
-  const handleCloseInfo = () => {
-    setShowUpdateStatus(false);
   };
 
   return (
@@ -41,6 +47,8 @@ function AppointmentsTable(props) {
                 dateFormat={dateFormat}
                 timeFormat={timeFormat}
                 handleMoreInfo={handleMoreInfo}
+                handleDelete={handleDelete}
+                handleDone={handleDone}
               />
             );
           })}

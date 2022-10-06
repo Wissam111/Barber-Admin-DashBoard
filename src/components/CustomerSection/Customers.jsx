@@ -7,8 +7,9 @@ function Customers(props) {
         return (
           <Customer
             customer={customer}
-            showUserInfo={props.showUserInfo}
+            // showUserInfo={props.showUserInfo}
             handleMoreInfo={props.handleMoreInfo}
+            handleDeleteUser={props.handleDeleteUser}
           />
         );
       })}

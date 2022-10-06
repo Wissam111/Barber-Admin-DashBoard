@@ -376,6 +376,7 @@ body {
 
 .staff-container {
   width: 27%;
+  height: 86vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -383,9 +384,13 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
   gap: 1em;
+}
+
+.staff-container .staff-wrapper {
+  height: 90%;
+  width: 100%;
+  overflow-y: scroll;
 }
 
 .workerView-container {
@@ -397,6 +402,7 @@ body {
   font-weight: bold;
   letter-spacing: 0.011ch;
   margin-left: 1em;
+  margin-bottom: 1em;
 }
 
 .workerView-container img {
@@ -530,6 +536,7 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  height: 5.2vh;
   gap: 1em;
   -webkit-box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
           box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -554,14 +561,35 @@ body {
 .customer-container .moreInfoBtn {
   color: #10bb22;
   margin-right: 1em;
-  position: absolute;
-  right: 0;
   font-size: 1rem;
   cursor: pointer;
 }
 
 .moreInfoBtn {
   color: orange !important;
+  font-size: 1rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.customer-action {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  right: 0;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.customer-action button {
+  background: none;
+  border: none;
 }
 
 .updateStatus-container {
@@ -595,7 +623,7 @@ body {
   cursor: pointer;
 }
 
-.PendingState {
+.ProgresState {
   color: orange;
   -webkit-animation: beat 0.25s infinite alternate;
           animation: beat 0.25s infinite alternate;
@@ -630,16 +658,27 @@ body {
 }
 
 .users-container {
-  border: 2px solid red;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  position: relative;
 }
 
 .users-container .staff-logo {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  left: 0;
+  top: 0;
+  position: absolute;
 }
 
 .users-container .staff-logo .fa-users {
@@ -687,6 +726,8 @@ body {
 
 .users-container .customers-container .customer-container {
   width: 80%;
+  padding: 1em;
+  min-height: 5vh;
 }
 
 .users-container .customers-container .customer-container img {
@@ -718,6 +759,77 @@ body {
 
 .usersLogo {
   font-size: 2.5rem;
+}
+
+.registerform-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  width: 50%;
+}
+
+.registerform-container h1 {
+  text-align: center;
+}
+
+.registerform-container .register-inputs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 15px 50px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 60%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1em;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+          box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.registerform-container .input-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 20px 30px;
+  width: 100%;
+  margin-right: 2em;
+}
+
+.registerform-container .input-wrapper label:after {
+  content: " *";
+  color: red;
+}
+
+.registerform-container .checkboxType {
+  -webkit-box-orient: horizontal !important;
+  -webkit-box-direction: normal !important;
+      -ms-flex-direction: row !important;
+          flex-direction: row !important;
+}
+
+.registerform-container .checkboxType label:after {
+  content: "";
+}
+
+.registerform-container .submitBtn {
+  height: 50px;
+  width: 20%;
+  cursor: pointer;
+  background: radial-gradient(ellipse at center, #f49d32 0, rgba(75, 251, 181, 0) 100%);
 }
 
 .agenda-container .table-container {
@@ -758,5 +870,78 @@ body {
 .chartLogo {
   width: 10px;
   font-size: 0.9rem;
+}
+
+.doneBtn {
+  color: green !important;
+}
+
+.login-container {
+  background-color: #fff;
+  border: 3px #000 solid;
+  border-radius: 10px;
+  padding: 30px;
+  max-width: 1000px;
+  text-align: center;
+}
+
+.code-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 40px 0;
+}
+
+.code {
+  caret-color: transparent;
+  border-radius: 5px;
+  font-size: 75px;
+  height: 120px;
+  width: 100px;
+  border: 1px solid #eee;
+  margin: 1%;
+  text-align: center;
+  font-weight: 300;
+  -moz-appearance: textfield;
+}
+
+.code::-webkit-outer-spin-button,
+.code::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.code:valid {
+  border-color: #3498db;
+  -webkit-box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.25);
+}
+
+.info {
+  background-color: #eaeaea;
+  display: inline-block;
+  padding: 10px;
+  line-height: 20px;
+  max-width: 400px;
+  color: #777;
+  border-radius: 5px;
+}
+
+@media (max-width: 600px) {
+  .code-container {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+  .code {
+    font-size: 60px;
+    height: 80px;
+    max-width: 70px;
+  }
 }
 /*# sourceMappingURL=style.css.map */

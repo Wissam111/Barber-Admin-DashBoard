@@ -320,6 +320,7 @@ body {
   color: red;
   text-align: center;
 }
+
 //************************************** NavBar *********************************//
 
 .navbar-container {
@@ -390,10 +391,16 @@ body {
 .staff-container {
   // border: 2px solid red;
   width: 27%;
+  height: 86vh;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   gap: 1em;
+  .staff-wrapper {
+    height: 90%;
+    width: 100%;
+
+    overflow-y: scroll;
+  }
 }
 
 .workerView-container {
@@ -405,6 +412,7 @@ body {
   font-weight: bold;
   letter-spacing: 0.011ch;
   margin-left: 1em;
+  margin-bottom: 1em;
   img {
     width: 50px;
     height: 50px;
@@ -486,13 +494,9 @@ body {
   gap: 0.6em;
   margin: 1em;
   padding: 0.6em;
-  // border: 2px solid red;
   width: 19em;
   min-height: 10vh;
-  // color: white;
   border-radius: 0.3em;
-  // background-image: linear-gradient(rgba(83, 52, 3, 0.7) ,rgba(222, 194, 100, 0.7)) ,url( "./../imgs/barberStyle.png");
-  // background-position: center;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   background-size: cover;
   .recentLogo {
@@ -515,6 +519,7 @@ body {
   display: flex;
   // border: 2px solid red;
   // justify-content: space-between;
+  height: 5.2vh;
   gap: 1em;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   align-items: center;
@@ -532,14 +537,31 @@ body {
   .moreInfoBtn {
     color: rgb(16, 187, 34);
     margin-right: 1em;
-    position: absolute;
-    right: 0;
+    // position: absolute;
+    // right: 0;
     font-size: 1rem;
     cursor: pointer;
   }
 }
+
 .moreInfoBtn {
   color: orange !important;
+  font-size: 1rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.customer-action {
+  display: flex;
+  position: absolute;
+  right: 0;
+  justify-content: center;
+  align-items: center;
+  button {
+    background: none;
+    border: none;
+  }
 }
 
 //************************* Update Status ***********************//
@@ -570,7 +592,7 @@ body {
     cursor: pointer;
   }
 }
-.PendingState {
+.ProgresState {
   // font-size: 150px;
   color: orange;
   animation: beat 0.25s infinite alternate;
@@ -595,30 +617,23 @@ body {
 }
 //************************* users ***********************//
 .users-container {
-  border: 2px solid red;
-  display: flex;
-
-  // background: #bdc3c7; /* fallback for old browsers */
-  // background: -webkit-linear-gradient(
-  //   to right,
-  //   #2c3e50,
-  //   #bdc3c7
-  // ); /* Chrome 10-25, Safari 5.1-6 */
-  // background: linear-gradient(
-  //   to right,
-  //   #2c3e50,
-  //   #bdc3c7
-  // ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   // border: 2px solid red;
+  display: flex;
+  flex-direction: row;
+  position: relative;
   .staff-logo {
     display: flex;
+    flex-direction: row;
+    left: 0;
+    top: 0;
+    position: absolute;
+
     .fa-users {
       font-size: 1.5rem;
     }
   }
 
   .users-cta {
-    // border: 2px solid red;
     width: 30%;
     display: flex;
     justify-content: center;
@@ -626,8 +641,6 @@ body {
     flex-direction: column;
     overflow: hidden;
     padding: 0.5em;
-    // box-shadow: rgba(223, 192, 88, 0.25) 0px 30px 60px -12px,
-    //   rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
   }
   .customers-container {
     width: 100%;
@@ -645,6 +658,9 @@ body {
     gap: 1em;
     .customer-container {
       width: 80%;
+      padding: 1em;
+      min-height: 5vh;
+      // border: 2px solid red;
       img {
         width: 60px;
       }
@@ -673,6 +689,62 @@ body {
 .usersLogo {
   font-size: 2.5rem;
 }
+.registerform-container {
+  display: flex;
+  flex-direction: column;
+  // box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  // align-items: center;
+  // flex-direction: column;
+  // border: 2px solid red;
+  h1 {
+    text-align: center;
+  }
+  width: 50%;
+  .register-inputs {
+    display: flex;
+    margin: 15px 50px;
+    flex-direction: column;
+    height: 60%;
+    align-items: center;
+    // border: 2px solid red;
+    gap: 1em;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  }
+  .input-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 30px;
+    width: 100%;
+    margin-right: 2em;
+
+    label:after {
+      content: " *";
+      color: red;
+    }
+  }
+  .checkboxType {
+    flex-direction: row !important;
+
+    label:after {
+      content: "";
+    }
+  }
+
+  .submitBtn {
+    height: 50px;
+    width: 20%;
+    cursor: pointer;
+    background: radial-gradient(
+      ellipse at center,
+      #f49d32 0,
+      rgba(75, 251, 181, 0) 100%
+    );
+  }
+}
+
 //************************* Agenda ***********************//
 .agenda-container {
   .table-container {
@@ -713,4 +785,75 @@ body {
   width: 10px;
   font-size: 0.9rem;
   // background: red;
+}
+
+.doneBtn {
+  color: green !important;
+
+  // font-size: 1rem;
+  // background: none;
+  // cursor: pointer;
+}
+//************************* Login ***********************//
+
+.login-container {
+  background-color: #fff;
+  border: 3px #000 solid;
+  border-radius: 10px;
+  padding: 30px;
+  max-width: 1000px;
+  text-align: center;
+}
+
+.code-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+.code {
+  caret-color: transparent;
+  border-radius: 5px;
+  font-size: 75px;
+  height: 120px;
+  width: 100px;
+  border: 1px solid #eee;
+  margin: 1%;
+  text-align: center;
+  font-weight: 300;
+  -moz-appearance: textfield;
+}
+
+.code::-webkit-outer-spin-button,
+.code::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.code:valid {
+  border-color: #3498db;
+  box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.25);
+}
+
+.info {
+  background-color: #eaeaea;
+  display: inline-block;
+  padding: 10px;
+  line-height: 20px;
+  max-width: 400px;
+  color: #777;
+  border-radius: 5px;
+}
+
+@media (max-width: 600px) {
+  .code-container {
+    flex-wrap: wrap;
+  }
+
+  .code {
+    font-size: 60px;
+    height: 80px;
+    max-width: 70px;
+  }
 }

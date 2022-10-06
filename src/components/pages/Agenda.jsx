@@ -5,11 +5,14 @@ import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React, { Component, useState } from "react";
 import { useLocation } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
 function Agenda(props) {
   const location = useLocation();
   const { state } = location != null ? location : null;
   const [date, setDate] = useState(state ? state.fromDate : new Date());
-  const { appointmentsData, timeFormat, dateFormat, DeleteAppoint } = props;
+  const { appointmentsData, timeFormat, dateFormat, DeleteAppoint, loading } =
+    props;
+  if (loading) return <CircularProgress />;
   return (
     <div className="agenda-container">
       <div className="date-container">

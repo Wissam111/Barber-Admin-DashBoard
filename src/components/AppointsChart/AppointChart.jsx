@@ -44,7 +44,7 @@ function AppointChart(props) {
 
       return (
         new Date(date).getFullYear() == appD.getFullYear() &&
-        appoint.status == "hold"
+        appoint.status == "done"
       );
     });
     const _ = require("lodash");
@@ -62,11 +62,6 @@ function AppointChart(props) {
   React.useEffect(() => {
     updateChart();
   }, [date]);
-  React.useEffect(() => {
-    console.log(appointmentsData);
-    updateChart();
-  }, []);
-  // updateChart();
 
   const data = {
     labels: [

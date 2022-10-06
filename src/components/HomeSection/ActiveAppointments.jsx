@@ -2,6 +2,7 @@ import React, { Component, useContext, useState } from "react";
 import moment from "moment/moment";
 import AppointmentsTable from "./AppointmentsTable";
 import { Link } from "react-router-dom";
+import APIContext from "../Context/apiContext";
 function ActiveAppointments(props) {
   const {
     date,
@@ -9,9 +10,11 @@ function ActiveAppointments(props) {
     timeFormat,
     dateFormat,
     DeleteAppoint,
+    UpdateStats,
     sliceNumb,
   } = props;
-  const [appointements, setAppointements] = useState([]);
+  const { UpdateStatus } = useContext(APIContext);
+  const [appointments, setAppointments] = useState([]);
   React.useEffect(() => {
     function filterCurrentDayData() {
       let format = "MM/DD/YYYY";
@@ -21,13 +24,13 @@ function ActiveAppointments(props) {
           let appDate = dateFormat(appoint.start_time, format);
           return (
             appDate == d &&
-            (appoint.customer != null || appoint.status == "hold")
+            (!(appoint.status == "free") || appoint.customer != null)
           );
         })
         .sort(function (appoint1, appoint2) {
           return new Date(appoint1.start_time) - new Date(appoint2.start_time);
         });
-      setAppointements(_currDayData);
+      setAppointments(_currDayData);
     }
     filterCurrentDayData();
   }, [date]);
@@ -37,7 +40,33 @@ function ActiveAppointments(props) {
   //   setPositionRef(ref);
   //   console.log(ref);
   // };
+  const handleDelete = (appoint) => {
+    if (window.confirm("Are you sure you wish to delete this item?")) {
+      let temp = appointments.filter((_appoint) => {
+        return appoint._id != _appoint._id;
+      });
+      setAppointments(temp);
+      DeleteAppoint(appoint._id);
+    }
+  };
 
+  const handleDone = (event, appoint) => {
+    let tempAppoints = [...appointments];
+    let tempAppoint = tempAppoints.find((_appoint) => {
+      return appoint._id == _appoint._id;
+    });
+    if (event.target.checked) {
+      tempAppoint.status = "done";
+      // appoint.status = "done";
+      UpdateStatus({ appointmentId: appoint._id, status: "done" });
+    } else {
+      tempAppoint.status = "in-progress";
+      UpdateStatus({ appointmentId: appoint._id, status: "in-progress" });
+    }
+    setAppointments(tempAppoints);
+    // console.log(tempAppoints);
+    UpdateStats(tempAppoints);
+  };
   return (
     <div className="table-container">
       <div className="table-info">
@@ -50,13 +79,16 @@ function ActiveAppointments(props) {
         )}
       </div>
       <AppointmentsTable
-        appointements={appointements.slice(0, sliceNumb)}
+        appointements={appointments.slice(0, sliceNumb)}
         dateFormat={dateFormat}
         timeFormat={timeFormat}
+        handleDelete={handleDelete}
+        handleDone={handleDone}
+        date={date}
         // handleMoreInfo={handleMoreInfo}
       />
 
-      {appointements.length == 0 && (
+      {appointments.length == 0 && (
         <h2 className="noAppointsDay">No Appointements on this day</h2>
       )}
 

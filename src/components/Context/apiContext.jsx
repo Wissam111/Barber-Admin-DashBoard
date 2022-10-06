@@ -3,11 +3,12 @@ import useFetch from "./useFetch";
 const APIContext = createContext();
 const ApiUrl = "https://saloon-ibra-api.herokuapp.com/api/";
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFiODViNjdmYjkxNjI2M2ZkMzNjMzQiLCJpYXQiOjE2NjQ4MDA5MzQsImV4cCI6MTY2NTA2MDEzNH0.3hDxDEpa1mXkCaB4NqjUXbM4JbzavInMDaHBQNsgnG4";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFiODViNjdmYjkxNjI2M2ZkMzNjMzQiLCJpYXQiOjE2NjUwNjI0MjksImV4cCI6MTY2NzY1NDQyOX0.ipmRmjL3PLcmu75-WgPFyGAvz2xsVwS-Wk7dEVsSsdA";
 export function APIContextProvider({ children }) {
   const [appointmentsData, setAppointmentsData] = useState([]);
   const [workers, setWorkers] = useState([]);
   const [users, setUsers] = useState([]);
+  const [stats, setStats] = useState([]);
 
   const { loading, error, setCurrId, data, refetch } = useFetch();
 
@@ -18,6 +19,7 @@ export function APIContextProvider({ children }) {
     setAppointmentsData(data[0].appointments);
     setUsers(data[1].users);
     setWorkers(data[2].workers);
+    setStats(data[3]);
   }, [data]);
 
   async function PostTime(appoint) {
@@ -32,7 +34,6 @@ export function APIContextProvider({ children }) {
       });
       const g = await res.json();
       console.log(g);
-      // setCurrId(g.appointment._id);
       refetch();
       return g;
     } catch (e) {
@@ -41,21 +42,16 @@ export function APIContextProvider({ children }) {
   }
   async function DeleteAppoint(appointId) {
     try {
-      let res = await fetch(
-        // `https://saloon-ibra-api.herokuapp.com/api/appointments/${appointId}`
-        ApiUrl + `appointments/${appointId}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-          },
-          method: "DELETE",
-        }
-      );
+      let res = await fetch(ApiUrl + `appointments/${appointId}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        method: "DELETE",
+      });
       const g = await res.json();
-      // setCurrId(appointId);
-      refetch();
       console.log(g);
+      // refetch();
     } catch (e) {
       console.log(e);
     }
@@ -63,21 +59,16 @@ export function APIContextProvider({ children }) {
 
   async function UnBookAppoint(appointId) {
     try {
-      let res = await fetch(
-        // "https://saloon-ibra-api.herokuapp.com/api/appointments/unbook",
-        ApiUrl + "appointments/unbook",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-          },
-          body: JSON.stringify(appointId),
-          method: "POST",
-        }
-      );
+      let res = await fetch(ApiUrl + "appointments/unbook", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(appointId),
+        method: "POST",
+      });
       const g = await res.json();
       console.log(g);
-      // setCurrId(appointId);
       refetch();
     } catch (e) {
       console.log(e);
@@ -85,22 +76,37 @@ export function APIContextProvider({ children }) {
   }
   async function BookAppoint(appoint) {
     try {
-      let res = await fetch(
-        // "https://saloon-ibra-api.herokuapp.com/api/appointments/book",
-        ApiUrl + "appointments/book",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-          },
-          body: JSON.stringify(appoint),
-          method: "POST",
-        }
-      );
+      let res = await fetch(ApiUrl + "appointments/book", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(appoint),
+        method: "POST",
+      });
       const g = await res.json();
-      // console.log(g);
-      // setCurrId(appoint.appointmentId);
+      console.log(g);
       refetch();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  async function CreateUser(user) {
+    try {
+      let res = await fetch(ApiUrl + "signup", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(user),
+        method: "POST",
+      });
+      const g = await res.json();
+      console.log(g);
+      if (g.message == "signup sucess") {
+        refetch();
+      }
+      return g.message;
     } catch (e) {
       console.log(e);
     }
@@ -108,23 +114,33 @@ export function APIContextProvider({ children }) {
 
   async function UpdateStatus(appoint) {
     try {
-      let res = await fetch(
-        // "https://saloon-ibra-api.herokuapp.com/api/appointments/book",
-        ApiUrl + "appointments/update-status",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-          },
-          body: JSON.stringify(appoint),
-          method: "PATCH",
-        }
-      );
+      let res = await fetch(ApiUrl + "appointments/update-status", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(appoint),
+        method: "PATCH",
+      });
       const g = await res.json();
       console.log(g);
-      console.log("lool");
-      // setCurrId(appoint.appointmentId);
       refetch();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  async function DeleteUser(userId) {
+    try {
+      let res = await fetch(ApiUrl + `users/${userId}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        method: "DELETE",
+      });
+      const g = await res.json();
+      console.log(g);
+      // refetch();
     } catch (e) {
       console.log(e);
     }
@@ -135,14 +151,18 @@ export function APIContextProvider({ children }) {
       value={{
         appointmentsData,
         workers,
+        stats,
         PostTime,
         DeleteAppoint,
         loading,
         UnBookAppoint,
         BookAppoint,
         users,
+        setUsers,
         UpdateStatus,
         refetch,
+        DeleteUser,
+        CreateUser,
       }}
     >
       {children}

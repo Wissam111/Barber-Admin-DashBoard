@@ -9,7 +9,7 @@ function useFetch() {
   const [data, setData] = useState([]);
   const ApiUrl = "https://saloon-ibra-api.herokuapp.com/api/";
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFiODViNjdmYjkxNjI2M2ZkMzNjMzQiLCJpYXQiOjE2NjQ4MDA5MzQsImV4cCI6MTY2NTA2MDEzNH0.3hDxDEpa1mXkCaB4NqjUXbM4JbzavInMDaHBQNsgnG4";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFiODViNjdmYjkxNjI2M2ZkMzNjMzQiLCJpYXQiOjE2NjUwNjI0MjksImV4cCI6MTY2NzY1NDQyOX0.ipmRmjL3PLcmu75-WgPFyGAvz2xsVwS-Wk7dEVsSsdA";
   const dataUrls = [
     {
       url: ApiUrl + "appointments",
@@ -19,6 +19,9 @@ function useFetch() {
     },
     {
       url: ApiUrl + "workers",
+    },
+    {
+      url: ApiUrl + "dashboard/stats",
     },
   ];
   async function fetchData() {
@@ -86,6 +89,7 @@ function useFetch() {
   }
 
   const refetch = () => {
+    setLoading(true);
     fetchData();
   };
 
