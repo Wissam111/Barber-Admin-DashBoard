@@ -2,7 +2,12 @@ import React, { Component, useState, useContext } from "react";
 import APIContext from "./Context/apiContext";
 import FORMATContext from "./Context/formatContext";
 import "react-calendar/dist/Calendar.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import NavBar from "./NavBar";
 import CircularProgress from "@mui/material/CircularProgress";
 import Home from "./pages/Home";
@@ -12,7 +17,7 @@ import Users from "./pages/Users";
 import Agenda from "./pages/Agenda";
 import Login from "./pages/Login";
 import { Fragment } from "react";
-function Main() {
+function DashBoard() {
   const {
     appointmentsData,
     workers,
@@ -37,20 +42,26 @@ function Main() {
 
   return (
     <Fragment>
-      {!isLogin && <Login handleLogin={() => setIsLogin(!isLogin)} />}
-      {isLogin && (
-        <div className="outerAdmin-container">
-          <div className="admindashb-container">
-            <Router>
+      <div className="outerAdmin-container">
+        <div className="admindashb-container">
+          <Router>
+            {isLogin && (
               <NavBar
                 workers={workers}
                 handleLogOut={() => setIsLogin(!isLogin)}
               />
-              <Routes>
-                <Route
-                  path="/"
-                  exact
-                  element={
+            )}
+            <Routes>
+              <Route
+                path="/"
+                exact
+                element={<Login handleLogin={() => setIsLogin(!isLogin)} />}
+              />
+              <Route
+                path="/main"
+                exact
+                element={
+                  isLogin ? (
                     <Home
                       appointmentsData={appointmentsData}
                       timeFormat={timeFormat}
@@ -61,12 +72,16 @@ function Main() {
                       loading={loading}
                       stats={stats}
                     />
-                  }
-                />
-                <Route
-                  path="/agenda"
-                  exact
-                  element={
+                  ) : (
+                    <Navigate to="/" />
+                  )
+                }
+              />
+              <Route
+                path="/agenda"
+                exact
+                element={
+                  isLogin ? (
                     <Agenda
                       appointmentsData={appointmentsData}
                       timeFormat={timeFormat}
@@ -75,12 +90,16 @@ function Main() {
                       users={users}
                       loading={loading}
                     />
-                  }
-                />
-                <Route
-                  path="/staff"
-                  exact
-                  element={
+                  ) : (
+                    <Navigate to="/" />
+                  )
+                }
+              />
+              <Route
+                path="/staff"
+                exact
+                element={
+                  isLogin ? (
                     <Staff
                       workers={workers}
                       appointmentsData={appointmentsData}
@@ -92,13 +111,17 @@ function Main() {
                       BookAppoint={BookAppoint}
                       UpdateStatus={UpdateStatus}
                     />
-                  }
-                />
-                <Route path="/form" exact element={<Form />} />
-                <Route
-                  path="/users"
-                  exact
-                  element={
+                  ) : (
+                    <Navigate to="/" />
+                  )
+                }
+              />
+              <Route path="/form" exact element={<Form />} />
+              <Route
+                path="/users"
+                exact
+                element={
+                  isLogin ? (
                     <Users
                       users={users}
                       dateFormat={dateFormat}
@@ -106,15 +129,17 @@ function Main() {
                       CreateUser={CreateUser}
                       loading={loading}
                     />
-                  }
-                />
-              </Routes>
-            </Router>
-          </div>
+                  ) : (
+                    <Navigate to="/" />
+                  )
+                }
+              />
+            </Routes>
+          </Router>
         </div>
-      )}
+      </div>
     </Fragment>
   );
 }
 
-export default Main;
+export default DashBoard;

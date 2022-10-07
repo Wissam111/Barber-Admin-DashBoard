@@ -1,11 +1,13 @@
 import React, { Component, useState, useContext, useRef } from "react";
 import OTP from "./OTP";
 import APIContext from "../Context/apiContext";
+import { useNavigate } from "react-router-dom";
 function PhoneLogin(props) {
   const { SendAuth, VerifyAuth } = useContext(APIContext);
   const phoneRef = useRef("");
   const [showPhone, setShowPhone] = useState(true);
   const [verfObj, setVerfObj] = useState({});
+  const navigate = useNavigate();
   const handleSubmitPhone = async () => {
     let ph = phoneRef.current.value;
     console.log(ph);
@@ -42,6 +44,7 @@ function PhoneLogin(props) {
     let resAuth = await VerifyAuth(veObj);
     if (resAuth.message == "login sucess") {
       props.handleLogin();
+      navigate("/main");
     } else {
       window.alert(resAuth.message);
     }

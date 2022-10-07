@@ -10,7 +10,7 @@ function NavBar(props) {
       <img className="logo" src={require("../imgs/logobarb.png")} alt="" />
       <ul className="nav-links">
         <li>
-          <Link to="/" className="nav-link">
+          <Link to="/main" className="nav-link">
             <i className="fa-solid fa-shop navLogo"></i>
           </Link>
         </li>
@@ -38,13 +38,13 @@ function NavBar(props) {
         </li>
 
         <li onClick={props.handleLogOut}>
-          {/* <Link to="/form" className="nav-link"> */}
-          <img
-            className="staffLogo"
-            src={require("../imgs/logout.png")}
-            alt=""
-          />
-          {/* </Link> */}
+          <Link to="/" className="nav-link">
+            <img
+              className="staffLogo"
+              src={require("../imgs/logout.png")}
+              alt=""
+            />
+          </Link>
         </li>
       </ul>
     </div>
