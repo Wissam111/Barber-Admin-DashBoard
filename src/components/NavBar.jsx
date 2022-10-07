@@ -36,20 +36,15 @@ function NavBar(props) {
             <i className="fa-solid fa-users navLogo"></i>
           </Link>
         </li>
-        <li>
-          <Link to="/chart" className="nav-link">
-            <img
-              className="chartLogo"
-              src={require("../imgs/line-chart.png")}
-              alt=""
-            />
-          </Link>
-        </li>
 
-        <li>
-          <Link to="/form" className="nav-link">
-            <i className="fa-brands fa-wpforms navLogo"></i>
-          </Link>
+        <li onClick={props.handleLogOut}>
+          {/* <Link to="/form" className="nav-link"> */}
+          <img
+            className="staffLogo"
+            src={require("../imgs/logout.png")}
+            alt=""
+          />
+          {/* </Link> */}
         </li>
       </ul>
     </div>

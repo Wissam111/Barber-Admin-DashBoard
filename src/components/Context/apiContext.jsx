@@ -145,6 +145,42 @@ export function APIContextProvider({ children }) {
       console.log(e);
     }
   }
+  async function SendAuth(appoint) {
+    try {
+      let res = await fetch(ApiUrl + "send-auth-verification", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(appoint),
+        method: "POST",
+      });
+      const g = await res.json();
+      // console.log(g);
+      // refetch();
+      return g;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  async function VerifyAuth(appoint) {
+    try {
+      let res = await fetch(ApiUrl + "login-verify-phone", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(appoint),
+        method: "POST",
+      });
+      const g = await res.json();
+      // console.log(g);
+      // refetch();
+      return g;
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   return (
     <APIContext.Provider
@@ -163,6 +199,8 @@ export function APIContextProvider({ children }) {
         refetch,
         DeleteUser,
         CreateUser,
+        SendAuth,
+        VerifyAuth,
       }}
     >
       {children}
