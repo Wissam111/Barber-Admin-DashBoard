@@ -4,15 +4,25 @@ function SettingsForm(props) {
   const { worker } = props;
   const [workerChecked, setworkerChecked] = useState(false);
   const [customerChecked, setcustomerChecked] = useState(false);
-  const [workerServ, setWrokerServ] = useState(worker.services);
+  const [workerServs, setWorkerServs] = useState(worker.services);
   const [showServices, setShowServices] = useState(false);
+  
+
   function Service(props) {
     return (
       <div className="service-container">
         <span>{props.service.title}</span>
-        <i className="fa fa-trash" aria-hidden="true"></i>
+        <i className="fa fa-trash" aria-hidden="true" onClick={()=>props.handleDeleteServ(props.service._id)}></i>
       </div>
     );
+  }
+  const handleDeleteServ=(servId)=>{
+  let tempServs = workerServs.filter(ser=>{
+     return ser._id !=servId;
+
+  })
+  setWorkerServs(tempServs);
+
   }
 
   return (
@@ -29,33 +39,36 @@ function SettingsForm(props) {
         <div className="inputs">
           <div className="input-wrapper">
             <label>First Name</label>
-            <input type="text" value={worker.firstName} required />
+            <input type="text" defaultValue={worker.firstName}  />
           </div>
           <div className="input-wrapper">
             <label>Last Name</label>
-            <input type="text" required />
+            <input type="text" defaultValue={worker.lastName} />
           </div>
           <div className="input-wrapper">
             <label>Phone Number</label>
-            <input type="tel" required />
+            <input type="tel" defaultValue={worker.phone} />
           </div>
           <div className="input-wrapper">
             <label>Birth Date</label>
-            <input type="date" required />
+            {/* yyyy-MM-DD */}
+            <input type="date"  defaultValue={moment(worker.birthDate).format("yyyy-MM-DD")}/>
           </div>
 
           <div className="services-container">
-            {/* <i
-              className="fa-sharp fa-solid fa-circle-chevron-down"
-              onClick={setShowServices(!showServices)}
-            ></i> */}
+          
             <label>Services:</label>
-            {workerServ.map((service) => {
-              return <Service service={service} />;
+              <i
+              className="fa-sharp fa-solid fa-circle-chevron-down"
+              onClick={()=>setShowServices(!showServices)}
+            ></i>
+            {showServices &&workerServs.map((service) => {
+              return <Service service={service} handleDeleteServ={handleDeleteServ}/>;
             })}
           </div>
         </div>
         <input className="submitBtn" type="submit" value={"Save Changes"} />
+
       </form>
     </div>
   );
