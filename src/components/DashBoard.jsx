@@ -12,7 +12,6 @@ import NavBar from "./NavBar";
 import CircularProgress from "@mui/material/CircularProgress";
 import Home from "./pages/Home";
 import Staff from "./pages/Staff";
-import Form from "./pages/Form";
 import Users from "./pages/Users";
 import Agenda from "./pages/Agenda";
 import Login from "./pages/Login";
@@ -116,7 +115,6 @@ function DashBoard() {
                   )
                 }
               />
-              <Route path="/form" exact element={<Form />} />
               <Route
                 path="/users"
                 exact

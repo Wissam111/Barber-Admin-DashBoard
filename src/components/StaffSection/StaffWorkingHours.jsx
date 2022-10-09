@@ -7,6 +7,7 @@ import {
   EditingState,
   IntegratedEditing,
 } from "@devexpress/dx-react-scheduler";
+import Settings from "./Settings";
 import {
   Scheduler,
   WeekView,
@@ -33,8 +34,15 @@ function StaffWorkingHours(props) {
   } = props;
 
   const [currWorker, setCurrWorker] = useState({});
+  const [showSettings, setShowSettings] = useState(false);
+  const [workerSetting, setWorkerSettings] = useState({});
   const handleStaffScheduler = (worker) => {
+    console.log(worker);
+
     const currWorkerAppoints = appointmentsData.filter((appoint) => {
+      if (!appoint.worker) {
+        return false;
+      }
       return appoint.worker._id == worker._id;
     });
     const schData = currWorkerAppoints.map((appoint) => {
@@ -155,12 +163,18 @@ function StaffWorkingHours(props) {
       setSchedulerData(newSc);
     }
   }
-
+  const handleSettings = (worker) => {
+    console.log("lol");
+    setShowSettings(!showSettings);
+    setWorkerSettings(worker);
+    console.log(worker);
+  };
   return (
     <div className="workinghours-container">
       <StaffView
         workers={workers}
         handleStaffScheduler={handleStaffScheduler}
+        handleSettings={handleSettings}
       />
       <div className="seheduler-container">
         {Object.keys(currWorker).length != 0 ? (
@@ -188,6 +202,14 @@ function StaffWorkingHours(props) {
           </Scheduler>
         </Paper>
       </div>
+      {showSettings && (
+        <div className="settingsWrapper">
+          <Settings
+            handleExitSettings={() => setShowSettings(false)}
+            worker={workerSetting}
+          />
+        </div>
+      )}
     </div>
   );
 }

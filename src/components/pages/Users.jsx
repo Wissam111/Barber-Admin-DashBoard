@@ -8,9 +8,10 @@ function Users(props) {
   // const [users, setUsers] = useState(props.users);
   // const [infoUser, setInfoUser] = useState({});
   const { users, setUsers } = useContext(APIContext);
+  const [searchedUsers, setSearchedUsers] = useState(users);
   if (props.loading) return <CircularProgress />;
   const handleChange = (event) => {
-    let temp = [...props.users];
+    let temp = [...users];
     let tempSearched = temp.filter((user) => {
       return (
         user.phone.includes(event.target.value) ||
@@ -18,7 +19,7 @@ function Users(props) {
       );
     });
 
-    setUsers(tempSearched);
+    setSearchedUsers(tempSearched);
   };
   // const handleMoreInfo = (customer) => {
   //   setInfoUser(customer);
@@ -29,6 +30,7 @@ function Users(props) {
         return user._id != customerId;
       });
       setUsers(tempUsers);
+      setSearchedUsers(tempUsers);
       // window.alert("user Deleted");
       props.DeleteUser(customerId);
     }
@@ -67,7 +69,7 @@ function Users(props) {
           <input type="text" placeholder="search" onChange={handleChange} />
         </div>
         <Customers
-          users={users}
+          users={searchedUsers}
           // showUserInfo={true}
           handleDeleteUser={handleDeleteUser}
         />

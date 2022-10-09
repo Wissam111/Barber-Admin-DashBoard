@@ -37,7 +37,7 @@ function NavBar(props) {
           </Link>
         </li>
 
-        <li onClick={props.handleLogOut}>
+        <li onClick={props.handleLogOut} className="logoutLogo">
           <Link to="/" className="nav-link">
             <img
               className="staffLogo"

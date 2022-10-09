@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import WorkerView from "./WorkerView";
 
 function StaffView(props) {
-  const { workers, handleStaffScheduler } = props;
+  const { workers, handleStaffScheduler, handleSettings } = props;
   // console.log(workers);
   return (
     <div className="staff-container">
@@ -17,6 +17,7 @@ function StaffView(props) {
               key={worker._id}
               worker={worker}
               handleStaffScheduler={handleStaffScheduler}
+              handleSettings={handleSettings}
             />
           );
         })}

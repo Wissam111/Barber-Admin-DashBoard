@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 function WorkerView(props) {
-  const { worker, handleStaffScheduler } = props;
+  const { worker, handleStaffScheduler, handleSettings } = props;
   // console.log(worker);
   return (
     <div className="workerView-container">
@@ -15,6 +15,11 @@ function WorkerView(props) {
         alt=""
       />
       <ul className="worker-info">
+        <i
+          className="fa fa-cog workerSettings"
+          aria-hidden="true"
+          onClick={() => handleSettings(worker)}
+        ></i>
         <li>{worker.firstName + " " + worker.lastName}</li>
         <i className="fa fa-phone">
           <a href={"tel:" + worker.phone}>{worker.phone}</a>

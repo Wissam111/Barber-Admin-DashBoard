@@ -140,7 +140,7 @@ export function APIContextProvider({ children }) {
       });
       const g = await res.json();
       console.log(g);
-      // refetch();
+      refetch();
     } catch (e) {
       console.log(e);
     }

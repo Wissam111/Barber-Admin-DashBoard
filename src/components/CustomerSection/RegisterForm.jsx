@@ -3,22 +3,7 @@ import moment from "moment/moment";
 function RegisterForm(props) {
   const [workerChecked, setworkerChecked] = useState(false);
   const [customerChecked, setcustomerChecked] = useState(false);
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   let fName = event.target[0].value;
-  //   let lName = event.target[1].value;
-  //   let phone = event.target[2].value;
-  //   let birthDate = moment(event.target[3].value).format("yyyy-MM-DD");
-  //   let workerService = event.target[6].value;
-  //   let userObj = {
-  //     phone: phone,
-  //     firstName: fName,
-  //     lastName: lName,
-  //     birthDate: birthDate,
-  //     role: customerChecked ? "customer" : "barber",
-  //   };
-  //   props.CreateUser(userObj);
-  // };
+
   return (
     <div
       className="registerform-container"
@@ -43,6 +28,7 @@ function RegisterForm(props) {
             <label>Birth Date</label>
             <input type="date" required />
           </div>
+
           <div className="input-wrapper checkboxType">
             <label>Worker</label>
             <input
@@ -57,12 +43,18 @@ function RegisterForm(props) {
               onChange={() => setcustomerChecked(!customerChecked)}
             />
           </div>
-          {workerChecked && (
+
+          {/* {workerChecked && (
             <div className="input-wrapper">
               <label>Service</label>
-              <input type="text" required />
+              <select id="algos" name="algos">
+                <option value="Hair Cut">Hair Cut</option>
+                <option value="Face Cut">Face Cut</option>
+                <option value="Wax">Wax</option>
+                <option value="Massage">Massage</option>
+              </select>
             </div>
-          )}
+          )} */}
         </div>
         <input className="submitBtn" type="submit" value={"Create user"} />
         {/* Create User

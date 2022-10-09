@@ -15,7 +15,11 @@ function CustomerRow(props) {
     // 17:30 18:00  18:01
     if (today >= startDate && today <= endDate) {
       return "In Progress";
-    } else if (today < startDate || appoint.status == "in-progress") {
+    } else if (
+      // today < startDate ||
+      // appoint.status == "in-progress" ||
+      appoint.status != "done"
+    ) {
       return "Pending";
     }
   };
