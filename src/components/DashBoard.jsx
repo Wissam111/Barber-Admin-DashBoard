@@ -34,7 +34,7 @@ function DashBoard() {
   } = useContext(APIContext);
 
   const { timeFormat, dateFormat } = useContext(FORMATContext);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   // React.useEffect(() => {
   // if (loading) return <CircularProgress />;
   // }, []);
@@ -109,6 +109,7 @@ function DashBoard() {
                       UnBookAppoint={UnBookAppoint}
                       BookAppoint={BookAppoint}
                       UpdateStatus={UpdateStatus}
+                      DeleteUser={DeleteUser}
                     />
                   ) : (
                     <Navigate to="/" />

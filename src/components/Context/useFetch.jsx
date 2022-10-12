@@ -23,6 +23,9 @@ function useFetch() {
     {
       url: ApiUrl + "dashboard/stats",
     },
+    {
+      url: ApiUrl + "dashboard/worker-revenue",
+    },
   ];
   async function fetchData() {
     const config = {

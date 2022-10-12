@@ -32,19 +32,21 @@ function RegisterForm(props) {
           <div className="input-wrapper checkboxType">
             <label>Worker</label>
             <input
+              className="Checkbox"
               type="checkbox"
               disabled={customerChecked ? true : false}
               onChange={() => setworkerChecked(!workerChecked)}
             />
             <label>Customer</label>
             <input
+              className="Checkbox"
               type="checkbox"
               disabled={workerChecked ? true : false}
               onChange={() => setcustomerChecked(!customerChecked)}
             />
           </div>
 
-          {workerChecked && (
+          {/* {workerChecked && (
             <div className="input-wrapper">
               <label>Service</label>
               <select id="algos" name="algos">
@@ -54,7 +56,7 @@ function RegisterForm(props) {
                 <option value="Massage">Massage</option>
               </select>
             </div>
-          )}
+          )} */}
         </div>
         <input className="submitBtn" type="submit" value={"Create user"} />
         {/* Create User

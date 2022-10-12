@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 
 function Customer(props) {
-  const { customer, showUserInfo, handleMoreInfo, handleDeleteUser } = props;
+  const {
+    customer,
+    showUserInfo,
+    handleMoreInfo,
+    handleDeleteUser,
+    handleSettings,
+  } = props;
 
   // const handleDelete = () => {
   //   // console.log(customer);
@@ -26,7 +32,12 @@ function Customer(props) {
       <h3>{customer.firstName + " " + customer.lastName}</h3>
 
       <div className="customer-action">
-        <i className="fa fa-phone">
+        <i
+          className="fa fa-cog workerSettings"
+          aria-hidden="true"
+          onClick={() => handleSettings(customer)}
+        ></i>
+        {/* <i className="fa fa-phone">
           <a href={"tel:" + customer.phone}></a>
         </i>
         <button
@@ -34,21 +45,8 @@ function Customer(props) {
           onClick={() => handleDeleteUser(customer._id)}
         >
           <i className="fa-solid fa-trash-can"></i>
-        </button>
+        </button> */}
       </div>
-
-      {/* {showUserInfo ? (
-        <button
-          className="moreInfoBtn"
-          onClick={() => handleMoreInfo(customer)}
-        >
-          <i className="fa fa-info-circle"></i>
-        </button>
-      ) : (
-        <i className="fa fa-phone">
-          <a href={"tel:" + customer.phone}></a>
-        </i>
-      )} */}
     </div>
   );
 }

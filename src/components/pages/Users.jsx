@@ -4,11 +4,16 @@ import RegisterForm from "../CustomerSection/RegisterForm";
 import CircularProgress from "@mui/material/CircularProgress";
 import APIContext from "../Context/apiContext";
 import moment from "moment/moment";
+import Settings from "../SettingsSection/Settings";
 function Users(props) {
   // const [users, setUsers] = useState(props.users);
   // const [infoUser, setInfoUser] = useState({});
   const { users, setUsers } = useContext(APIContext);
   const [searchedUsers, setSearchedUsers] = useState(users);
+
+  const [showSettings, setShowSettings] = useState(false);
+  const [currUser, setCurrUser] = useState({});
+
   if (props.loading) return <CircularProgress />;
   const handleChange = (event) => {
     let temp = [...users];
@@ -21,18 +26,29 @@ function Users(props) {
 
     setSearchedUsers(tempSearched);
   };
+  const handleSettings = (customer) => {
+    console.log("hhh");
+    setShowSettings(true);
+    setCurrUser(customer);
+  };
+
+  const handleExitSettings = () => {
+    setShowSettings(false);
+  };
+
   // const handleMoreInfo = (customer) => {
   //   setInfoUser(customer);
   // };
-  const handleDeleteUser = (customerId) => {
-    if (window.confirm("Are you sure you wish to delete this item?")) {
+  const handleDeleteUser = async (customerId) => {
+    if (window.confirm("Are you sure you want to delete this user?")) {
       let tempUsers = users.filter((user) => {
         return user._id != customerId;
       });
       setUsers(tempUsers);
       setSearchedUsers(tempUsers);
-      // window.alert("user Deleted");
-      props.DeleteUser(customerId);
+      let res = await props.DeleteUser(customerId);
+      window.alert(res.message);
+      handleExitSettings();
     }
   };
   const handleSubmit = async (event, customerChecked) => {
@@ -72,12 +88,19 @@ function Users(props) {
           users={searchedUsers}
           // showUserInfo={true}
           handleDeleteUser={handleDeleteUser}
+          handleSettings={handleSettings}
         />
       </div>
       <RegisterForm handleSubmit={handleSubmit} />
-      {/* <div className="customerInfo-container">
-        <UserInfoView user={infoUser} dateFormat={props.dateFormat} />
-      </div> */}
+      {showSettings && (
+        <div className="settingsWrapper">
+          <Settings
+            handleExitSettings={() => setShowSettings(false)}
+            user={currUser}
+            handleDeleteUser={handleDeleteUser}
+          />
+        </div>
+      )}
     </div>
   );
 }

@@ -8,9 +8,8 @@ function Staff(props) {
     dateFormat,
     PostTime,
     DeleteAppoint,
-    UnBookAppoint,
-    BookAppoint,
     UpdateStatus,
+    DeleteUser,
   } = props;
   return (
     <StaffWorkingHours
@@ -20,9 +19,8 @@ function Staff(props) {
       dateFormat={dateFormat}
       PostTime={PostTime}
       DeleteAppoint={DeleteAppoint}
-      UnBookAppoint={UnBookAppoint}
-      BookAppoint={BookAppoint}
       UpdateStatus={UpdateStatus}
+      DeleteUser={DeleteUser}
     />
   );
 }

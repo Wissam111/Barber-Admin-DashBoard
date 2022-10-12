@@ -35,11 +35,6 @@ function ActiveAppointments(props) {
     filterCurrentDayData();
   }, [date]);
 
-  // const handleMoreInfo = (ref, appoint) => {
-  //   setCurrAppoint(appoint);
-  //   setPositionRef(ref);
-  //   console.log(ref);
-  // };
   const handleDelete = (appoint) => {
     if (window.confirm("Are you sure you wish to delete this item?")) {
       let temp = appointments.filter((_appoint) => {
@@ -55,16 +50,21 @@ function ActiveAppointments(props) {
     let tempAppoint = tempAppoints.find((_appoint) => {
       return appoint._id == _appoint._id;
     });
+
     if (event.target.checked) {
+      if (!tempAppoint.service) {
+        event.target.checked = false;
+        window.alert("you cant change the status to done  without a service");
+        return;
+      }
+
       tempAppoint.status = "done";
-      // appoint.status = "done";
       UpdateStatus({ appointmentId: appoint._id, status: "done" });
     } else {
       tempAppoint.status = "in-progress";
       UpdateStatus({ appointmentId: appoint._id, status: "in-progress" });
     }
     setAppointments(tempAppoints);
-    // console.log(tempAppoints);
     UpdateStats(tempAppoints);
   };
   return (
@@ -85,23 +85,11 @@ function ActiveAppointments(props) {
         handleDelete={handleDelete}
         handleDone={handleDone}
         date={date}
-        // handleMoreInfo={handleMoreInfo}
       />
 
       {appointments.length == 0 && (
         <h2 className="noAppointsDay">No Appointements on this day</h2>
       )}
-
-      {/* {Object.keys(currAppoint).length != 0 && (
-        <CustomerCard
-          appointment={currAppoint}
-          timeFormat={timeFormat}
-          dateFormat={dateFormat}
-          handleCloseInfo={handleCloseInfo}
-          position={positionRef}
-          handleDeleteAppoint={handleDeleteAppoint}
-        />
-      )} */}
     </div>
   );
 }

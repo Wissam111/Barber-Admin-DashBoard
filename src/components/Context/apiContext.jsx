@@ -9,6 +9,7 @@ export function APIContextProvider({ children }) {
   const [workers, setWorkers] = useState([]);
   const [users, setUsers] = useState([]);
   const [stats, setStats] = useState([]);
+  const [revenue, setRevenue] = useState([]);
 
   const { loading, error, setCurrId, data, refetch } = useFetch();
 
@@ -20,8 +21,8 @@ export function APIContextProvider({ children }) {
     setUsers(data[1].users);
     setWorkers(data[2].workers);
     setStats(data[3]);
+    setRevenue(data[4]);
   }, [data]);
-
   async function PostTime(appoint) {
     try {
       let res = await fetch(ApiUrl + "appointments", {
@@ -74,6 +75,7 @@ export function APIContextProvider({ children }) {
       console.log(e);
     }
   }
+
   async function BookAppoint(appoint) {
     try {
       let res = await fetch(ApiUrl + "appointments/book", {
@@ -125,10 +127,63 @@ export function APIContextProvider({ children }) {
       const g = await res.json();
       console.log(g);
       refetch();
+      return g;
     } catch (e) {
       console.log(e);
     }
   }
+  async function UpdateUser(userId, userObj) {
+    try {
+      let res = await fetch(ApiUrl + `users/${userId}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(userObj),
+        method: "PATCH",
+      });
+      const g = await res.json();
+      console.log(g);
+      refetch();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  async function AddService(servObj) {
+    try {
+      let res = await fetch(ApiUrl + `workers/services`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(servObj),
+        method: "POST",
+      });
+      const g = await res.json();
+      console.log(g);
+      refetch();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async function DeleteService(servId) {
+    try {
+      let res = await fetch(ApiUrl + `workers/services/${servId}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        method: "DELETE",
+      });
+      const g = await res.json();
+      console.log(g);
+      // refetch();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   async function DeleteUser(userId) {
     try {
       let res = await fetch(ApiUrl + `users/${userId}`, {
@@ -139,8 +194,9 @@ export function APIContextProvider({ children }) {
         method: "DELETE",
       });
       const g = await res.json();
-      console.log(g);
+      // console.log(g);
       refetch();
+      return g;
     } catch (e) {
       console.log(e);
     }
@@ -181,6 +237,25 @@ export function APIContextProvider({ children }) {
       console.log(e);
     }
   }
+  // async function getRevenue() {
+  //   try {
+  //     let res = await fetch(ApiUrl + "dashboard/worker-revenue", {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: "Bearer " + token,
+  //       },
+  //       // body: JSON.stringify(appoint),
+  //       method: "GET",
+  //     });
+  //     const g = await res.json();
+  //     // console.log(g);
+  //     // refetch();
+  //     return g;
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }
+  // /api/dashboard/worker-revenue
 
   return (
     <APIContext.Provider
@@ -201,6 +276,10 @@ export function APIContextProvider({ children }) {
         CreateUser,
         SendAuth,
         VerifyAuth,
+        UpdateUser,
+        AddService,
+        DeleteService,
+        revenue,
       }}
     >
       {children}

@@ -1,13 +1,14 @@
-import React, { Component, useState, useContext } from "react";
+import React, { Component, useState, useContext, useRef } from "react";
 import StaffView from "./StaffView";
 import Paper from "@mui/material/Paper";
 import moment from "moment/moment";
+import AppointmentCard from "./AppointmentCard";
 import {
   ViewState,
   EditingState,
   IntegratedEditing,
 } from "@devexpress/dx-react-scheduler";
-import Settings from "./Settings";
+import Settings from "../SettingsSection/Settings";
 import {
   Scheduler,
   WeekView,
@@ -28,17 +29,18 @@ function StaffWorkingHours(props) {
     dateFormat,
     PostTime,
     DeleteAppoint,
-    UnBookAppoint,
-    BookAppoint,
     UpdateStatus,
+    DeleteUser,
   } = props;
 
   const [currWorker, setCurrWorker] = useState({});
   const [showSettings, setShowSettings] = useState(false);
   const [workerSetting, setWorkerSettings] = useState({});
-  const handleStaffScheduler = (worker) => {
-    console.log(worker);
+  const [showAppointCard, setShowAppointCard] = useState(false);
+  const [currAppoint, setCurrAppoint] = useState({});
+  const [isBooked, setIsBooked] = useState(false);
 
+  const handleStaffScheduler = (worker) => {
     const currWorkerAppoints = appointmentsData.filter((appoint) => {
       if (!appoint.worker) {
         return false;
@@ -68,58 +70,99 @@ function StaffWorkingHours(props) {
 
   function Appointment({ children, style, data, ...restProps }) {
     return (
-      <Appointments.Appointment
-        {...restProps}
-        style={{
-          ...style,
-          backgroundColor: data.color,
-        }}
-      >
-        {<Button color={data.color} id={data.id} />}
-        {children}
-      </Appointments.Appointment>
+      <div className={`AppointmentComp-container`} id={`app-${data.id}`}>
+        <Appointments.Appointment
+          {...restProps}
+          style={{
+            ...style,
+            backgroundColor: data.color,
+          }}
+        >
+          {
+            <Button
+              color={data.color}
+              id={data.id}
+              setShowAppointCard={setShowAppointCard}
+            />
+          }
+          {/* {<Button color={data.color} id={data.id} />} */}
+          {children}
+        </Appointments.Appointment>
+      </div>
     );
   }
+  async function handleBook(id, selectedServ) {
+    // let tempServs = [selectedServ];
+    if (selectedServ == "") {
+      window.alert("No Service Selected!");
+      return;
+    }
 
+    let objAppo = {
+      appointmentId: id,
+      status: "hold",
+      service: selectedServ,
+    };
+    let newschData = schedulerData.map((appoint) => {
+      if (appoint.id == id) {
+        appoint.title = "Booked";
+        appoint.color = "green";
+      }
+
+      return appoint;
+    });
+
+    let res = await UpdateStatus(objAppo);
+    // appointment status updated
+    console.log(res);
+    if (res.message == "appointment status updated") {
+      setShowAppointCard(false);
+      setSchedulerData(newschData);
+      window.alert("Appointment Booked Successfully");
+    } else {
+      window.alert(res.message);
+    }
+  }
+  async function handleUnBook(id, selectedServ) {
+    let objAppo = {
+      appointmentId: id,
+      status: "free",
+    };
+    let newschData = schedulerData.map((appoint) => {
+      if (appoint.id == id) {
+        appoint.title = "Not Booked";
+        appoint.color = "orange";
+      }
+      return appoint;
+    });
+
+    let res = await UpdateStatus(objAppo);
+    if (res.message == "appointment status updated") {
+      setShowAppointCard(false);
+      setSchedulerData(newschData);
+      window.alert("Appointment UnBooked Successfully");
+    } else {
+      window.alert(res.message);
+    }
+  }
   function Button(props) {
     let isBooked = props.color == "orange" ? false : true;
-    function handleUnBook() {
-      let objAppo = {
-        appointmentId: props.id,
-        status: "free",
-      };
-      let newschData = schedulerData.map((appoint) => {
-        if (appoint.id == props.id) {
-          appoint.title = "Not Booked";
-          appoint.color = "orange";
-        }
-        return appoint;
+
+    const handleClick = () => {
+      let appd = appointmentsData.find((app) => {
+        return app._id == props.id;
       });
-      UpdateStatus(objAppo);
-      setSchedulerData(newschData);
-    }
-    function handleBook() {
-      let objAppo = {
-        appointmentId: props.id,
-        status: "hold",
-      };
-      let newschData = schedulerData.map((appoint) => {
-        if (appoint.id == props.id) {
-          appoint.title = "Booked";
-          appoint.color = "green";
-        }
-
-        return appoint;
-      });
-
-      UpdateStatus(objAppo);
-      setSchedulerData(newschData);
-    }
-
+      // const appoElement = document.getElementById(props.id);
+      // console.log(appoElement);
+      setShowAppointCard(true);
+      setCurrAppoint(appd);
+      setIsBooked(isBooked);
+    };
     return (
       <button
         className={isBooked ? "unbookBtn" : "bookBtn"}
-        onClick={isBooked ? handleUnBook : handleBook}
+        // onClick={isBooked ? handleUnBook : handleBook}
+        onClick={handleClick}
       >
         {isBooked ? (
           <img src={require("./../../imgs/unBook.png")}></img>
@@ -151,24 +194,39 @@ function StaffWorkingHours(props) {
       };
 
       let appObj = await PostTime(appoint);
-      let appointSch = createSchAppoint(appObj.appointment);
-      _tempSchData.push(appointSch);
-      setSchedulerData(_tempSchData);
+      if (appObj.message == "appointment created") {
+        window.alert("appointment created Successfully");
+        let appointSch = createSchAppoint(appObj.appointment);
+        _tempSchData.push(appointSch);
+        setSchedulerData(_tempSchData);
+      } else {
+        window.alert(appObj.message);
+      }
     }
     if (deleted != null) {
-      DeleteAppoint(deleted);
-      let newSc = _tempSchData.filter((appoint) => {
-        return appoint.id != deleted;
-      });
-      setSchedulerData(newSc);
+      handleDeleteAppoint(deleted);
     }
   }
   const handleSettings = (worker) => {
-    console.log("lol");
     setShowSettings(!showSettings);
     setWorkerSettings(worker);
-    console.log(worker);
   };
+  const handleDeleteAppoint = (appointId) => {
+    let _tempSchData = [...schedulerData];
+    DeleteAppoint(appointId);
+    let newSc = _tempSchData.filter((appoint) => {
+      return appoint.id != appointId;
+    });
+    setSchedulerData(newSc);
+  };
+  const handleDeleteUser = async (userId) => {
+    if (window.confirm("Are you sure you want to delete this user?")) {
+      let res = await DeleteUser(userId);
+      window.alert(res.message);
+      setShowSettings(false);
+    }
+  };
+
   return (
     <div className="workinghours-container">
       <StaffView
@@ -188,7 +246,7 @@ function StaffWorkingHours(props) {
             <ViewState defaultCurrentDate={new Date()} />
             <Toolbar />
             <DateNavigator />
-            <WeekView startDayHour={8} endDayHour={24} />
+            <WeekView startDayHour={8} endDayHour={24} height="30em" />
             <Appointments appointmentComponent={Appointment} />
 
             <CurrentTimeIndicator
@@ -206,9 +264,23 @@ function StaffWorkingHours(props) {
         <div className="settingsWrapper">
           <Settings
             handleExitSettings={() => setShowSettings(false)}
-            worker={workerSetting}
+            user={workerSetting}
+            isWorker={true}
+            handleDeleteUser={handleDeleteUser}
           />
         </div>
+      )}
+      {showAppointCard && (
+        <AppointmentCard
+          appointment={currAppoint}
+          handleCloseAppoint={() => setShowAppointCard(false)}
+          dateFormat={dateFormat}
+          timeFormat={timeFormat}
+          handleBook={handleBook}
+          handleUnBook={handleUnBook}
+          isBooked={isBooked}
+          worker={currWorker}
+        />
       )}
     </div>
   );

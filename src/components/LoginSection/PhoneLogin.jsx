@@ -31,7 +31,6 @@ function PhoneLogin(props) {
 
   const handleVerf = async (event) => {
     event.preventDefault();
-    console.log("hhhhhh");
     let subCode =
       event.target[0].value +
       event.target[1].value +

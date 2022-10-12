@@ -12,7 +12,7 @@ import {
 import { Line } from "react-chartjs-2";
 
 function AppointChart(props) {
-  const { appointmentsData, date } = props;
+  const { revenueData, date, isDoneDeal } = props;
   const [monthsData, setMonthsData] = useState([]);
   ChartJS.register(
     CategoryScale,
@@ -33,35 +33,39 @@ function AppointChart(props) {
       },
       title: {
         display: true,
-        text: new Date(date).getFullYear() + " Appointments Chart",
+        text:
+          new Date(date).getFullYear() + "" + isDoneDeal
+            ? `Done Deals`
+            : "Profit",
       },
     },
   };
 
-  function updateChart() {
-    let tempD = [...appointmentsData].filter((appoint) => {
-      let appD = new Date(appoint.start_time);
+  // function updateChart() {
+  //   let tempD = [...appointmentsData].filter((appoint) => {
+  //     let appD = new Date(appoint.start_time);
 
-      return (
-        new Date(date).getFullYear() == appD.getFullYear() &&
-        appoint.status == "done"
-      );
-    });
-    const _ = require("lodash");
-    // console.log(props.appointmentsData);
-    const monthsDataObject = _.groupBy(tempD, ({ start_time }) =>
-      new Date(start_time).getMonth()
-    );
-    let mothsD = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    Object.keys(monthsDataObject).forEach((objkey) => {
-      mothsD[objkey] = monthsDataObject[objkey].length;
-    });
-    setMonthsData(mothsD);
-  }
+  //     return (
+  //       new Date(date).getFullYear() == appD.getFullYear() &&
+  //       appoint.status == "done"
+  //     );
+  //   });
+  //   const _ = require("lodash");
+  //   // console.log(props.appointmentsData);
 
-  React.useEffect(() => {
-    updateChart();
-  }, [date]);
+  //   const monthsDataObject = _.groupBy(tempD, ({ start_time }) =>
+  //     new Date(start_time).getMonth()
+  //   );
+  //   let mothsD = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  //   Object.keys(monthsDataObject).forEach((objkey) => {
+  //     mothsD[objkey] = monthsDataObject[objkey].length;
+  //   });
+  //   setMonthsData(mothsD);
+  // }
+
+  // React.useEffect(() => {
+  //   updateChart();
+  // }, [date]);
 
   const data = {
     labels: [
@@ -80,11 +84,12 @@ function AppointChart(props) {
     ],
     datasets: [
       {
-        label: "hide data",
+        label: isDoneDeal ? "done" : "שיקל",
         fill: false,
         lineTension: 0.1,
         backgroundColor: "rgba(75,192,192,0.4)",
-        borderColor: "rgba(75,192,192,1)",
+        // borderColor: "rgba(75,192,192,1)",
+        borderColor: isDoneDeal ? "rgba(75,192,192,1)" : "red",
         borderCapStyle: "butt",
         borderDash: [],
         borderDashOffset: 0.0,
@@ -98,7 +103,7 @@ function AppointChart(props) {
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
-        data: monthsData,
+        data: revenueData,
       },
     ],
   };

@@ -25,7 +25,10 @@ function HomeView(props) {
     loading,
     stats,
   } = props;
-  const { users, setUsers } = useContext(APIContext);
+  const { users, setUsers, revenue } = useContext(APIContext);
+  const [doneDealsData, setDoneDealsData] = useState([]);
+  const [profitData, setProfitData] = useState([]);
+  // console.log(revenue);
   function UpdateStats(appointments) {
     let done = 0;
     let pending = 0;
@@ -52,6 +55,7 @@ function HomeView(props) {
   }
   React.useEffect(() => {
     UpdateStats(appointmentsData);
+    updateRevenueData();
   }, [date]);
 
   const handleDeleteUser = (customerId) => {
@@ -63,6 +67,21 @@ function HomeView(props) {
       props.DeleteUser(customerId);
     }
   };
+
+  function updateRevenueData() {
+    if (!revenue.data) {
+      return;
+    }
+    let pData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let doneData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    revenue.data.forEach((rev) => {
+      pData.splice(rev.month - 1, 0, rev.revenue);
+      doneData.splice(rev.month - 1, 0, rev.count);
+    });
+
+    setDoneDealsData(doneData);
+    setProfitData(pData);
+  }
 
   // if (loading) return <CircularProgress />;
   return (
@@ -111,7 +130,14 @@ function HomeView(props) {
             UpdateStats={UpdateStats}
             sliceNumb={5}
           />
-          <AppointChart appointmentsData={appointmentsData} date={date} />
+          <div className="charts-container">
+            <AppointChart
+              revenueData={doneDealsData}
+              date={date}
+              isDoneDeal={true}
+            />
+            <AppointChart revenueData={profitData} date={date} />
+          </div>
         </div>
 
         <div className="statusPrect-container">
