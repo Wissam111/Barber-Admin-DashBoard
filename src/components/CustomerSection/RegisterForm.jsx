@@ -58,7 +58,8 @@ function RegisterForm(props) {
             </div>
           )} */}
         </div>
-        <input className="submitBtn" type="submit" value={"Create user"} />
+        <input className="submitBtn"  type="submit" value={"Create user"} />
+   
         {/* Create User
         </input> */}
       </form>

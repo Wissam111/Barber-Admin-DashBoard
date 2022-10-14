@@ -35,7 +35,7 @@ function SummeryView(props) {
             className={isProfit ? "selectBtn activeS" : "selectBtn"}
             onClick={() => setIsProfit(true)}
           >
-            Profit
+            Revenue
           </button>
           <button
             className={!isProfit ? "selectBtn activeS" : "selectBtn"}

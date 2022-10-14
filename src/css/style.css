@@ -19,6 +19,7 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  overflow: hidden;
   background: linear-gradient(87.4deg, #fff1a5 1.9%, #c87d4c 49.7%, #533636 100.5%);
 }
 
@@ -26,8 +27,8 @@ body {
   border: 5px solid orange;
   margin-top: 10px;
   padding: 15px 12px;
-  width: 90%;
-  height: 83%;
+  width: 95%;
+  height: 75%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -39,7 +40,7 @@ body {
 .users-container,
 .agenda-container,
 .summery-container {
-  width: 85%;
+  width: 93%;
   height: 100%;
   border-radius: 1em;
   display: -webkit-box;
@@ -209,6 +210,7 @@ body {
   border-radius: 0.4em;
   font-weight: lighter;
   position: relative;
+  margin: 5px 0;
 }
 
 .precentage-wrapper {
@@ -414,6 +416,7 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  overflow: hidden;
 }
 
 .staff-container {
@@ -923,7 +926,7 @@ body {
   margin-right: 2em;
 }
 
-.registerform-container .input-wrapper label:after {
+.registerform-container .input-wrapper .checkBoxlabel:after {
   content: " *";
   color: red;
 }
@@ -952,15 +955,48 @@ body {
   width: 8%;
 }
 
-.registerform-container .checkboxType label:after {
+.registerform-container .checkboxType .checkBoxlabel:after {
   content: "";
 }
 
-.registerform-container .submitBtn {
-  height: 50px;
-  min-width: 20%;
+/* CSS */
+.submitBtn {
+  background: -webkit-gradient(linear, left top, right bottom, from(#EF4765), to(#FF9A5A));
+  background: linear-gradient(to bottom right, #EF4765, #FF9A5A);
+  border: 0;
+  border-radius: 12px;
+  color: #FFFFFF;
   cursor: pointer;
-  background: radial-gradient(ellipse at center, #f49d32 0, rgba(75, 251, 181, 0) 100%);
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 2.5;
+  outline: transparent;
+  padding: 0 1rem;
+  text-align: center;
+  text-decoration: none;
+  -webkit-transition: -webkit-box-shadow .2s ease-in-out;
+  transition: -webkit-box-shadow .2s ease-in-out;
+  transition: box-shadow .2s ease-in-out;
+  transition: box-shadow .2s ease-in-out, -webkit-box-shadow .2s ease-in-out;
+  -moz-user-select: none;
+   -ms-user-select: none;
+       user-select: none;
+  -webkit-user-select: none;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  white-space: nowrap;
+}
+
+.submitBtn:not([disabled]):focus {
+  -webkit-box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5), -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5), 0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+          box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5), -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5), 0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+}
+
+.submitBtn:not([disabled]):hover {
+  -webkit-box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5), -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5), 0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+          box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5), -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5), 0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
 }
 
 .agenda-container .table-container {
@@ -1378,7 +1414,6 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  border: 2px solid red;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -1388,9 +1423,9 @@ body {
 }
 
 .summery-info h1 {
-  border: 2px solid red;
   width: 10em;
   color: #5c5b5b;
+  margin-left: 1em;
 }
 
 .summery-info .picki {
@@ -1404,6 +1439,8 @@ body {
 .summery-info .picki .selectBtn {
   background-color: #ffffff;
   border: 0;
+  width: 110px;
+  height: 40px;
   border-radius: 0.5rem;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -1419,6 +1456,7 @@ body {
   text-decoration-thickness: auto;
   -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
           box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  text-align: center;
   cursor: pointer;
   -moz-user-select: none;
    -ms-user-select: none;
@@ -1450,6 +1488,7 @@ body {
 .summery-chart {
   width: 80%;
   margin: 10px 5px;
+  margin: 10px 20px;
 }
 
 @media (max-width: 825px) {
@@ -1462,9 +1501,6 @@ body {
   }
   .registerform-container {
     width: 100%;
-  }
-  .registerform-container .submitBtn {
-    min-width: 50%;
   }
 }
 

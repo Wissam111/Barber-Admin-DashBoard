@@ -34,38 +34,14 @@ function Chart(props) {
       title: {
         display: true,
         text:
-          new Date(date).getFullYear() + "" + isDoneDeal
+          `${new Date(date).getFullYear()} ${ isDoneDeal
             ? `Done Deals`
-            : "Profit",
+            : "Revenue"}`,
       },
     },
   };
 
-  // function updateChart() {
-  //   let tempD = [...appointmentsData].filter((appoint) => {
-  //     let appD = new Date(appoint.start_time);
 
-  //     return (
-  //       new Date(date).getFullYear() == appD.getFullYear() &&
-  //       appoint.status == "done"
-  //     );
-  //   });
-  //   const _ = require("lodash");
-  //   // console.log(props.appointmentsData);
-
-  //   const monthsDataObject = _.groupBy(tempD, ({ start_time }) =>
-  //     new Date(start_time).getMonth()
-  //   );
-  //   let mothsD = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  //   Object.keys(monthsDataObject).forEach((objkey) => {
-  //     mothsD[objkey] = monthsDataObject[objkey].length;
-  //   });
-  //   setMonthsData(mothsD);
-  // }
-
-  // React.useEffect(() => {
-  //   updateChart();
-  // }, [date]);
 
   const data = {
     labels: [
@@ -89,7 +65,7 @@ function Chart(props) {
         lineTension: 0.1,
         backgroundColor: "rgba(75,192,192,0.4)",
         // borderColor: "rgba(75,192,192,1)",
-        borderColor: isDoneDeal ? "rgba(75,192,192,1)" : "red",
+        borderColor: "rgba(75,192,192,1)" ,
         borderCapStyle: "butt",
         borderDash: [],
         borderDashOffset: 0.0,

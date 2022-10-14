@@ -56,7 +56,7 @@ function CustomerRow(props) {
           ? appoint.worker.firstName + " " + appoint.worker.lastName
           : "non"}
       </td>
-      <td>
+      <td className="actionTd">
         <button className="moreInfoBtn" onClick={() => handleDelete(appoint)}>
           <i className="fa-solid fa-trash-can"></i>
         </button>
@@ -66,6 +66,8 @@ function CustomerRow(props) {
           checked={appoint.status == "done"}
           onChange={(event) => handleDone(event, appoint)}
         ></input>
+ 
+
       </td>
     </tr>
   );
