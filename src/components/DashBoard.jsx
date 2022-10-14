@@ -15,7 +15,9 @@ import Staff from "./pages/Staff";
 import Users from "./pages/Users";
 import Agenda from "./pages/Agenda";
 import Login from "./pages/Login";
+import Summery from "./pages/Summery";
 import { Fragment } from "react";
+
 function DashBoard() {
   const {
     appointmentsData,
@@ -132,6 +134,11 @@ function DashBoard() {
                     <Navigate to="/" />
                   )
                 }
+              />
+              <Route
+                path="/summery"
+                exact
+                element={isLogin ? <Summery /> : <Navigate to="/" />}
               />
             </Routes>
           </Router>

@@ -42,7 +42,8 @@ body {
 .workinghours-container,
 .form-container,
 .users-container,
-.agenda-container {
+.agenda-container,
+.summery-container {
   width: 85%;
   height: 100%;
   // border: 2px solid red;
@@ -102,11 +103,11 @@ body {
 
   // border: 2px solid red;
 }
-.appointChart-container {
-  // border: 2px solid red;
-  // height: 5vh;
-  width: 26em;
-}
+// .Chart-container {
+//   // border: 2px solid red;
+//   // height: 5vh;
+//   width: 26em;
+// }
 .charts-container {
   display: flex;
   gap: 1em;
@@ -176,6 +177,32 @@ body {
   }
 }
 
+.percentagecard-container {
+  // border: 2px solid red;
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  padding: 10px 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  border-radius: 0.4em;
+  font-weight: lighter;
+  position: relative;
+}
+.precentage-wrapper {
+  // border: 2px solid red;
+  width: 120px;
+}
+.totalMonthProfit {
+  font-size: 2rem;
+  font-weight: bold;
+  // color: rgb(16, 145, 16);
+}
+.chartLink {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: black;
+}
 //************************************** Table *********************************//
 .table-container {
   // position: absolute;
@@ -466,6 +493,9 @@ body {
     height: 50px;
   }
 }
+.chartLogo {
+  font-size: 0.9rem;
+}
 
 .workerhours-cta {
   // border: 2px solid red;
@@ -488,9 +518,9 @@ body {
   cursor: pointer;
   position: absolute;
   right: 0;
-  background: none;
-  // border: none;
-  font-size: 1rem;
+  // background: none;
+  // // border: none;
+  // font-size: 1rem;
 }
 .unbookBtn {
   cursor: pointer;
@@ -503,7 +533,8 @@ body {
   min-height: 2vh;
   padding: 0;
   border-radius: 0.5em;
-
+  background: none;
+  font-size: 1rem;
   // background: none;
   img {
     // width: 1.4em;
@@ -1205,6 +1236,77 @@ body {
   .users-container {
     width: 100%;
   }
+}
+//************************* Summery ***********************//
+
+.summery-info {
+  display: flex;
+  border: 2px solid red;
+  // width: 100%;
+  align-items: center;
+  // gap: 2em;
+  justify-content: space-between;
+  h1 {
+    border: 2px solid red;
+    width: 10em;
+    color: rgb(92, 91, 91);
+  }
+  .picki {
+    display: flex;
+    gap: 1em;
+    // border: 2px solid red;
+    width: 500px;
+    .selectBtn {
+      background-color: #ffffff;
+      border: 0;
+      border-radius: 0.5rem;
+      box-sizing: border-box;
+      color: #111827;
+      font-family: "Inter var", ui-sans-serif, system-ui, -apple-system,
+        system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+        sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
+      font-size: 0.875rem;
+      font-weight: 600;
+      line-height: 1.25rem;
+      padding: 0.75rem 1rem;
+      text-align: center;
+      text-decoration: none #d1d5db solid;
+      text-decoration-thickness: auto;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+        0 1px 2px 0 rgba(0, 0, 0, 0.06);
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    .selectBtn:hover {
+      background-color: rgb(249, 250, 251);
+    }
+
+    .selectBtn:focus {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+    }
+
+    .button-38:focus-visible {
+      box-shadow: none;
+    }
+  }
+}
+.activeS {
+  background: gray !important;
+  color: white !important;
+}
+// .picki {
+//  border: 2px solid red;
+//   width: 500px;
+// }
+.summery-chart {
+  // border: 2px solid red;
+  width: 80%;
+  margin: 10px 5px;
 }
 
 @media (max-width: 825px) {

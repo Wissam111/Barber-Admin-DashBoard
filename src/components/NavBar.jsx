@@ -37,6 +37,16 @@ function NavBar(props) {
           </Link>
         </li>
 
+        <li>
+          <Link to="/summery" className="nav-link">
+            <img
+              class="chartLogo"
+              src={require("../imgs/line-chart.png")}
+              alt=""
+            />
+          </Link>
+        </li>
+
         <li onClick={props.handleLogOut} className="logoutLogo">
           <Link to="/" className="nav-link">
             <img

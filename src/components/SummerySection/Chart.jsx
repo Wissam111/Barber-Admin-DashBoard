@@ -11,7 +11,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
-function AppointChart(props) {
+function Chart(props) {
   const { revenueData, date, isDoneDeal } = props;
   const [monthsData, setMonthsData] = useState([]);
   ChartJS.register(
@@ -109,10 +109,10 @@ function AppointChart(props) {
   };
 
   return (
-    <div className="appointChart-container">
+    <div className="Chart-container">
       <Line options={options} data={data}></Line>
     </div>
   );
 }
 
-export default AppointChart;
+export default Chart;

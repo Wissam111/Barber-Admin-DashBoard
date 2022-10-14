@@ -8,9 +8,13 @@ import StatusCard from "./StatusCard";
 import ActiveAppointments from "./ActiveAppointments";
 import Customers from "../CustomerSection/Customers";
 import CircularProgress from "@mui/material/CircularProgress";
-import AppointChart from "../AppointsChart/AppointChart";
+// import AppointChart from "../SummerySection/AppointChart";
 import APIContext from "../Context/apiContext";
+
 import { Link } from "react-router-dom";
+
+import PercentageCard from "../SummerySection/PercentageCard";
+
 function HomeView(props) {
   const [date, setDate] = useState(new Date());
   const [done, setDone] = useState(0);
@@ -131,24 +135,26 @@ function HomeView(props) {
             sliceNumb={5}
           />
           <div className="charts-container">
-            <AppointChart
+            <PercentageCard revenueData={doneDealsData} />
+            <PercentageCard revenueData={profitData} isProfit={true} />
+            {/* <AppointChart
               revenueData={doneDealsData}
               date={date}
               isDoneDeal={true}
             />
-            <AppointChart revenueData={profitData} date={date} />
+            <AppointChart revenueData={profitData} date={date} /> */}
           </div>
         </div>
 
         <div className="statusPrect-container">
           <StatusCard
             imgUrl={require("./../../imgs/percentage.png")}
-            status={"Number of deals: "}
+            status={"Number of deals "}
             statsNumber={stats.appointmentsCount}
           />
           <StatusCard
             imgUrl={require("./../../imgs/cd-scetch.png")}
-            status={"Total number of users:"}
+            status={"Total number of users "}
             statsNumber={stats.customersCount}
           />
           <div className="recent-customers">

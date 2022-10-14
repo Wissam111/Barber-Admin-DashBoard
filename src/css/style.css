@@ -37,7 +37,8 @@ body {
 .workinghours-container,
 .form-container,
 .users-container,
-.agenda-container {
+.agenda-container,
+.summery-container {
   width: 85%;
   height: 100%;
   border-radius: 1em;
@@ -108,10 +109,6 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-}
-
-.appointChart-container {
-  width: 26em;
 }
 
 .charts-container {
@@ -196,6 +193,38 @@ body {
   -webkit-box-shadow: rgba(243, 174, 55, 0.24) 0px 3px 8px;
           box-shadow: rgba(243, 174, 55, 0.24) 0px 3px 8px;
   cursor: pointer;
+}
+
+.percentagecard-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1em;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px 5px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+          box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  border-radius: 0.4em;
+  font-weight: lighter;
+  position: relative;
+}
+
+.precentage-wrapper {
+  width: 120px;
+}
+
+.totalMonthProfit {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.chartLink {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: black;
 }
 
 .table-container {
@@ -468,6 +497,10 @@ body {
   height: 50px;
 }
 
+.chartLogo {
+  font-size: 0.9rem;
+}
+
 .workerhours-cta {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -494,8 +527,6 @@ body {
   cursor: pointer;
   position: absolute;
   right: 0;
-  background: none;
-  font-size: 1rem;
 }
 
 .unbookBtn {
@@ -510,6 +541,8 @@ body {
   min-height: 2vh;
   padding: 0;
   border-radius: 0.5em;
+  background: none;
+  font-size: 1rem;
 }
 
 .unbookBtn img,
@@ -1339,6 +1372,84 @@ body {
   .users-container {
     width: 100%;
   }
+}
+
+.summery-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border: 2px solid red;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.summery-info h1 {
+  border: 2px solid red;
+  width: 10em;
+  color: #5c5b5b;
+}
+
+.summery-info .picki {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1em;
+  width: 500px;
+}
+
+.summery-info .picki .selectBtn {
+  background-color: #ffffff;
+  border: 0;
+  border-radius: 0.5rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: #111827;
+  font-family: "Inter var", ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  -webkit-text-decoration: none #d1d5db solid;
+          text-decoration: none #d1d5db solid;
+  text-decoration-thickness: auto;
+  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  -moz-user-select: none;
+   -ms-user-select: none;
+       user-select: none;
+  -webkit-user-select: none;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+}
+
+.summery-info .picki .selectBtn:hover {
+  background-color: #f9fafb;
+}
+
+.summery-info .picki .selectBtn:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.summery-info .picki .button-38:focus-visible {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.activeS {
+  background: gray !important;
+  color: white !important;
+}
+
+.summery-chart {
+  width: 80%;
+  margin: 10px 5px;
 }
 
 @media (max-width: 825px) {
