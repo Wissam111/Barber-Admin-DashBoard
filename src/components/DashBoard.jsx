@@ -26,8 +26,6 @@ function DashBoard() {
     PostTime,
     DeleteAppoint,
     loading,
-    UnBookAppoint,
-    BookAppoint,
     users,
     UpdateStatus,
     refetch,
@@ -36,7 +34,7 @@ function DashBoard() {
   } = useContext(APIContext);
 
   const { timeFormat, dateFormat } = useContext(FORMATContext);
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   // React.useEffect(() => {
   // if (loading) return <CircularProgress />;
   // }, []);
@@ -108,8 +106,6 @@ function DashBoard() {
                       dateFormat={dateFormat}
                       PostTime={PostTime}
                       DeleteAppoint={DeleteAppoint}
-                      UnBookAppoint={UnBookAppoint}
-                      BookAppoint={BookAppoint}
                       UpdateStatus={UpdateStatus}
                       DeleteUser={DeleteUser}
                     />

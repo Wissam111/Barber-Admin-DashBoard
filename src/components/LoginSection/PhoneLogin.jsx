@@ -1,4 +1,5 @@
 import React, { Component, useState, useContext, useRef } from "react";
+import CircularProgress from "@mui/material/CircularProgress";
 import OTP from "./OTP";
 import APIContext from "../Context/apiContext";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +9,7 @@ function PhoneLogin(props) {
   const [showPhone, setShowPhone] = useState(true);
   const [verfObj, setVerfObj] = useState({});
   const navigate = useNavigate();
+  const [loadLogin, setLoadLogin] = useState(false);
   const handleSubmitPhone = async () => {
     let ph = phoneRef.current.value;
     console.log(ph);
@@ -15,9 +17,11 @@ function PhoneLogin(props) {
       phone: ph,
       isLogin: true,
     };
+    setLoadLogin(true);
     let res = await SendAuth(authObj);
     let code = "1234";
     if (res.message == "verification sent") {
+      setLoadLogin(false);
       setVerfObj({
         phone: ph,
         verifyId: res.verifyId,
@@ -39,9 +43,10 @@ function PhoneLogin(props) {
     let veObj = verfObj;
     veObj.code = subCode;
     setVerfObj(veObj);
-    console.log(veObj);
+    setLoadLogin(true);
     let resAuth = await VerifyAuth(veObj);
     if (resAuth.message == "login sucess") {
+      setLoadLogin(false);
       props.handleLogin();
       navigate("/main");
     } else {
@@ -59,8 +64,13 @@ function PhoneLogin(props) {
             ref={phoneRef}
             required
           />
-          <button className="submitPhoneBtn" onClick={handleSubmitPhone}>
-            SUBMIT
+          {loadLogin && (
+            <div className="circle-wrapper">
+              <CircularProgress />
+            </div>
+          )}
+          <button className="loginBtn" onClick={handleSubmitPhone}>
+            {"SUBMIT"}
           </button>
         </div>
       )}

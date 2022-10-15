@@ -1,4 +1,4 @@
-import React, { Component, useRef, useState, useContext } from "react";
+import React, { Component } from "react";
 function CustomerRow(props) {
   const { appoint, dateFormat, timeFormat, handleDelete, handleDone } = props;
 
@@ -15,11 +15,7 @@ function CustomerRow(props) {
     // 17:30 18:00  18:01
     if (today >= startDate && today <= endDate) {
       return "In Progress";
-    } else if (
-      // today < startDate ||
-      // appoint.status == "in-progress" ||
-      appoint.status != "done"
-    ) {
+    } else if (appoint.status != "done") {
       return "Pending";
     }
   };
@@ -66,8 +62,6 @@ function CustomerRow(props) {
           checked={appoint.status == "done"}
           onChange={(event) => handleDone(event, appoint)}
         ></input>
- 
-
       </td>
     </tr>
   );

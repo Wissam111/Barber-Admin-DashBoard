@@ -57,13 +57,14 @@ function OTP(props) {
             onKeyDown={handleKeyDown}
           />
         </div>
-
-        <i
-          class="fa fa-arrow-left"
-          aria-hidden="true"
-          onClick={props.handleBack}
-        ></i>
-        <input className="submitOtpBtn" type="submit" value={"VERIFY"} />
+        <div className="loginVerf-container">
+          <input className="loginBtn" type="submit" value={"VERIFY"} />
+          <i
+            class="fa fa-arrow-left"
+            aria-hidden="true"
+            onClick={props.handleBack}
+          ></i>
+        </div>
       </form>
     </div>
   );

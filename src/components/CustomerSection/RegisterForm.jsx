@@ -1,5 +1,4 @@
 import React, { Component, useState } from "react";
-import moment from "moment/moment";
 function RegisterForm(props) {
   const [workerChecked, setworkerChecked] = useState(false);
   const [customerChecked, setcustomerChecked] = useState(false);
@@ -45,23 +44,8 @@ function RegisterForm(props) {
               onChange={() => setcustomerChecked(!customerChecked)}
             />
           </div>
-
-          {/* {workerChecked && (
-            <div className="input-wrapper">
-              <label>Service</label>
-              <select id="algos" name="algos">
-                <option value="Hair Cut">Hair Cut</option>
-                <option value="Face Cut">Face Cut</option>
-                <option value="Wax">Wax</option>
-                <option value="Massage">Massage</option>
-              </select>
-            </div>
-          )} */}
         </div>
-        <input className="submitBtn"  type="submit" value={"Create user"} />
-   
-        {/* Create User
-        </input> */}
+        <input className="submitBtn" type="submit" value={"Create user"} />
       </form>
     </div>
   );

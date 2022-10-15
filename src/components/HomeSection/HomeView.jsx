@@ -8,11 +8,8 @@ import StatusCard from "./StatusCard";
 import ActiveAppointments from "./ActiveAppointments";
 import Customers from "../CustomerSection/Customers";
 import CircularProgress from "@mui/material/CircularProgress";
-// import AppointChart from "../SummerySection/AppointChart";
 import APIContext from "../Context/apiContext";
-
 import { Link } from "react-router-dom";
-
 import PercentageCard from "../SummerySection/PercentageCard";
 
 function HomeView(props) {
@@ -29,10 +26,8 @@ function HomeView(props) {
     loading,
     stats,
   } = props;
-  const { users, setUsers, revenue } = useContext(APIContext);
-  const [doneDealsData, setDoneDealsData] = useState([]);
-  const [profitData, setProfitData] = useState([]);
-  // console.log(revenue);
+  const { users, doneDealsData, profitData } = useContext(APIContext);
+
   function UpdateStats(appointments) {
     let done = 0;
     let pending = 0;
@@ -59,37 +54,20 @@ function HomeView(props) {
   }
   React.useEffect(() => {
     UpdateStats(appointmentsData);
-    updateRevenueData();
-  }, [date]);
+  }, [date, appointmentsData]);
 
-  const handleDeleteUser = (customerId) => {
-    if (window.confirm("Are you sure you wish to delete this item?")) {
-      let tempUsers = users.filter((user) => {
-        return user._id != customerId;
-      });
-      setUsers(tempUsers);
-      props.DeleteUser(customerId);
-    }
-  };
-
-  function updateRevenueData() {
-    if (!revenue.data) {
-      return;
-    }
-    let pData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    let doneData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    revenue.data.forEach((rev) => {
-      pData.splice(rev.month - 1, 0, rev.revenue);
-      doneData.splice(rev.month - 1, 0, rev.count);
-    });
-
-    setDoneDealsData(doneData);
-    setProfitData(pData);
-  }
-
-  // if (loading) return <CircularProgress />;
   return (
-    <div className="homeView-container">
+    <div
+      className={
+        loading ? "homeView-container loadingHome" : "homeView-container"
+      }
+    >
+      {loading && (
+        <div className="circle-wrapper">
+          <CircularProgress />
+        </div>
+      )}
+
       <div className="date-container">
         <button onClick={() => refetch()} className="refreshBtn">
           <i class="fa fa-refresh" aria-hidden="true"></i>
@@ -137,12 +115,6 @@ function HomeView(props) {
           <div className="charts-container">
             <PercentageCard revenueData={doneDealsData} />
             <PercentageCard revenueData={profitData} isProfit={true} />
-            {/* <AppointChart
-              revenueData={doneDealsData}
-              date={date}
-              isDoneDeal={true}
-            />
-            <AppointChart revenueData={profitData} date={date} /> */}
           </div>
         </div>
 
@@ -169,12 +141,9 @@ function HomeView(props) {
               users={users
                 .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
                 .slice(0, 5)}
-              handleDeleteUser={handleDeleteUser}
+              isHome={true}
             />
           </div>
-          {/* <div className="topStyles">
-            <img src={require("./../../imgs/barberStyle.png")} alt="" />
-          </div> */}
         </div>
       </div>
     </div>

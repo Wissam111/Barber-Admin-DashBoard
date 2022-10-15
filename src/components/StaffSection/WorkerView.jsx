@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 function WorkerView(props) {
   const { worker, handleStaffScheduler, handleSettings } = props;
-  // console.log(worker);
   return (
     <div className="workerView-container">
       <img

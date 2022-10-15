@@ -9,8 +9,9 @@ export function APIContextProvider({ children }) {
   const [workers, setWorkers] = useState([]);
   const [users, setUsers] = useState([]);
   const [stats, setStats] = useState([]);
-  const [revenue, setRevenue] = useState([]);
-
+  // const [revenue, setRevenue] = useState([]);
+  const [doneDealsData, setDoneDealsData] = useState([]);
+  const [profitData, setProfitData] = useState([]);
   const { loading, error, setCurrId, data, refetch } = useFetch();
 
   useEffect(() => {
@@ -21,7 +22,8 @@ export function APIContextProvider({ children }) {
     setUsers(data[1].users);
     setWorkers(data[2].workers);
     setStats(data[3]);
-    setRevenue(data[4]);
+    // setRevenue(data[4]);
+    updateRevenueData(data[4]);
   }, [data]);
   async function PostTime(appoint) {
     try {
@@ -52,47 +54,13 @@ export function APIContextProvider({ children }) {
       });
       const g = await res.json();
       console.log(g);
-      // refetch();
+      refetch();
+      return g;
     } catch (e) {
       console.log(e);
     }
   }
 
-  async function UnBookAppoint(appointId) {
-    try {
-      let res = await fetch(ApiUrl + "appointments/unbook", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-        body: JSON.stringify(appointId),
-        method: "POST",
-      });
-      const g = await res.json();
-      console.log(g);
-      refetch();
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  async function BookAppoint(appoint) {
-    try {
-      let res = await fetch(ApiUrl + "appointments/book", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-        body: JSON.stringify(appoint),
-        method: "POST",
-      });
-      const g = await res.json();
-      console.log(g);
-      refetch();
-    } catch (e) {
-      console.log(e);
-    }
-  }
   async function CreateUser(user) {
     try {
       let res = await fetch(ApiUrl + "signup", {
@@ -161,7 +129,7 @@ export function APIContextProvider({ children }) {
       });
       const g = await res.json();
       console.log(g);
-      refetch();
+      // refetch();
     } catch (e) {
       console.log(e);
     }
@@ -213,7 +181,7 @@ export function APIContextProvider({ children }) {
       });
       const g = await res.json();
       // console.log(g);
-      // refetch();
+      refetch();
       return g;
     } catch (e) {
       console.log(e);
@@ -231,31 +199,27 @@ export function APIContextProvider({ children }) {
       });
       const g = await res.json();
       // console.log(g);
-      // refetch();
+      refetch();
       return g;
     } catch (e) {
       console.log(e);
     }
   }
-  // async function getRevenue() {
-  //   try {
-  //     let res = await fetch(ApiUrl + "dashboard/worker-revenue", {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: "Bearer " + token,
-  //       },
-  //       // body: JSON.stringify(appoint),
-  //       method: "GET",
-  //     });
-  //     const g = await res.json();
-  //     // console.log(g);
-  //     // refetch();
-  //     return g;
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // }
-  // /api/dashboard/worker-revenue
+
+  function updateRevenueData(revenue) {
+    if (!revenue.data) {
+      return;
+    }
+    let pData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let doneData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    revenue.data.forEach((rev) => {
+      pData.splice(rev.month - 1, 0, rev.revenue);
+      doneData.splice(rev.month - 1, 0, rev.count);
+    });
+
+    setDoneDealsData(doneData);
+    setProfitData(pData);
+  }
 
   return (
     <APIContext.Provider
@@ -266,8 +230,6 @@ export function APIContextProvider({ children }) {
         PostTime,
         DeleteAppoint,
         loading,
-        UnBookAppoint,
-        BookAppoint,
         users,
         setUsers,
         UpdateStatus,
@@ -279,7 +241,8 @@ export function APIContextProvider({ children }) {
         UpdateUser,
         AddService,
         DeleteService,
-        revenue,
+        doneDealsData,
+        profitData,
       }}
     >
       {children}

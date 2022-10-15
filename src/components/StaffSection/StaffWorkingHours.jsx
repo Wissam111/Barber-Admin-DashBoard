@@ -39,7 +39,6 @@ function StaffWorkingHours(props) {
   const [showAppointCard, setShowAppointCard] = useState(false);
   const [currAppoint, setCurrAppoint] = useState({});
   const [isBooked, setIsBooked] = useState(false);
-
   const handleStaffScheduler = (worker) => {
     const currWorkerAppoints = appointmentsData.filter((appoint) => {
       if (!appoint.worker) {
@@ -56,7 +55,6 @@ function StaffWorkingHours(props) {
   };
 
   function createSchAppoint(appoint) {
-    // let isBooked = appoint.customer || appoint.status == "hold";
     let isBooked = !(appoint.status == "free" || appoint.status == "canceled");
     let _appoint = {
       id: appoint._id,
@@ -85,14 +83,12 @@ function StaffWorkingHours(props) {
               setShowAppointCard={setShowAppointCard}
             />
           }
-          {/* {<Button color={data.color} id={data.id} />} */}
           {children}
         </Appointments.Appointment>
       </div>
     );
   }
   async function handleBook(id, selectedServ) {
-    // let tempServs = [selectedServ];
     if (selectedServ == "") {
       window.alert("No Service Selected!");
       return;
@@ -113,8 +109,6 @@ function StaffWorkingHours(props) {
     });
 
     let res = await UpdateStatus(objAppo);
-    // appointment status updated
-    console.log(res);
     if (res.message == "appointment status updated") {
       setShowAppointCard(false);
       setSchedulerData(newschData);
@@ -152,23 +146,19 @@ function StaffWorkingHours(props) {
       let appd = appointmentsData.find((app) => {
         return app._id == props.id;
       });
-      // const appoElement = document.getElementById(props.id);
-      // console.log(appoElement);
+
       setShowAppointCard(true);
       setCurrAppoint(appd);
       setIsBooked(isBooked);
     };
     return (
-      <button
-        className={isBooked ? "unbookBtn" : "bookBtn"}
-        // onClick={isBooked ? handleUnBook : handleBook}
-        onClick={handleClick}
-      >
-        {isBooked ? (
+      <button className={"appointInfoBtn"} onClick={handleClick}>
+        {<img src={require("./../../imgs/calendar2.png")}></img>}
+        {/* {isBooked ? (
           <img src={require("./../../imgs/unBook.png")}></img>
         ) : (
           <img src={require("./../../imgs/book.png")}></img>
-        )}
+        )} */}
       </button>
     );
   }
@@ -176,7 +166,6 @@ function StaffWorkingHours(props) {
   async function commitChanges({ added, changed, deleted }) {
     let _tempSchData = [...schedulerData];
     if (added) {
-      // yyyy-MM-DDTHH:mm:ssZZ
       let format = "yyyy-MM-DDTHH:mm:ssZZ";
       let currDate = dateFormat(added.startDate, "yyyy-MM-DD");
       let startDate = dateFormat(
@@ -207,17 +196,22 @@ function StaffWorkingHours(props) {
       handleDeleteAppoint(deleted);
     }
   }
-  const handleSettings = (worker) => {
+  const handleSettings = async (worker) => {
     setShowSettings(!showSettings);
     setWorkerSettings(worker);
   };
-  const handleDeleteAppoint = (appointId) => {
+  const handleDeleteAppoint = async (appointId) => {
     let _tempSchData = [...schedulerData];
-    DeleteAppoint(appointId);
-    let newSc = _tempSchData.filter((appoint) => {
-      return appoint.id != appointId;
-    });
-    setSchedulerData(newSc);
+    let g = await DeleteAppoint(appointId);
+    if (g.message == "appointment deleted") {
+      let newSc = _tempSchData.filter((appoint) => {
+        return appoint.id != appointId;
+      });
+      setSchedulerData(newSc);
+      window.alert("appointment deleted successfully");
+    } else {
+      window.alert(g.message);
+    }
   };
   const handleDeleteUser = async (userId) => {
     if (window.confirm("Are you sure you want to delete this user?")) {

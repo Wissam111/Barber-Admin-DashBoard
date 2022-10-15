@@ -6,8 +6,6 @@ import APIContext from "../Context/apiContext";
 import moment from "moment/moment";
 import Settings from "../SettingsSection/Settings";
 function Users(props) {
-  // const [users, setUsers] = useState(props.users);
-  // const [infoUser, setInfoUser] = useState({});
   const { users, setUsers } = useContext(APIContext);
   const [searchedUsers, setSearchedUsers] = useState(users);
 
@@ -36,9 +34,6 @@ function Users(props) {
     setShowSettings(false);
   };
 
-  // const handleMoreInfo = (customer) => {
-  //   setInfoUser(customer);
-  // };
   const handleDeleteUser = async (customerId) => {
     if (window.confirm("Are you sure you want to delete this user?")) {
       let tempUsers = users.filter((user) => {
@@ -57,7 +52,6 @@ function Users(props) {
     let lName = event.target[1].value;
     let phone = event.target[2].value;
     let birthDate = moment(event.target[3].value).format("yyyy-MM-DD");
-    let workerService = event.target[6].value;
     let userObj = {
       phone: phone,
       firstName: fName,
@@ -67,12 +61,13 @@ function Users(props) {
     };
 
     let mess = await props.CreateUser(userObj);
-    if (mess == "signup sucess") {
+    if (mess == "user created successfully") {
       let tempUsers = [...users];
       tempUsers.push(userObj);
       setUsers(tempUsers);
+    } else {
+      window.alert(mess);
     }
-    window.alert(mess);
   };
   return (
     <div className="users-container">
@@ -86,7 +81,6 @@ function Users(props) {
         </div>
         <Customers
           users={searchedUsers}
-          // showUserInfo={true}
           handleDeleteUser={handleDeleteUser}
           handleSettings={handleSettings}
         />

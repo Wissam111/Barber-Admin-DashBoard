@@ -1,23 +1,7 @@
 import React, { Component } from "react";
 
 function Customer(props) {
-  const {
-    customer,
-    showUserInfo,
-    handleMoreInfo,
-    handleDeleteUser,
-    handleSettings,
-  } = props;
-
-  // const handleDelete = () => {
-  //   // console.log(customer);
-  //   if (window.confirm("Are you sure you wish to delete this item?")) {
-  //     console.log("hhhhhh");
-  //     DeleteUser(customer._id);
-  //   } else {
-  //     console.log("hh");
-  //   }
-  // };
+  const { customer, handleSettings, isHome } = props;
 
   return (
     <div className="customer-container">
@@ -31,22 +15,15 @@ function Customer(props) {
       />
       <h3>{customer.firstName + " " + customer.lastName}</h3>
 
-      <div className="customer-action">
-        <i
-          className="fa fa-cog workerSettings"
-          aria-hidden="true"
-          onClick={() => handleSettings(customer)}
-        ></i>
-        {/* <i className="fa fa-phone">
-          <a href={"tel:" + customer.phone}></a>
-        </i>
-        <button
-          className="moreInfoBtn"
-          onClick={() => handleDeleteUser(customer._id)}
-        >
-          <i className="fa-solid fa-trash-can"></i>
-        </button> */}
-      </div>
+      {!isHome && (
+        <div className="customer-action">
+          <i
+            className="fa fa-cog workerSettings"
+            aria-hidden="true"
+            onClick={() => handleSettings(customer)}
+          ></i>
+        </div>
+      )}
     </div>
   );
 }

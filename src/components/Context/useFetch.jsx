@@ -1,6 +1,7 @@
 import React, { Component, useEffect, useState } from "react";
 import axios from "axios";
 //working on it
+import CircularProgress from "@mui/material/CircularProgress";
 
 function useFetch() {
   const [loading, setLoading] = useState(false);
@@ -58,33 +59,7 @@ function useFetch() {
   try {
     useEffect(() => {
       setLoading(true);
-      // async function fetchData() {
-      //   const config = {
-      //     headers: {
-      //       Accept: "application/json",
-      //       phone: "0547973441",
-      //       password: "12345",
-      //       Authorization: "Bearer " + token,
-      //     },
-      //   };
-      //   Promise.all(
-      //     dataUrls.map((durl) => {
-      //       return axios.get(durl.url, config);
-      //     })
-      //   )
-      //     .then((response) => {
-      //       let tempData = response.map((res) => {
-      //         return res.data;
-      //       });
-      //       setData(tempData);
-      //     })
-      //     .catch((err) => {
-      //       setError(err);
-      //     })
-      //     .finally(() => {
-      //       setLoading(false);
-      //     });
-      // }
+
       fetchData();
     }, [currId]);
   } catch (e) {
@@ -94,6 +69,8 @@ function useFetch() {
   const refetch = () => {
     setLoading(true);
     fetchData();
+
+    // if (loading) return <CircularProgress />;
   };
 
   return { loading, error, setCurrId, data, refetch };

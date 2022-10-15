@@ -3,8 +3,6 @@ import { useState } from "react";
 import { act } from "react-dom/test-utils";
 import { Link } from "react-router-dom";
 function NavBar(props) {
-  // const { active } = props;
-
   return (
     <div className="navbar-container">
       <img className="logo" src={require("../imgs/logobarb.png")} alt="" />

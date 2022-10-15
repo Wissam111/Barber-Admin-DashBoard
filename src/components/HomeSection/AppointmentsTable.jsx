@@ -1,34 +1,12 @@
 import React, { Component } from "react";
-import { useState } from "react";
 import CustomerRow from "./CustomerRow";
-import UpdateStatus from "./UpdateStatus";
 function AppointmentsTable(props) {
-  // const { appointements, dateFormat, timeFormat, handleMoreInfo } = props;
-  const {
-    appointements,
-    dateFormat,
-    timeFormat,
-    DeleteAppoint,
-    handleDelete,
-    handleDone,
-    UpdateStats,
-  } = props;
-  const [position, setPosition] = useState({});
-  const [showUpdateStatus, setShowUpdateStatus] = useState(false);
-  const [currStatus, setCurrStatus] = useState("");
-
-  const handleMoreInfo = (ref, appoint) => {
-    setPosition(ref);
-    setShowUpdateStatus(true);
-    setCurrStatus(appoint.status);
-  };
+  const { appointements, dateFormat, timeFormat, handleDelete, handleDone } =
+    props;
 
   return (
     <div className="table-wrapper">
       <table className="appointsview">
-        {/* {showUpdateStatus && (
-        <UpdateStatus position={position} handleCloseInfo={handleCloseInfo} />
-      )} */}
         <tbody>
           <tr className="mainRow">
             <th>Name</th>
@@ -46,7 +24,6 @@ function AppointmentsTable(props) {
                 appoint={appoint}
                 dateFormat={dateFormat}
                 timeFormat={timeFormat}
-                handleMoreInfo={handleMoreInfo}
                 handleDelete={handleDelete}
                 handleDone={handleDone}
               />

@@ -3,7 +3,6 @@ import WorkerView from "./WorkerView";
 
 function StaffView(props) {
   const { workers, handleStaffScheduler, handleSettings } = props;
-  // console.log(workers);
   return (
     <div className="staff-container">
       <div className="staff-logo">

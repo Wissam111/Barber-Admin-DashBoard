@@ -29,7 +29,6 @@ function AppointmentCard(props) {
       }}
     >
       <div className="appointCard-container">
-        {/* <button className="closeBtn" onClick={handleCloseAppoint}> */}
         <i className="fa fa-times closeBtn" onClick={handleCloseAppoint}></i>
         <ul>
           <li className="cusName">

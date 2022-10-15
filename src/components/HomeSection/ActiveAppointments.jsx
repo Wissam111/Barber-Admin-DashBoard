@@ -33,7 +33,7 @@ function ActiveAppointments(props) {
       setAppointments(_currDayData);
     }
     filterCurrentDayData();
-  }, [date]);
+  }, [date, appointmentsData]);
 
   const handleDelete = (appoint) => {
     if (window.confirm("Are you sure you wish to delete this item?")) {
