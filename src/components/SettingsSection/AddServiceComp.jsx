@@ -67,7 +67,9 @@ function AddServiceComp(props) {
                 });
               }}
             />
-            <button onClick={() => handleAddService(newServData)}>
+            <button
+              onClick={() => handleAddService(newServData, setShowAddServ)}
+            >
               Add Service
             </button>
           </div>

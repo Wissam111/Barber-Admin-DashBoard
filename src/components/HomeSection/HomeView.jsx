@@ -54,7 +54,7 @@ function HomeView(props) {
   }
   React.useEffect(() => {
     UpdateStats(appointmentsData);
-  }, [date, appointmentsData]);
+  }, [date, appointmentsData, doneDealsData, profitData]);
 
   return (
     <div
