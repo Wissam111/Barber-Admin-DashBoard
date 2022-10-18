@@ -4,7 +4,8 @@ import OTP from "./OTP";
 import APIContext from "../Context/apiContext";
 import { useNavigate } from "react-router-dom";
 function PhoneLogin(props) {
-  const { SendAuth, VerifyAuth } = useContext(APIContext);
+  const { SendAuth, VerifyAuth, setAuthData, audthData } =
+    useContext(APIContext);
   const phoneRef = useRef("");
   const [showPhone, setShowPhone] = useState(true);
   const [verfObj, setVerfObj] = useState({});
@@ -30,6 +31,7 @@ function PhoneLogin(props) {
       setShowPhone(false);
     } else {
       window.alert(res.message);
+      setLoadLogin(false);
     }
   };
 
@@ -48,9 +50,12 @@ function PhoneLogin(props) {
     if (resAuth.message == "login sucess") {
       setLoadLogin(false);
       props.handleLogin();
+      setAuthData(resAuth.authData.user);
+      console.log(resAuth.authData);
       navigate("/main");
     } else {
       window.alert(resAuth.message);
+      setLoadLogin(false);
     }
   };
   return (
@@ -79,6 +84,7 @@ function PhoneLogin(props) {
         <OTP
           handleBack={() => setShowPhone(!showPhone)}
           handleVerf={handleVerf}
+          loadLogin={loadLogin}
         />
       )}
     </div>

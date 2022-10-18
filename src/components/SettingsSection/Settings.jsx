@@ -21,8 +21,6 @@ function Settings(props) {
         isWorker={isWorker}
         handleDeleteUser={handleDeleteUser}
       />
-
-      {/* <AddService user={user} workerServs={[]} /> */}
     </div>
   );
 }

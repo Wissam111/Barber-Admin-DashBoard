@@ -1,8 +1,10 @@
-import React, { Component } from "react";
-import { useState } from "react";
-import { act } from "react-dom/test-utils";
+import React, { Component, useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import APIContext from "./Context/apiContext";
 function NavBar(props) {
+  const { authData } = useContext(APIContext);
+  const [admin, setAdmin] = useState({});
+
   return (
     <div className="navbar-container">
       <img className="logo" src={require("../imgs/logobarb.png")} alt="" />
@@ -44,7 +46,16 @@ function NavBar(props) {
             />
           </Link>
         </li>
-
+        {/* <li onClick={props.handleLogOut} className="logoutLogo">
+          <img
+            src={
+              admin.image != null
+                ? `https://saloon-ibra-api.herokuapp.com/imgs/${authData.user.image}`
+                : require("./../imgs/unknown.png")
+            }
+            alt=""
+          />
+        </li> */}
         <li onClick={props.handleLogOut} className="logoutLogo">
           <Link to="/" className="nav-link">
             <img

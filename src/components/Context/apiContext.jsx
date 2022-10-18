@@ -9,7 +9,7 @@ export function APIContextProvider({ children }) {
   const [workers, setWorkers] = useState([]);
   const [users, setUsers] = useState([]);
   const [stats, setStats] = useState([]);
-  // const [revenue, setRevenue] = useState([]);
+  const [authData, setAuthData] = useState({});
   const [doneDealsData, setDoneDealsData] = useState([]);
   const [profitData, setProfitData] = useState([]);
   const { loading, error, setCurrId, data, refetch } = useFetch();
@@ -22,7 +22,6 @@ export function APIContextProvider({ children }) {
     setUsers(data[1].users);
     setWorkers(data[2].workers);
     setStats(data[3]);
-    // setRevenue(data[4]);
     updateRevenueData(data[4]);
   }, [data]);
   async function PostTime(appoint) {
@@ -129,7 +128,6 @@ export function APIContextProvider({ children }) {
       });
       const g = await res.json();
       console.log(g);
-      // refetch();
     } catch (e) {
       console.log(e);
     }
@@ -146,7 +144,6 @@ export function APIContextProvider({ children }) {
       });
       const g = await res.json();
       console.log(g);
-      // refetch();
     } catch (e) {
       console.log(e);
     }
@@ -162,7 +159,6 @@ export function APIContextProvider({ children }) {
         method: "DELETE",
       });
       const g = await res.json();
-      // console.log(g);
       refetch();
       return g;
     } catch (e) {
@@ -180,7 +176,6 @@ export function APIContextProvider({ children }) {
         method: "POST",
       });
       const g = await res.json();
-      // console.log(g);
       refetch();
       return g;
     } catch (e) {
@@ -198,14 +193,12 @@ export function APIContextProvider({ children }) {
         method: "POST",
       });
       const g = await res.json();
-      // console.log(g);
       refetch();
       return g;
     } catch (e) {
       console.log(e);
     }
   }
-
   function updateRevenueData(revenue) {
     if (!revenue.data) {
       return;
@@ -243,6 +236,8 @@ export function APIContextProvider({ children }) {
         DeleteService,
         doneDealsData,
         profitData,
+        setAuthData,
+        authData,
       }}
     >
       {children}

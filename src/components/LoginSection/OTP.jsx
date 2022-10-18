@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import CircularProgress from "@mui/material/CircularProgress";
 function OTP(props) {
   const handleKeyDown = (e, idx) => {
     const codes = document.querySelectorAll(".code");
@@ -57,6 +57,11 @@ function OTP(props) {
             onKeyDown={handleKeyDown}
           />
         </div>
+        {props.loadLogin && (
+          <div className="circle-wrapper">
+            <CircularProgress />
+          </div>
+        )}
         <div className="loginVerf-container">
           <input className="loginBtn" type="submit" value={"VERIFY"} />
           <i
