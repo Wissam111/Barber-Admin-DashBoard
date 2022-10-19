@@ -38,16 +38,24 @@ function DashBoard() {
   // React.useEffect(() => {
   // if (loading) return <CircularProgress />;
   // }, []);
-
+  const [showNav, setShowNav] = useState(false);
   return (
     <Fragment>
       <div className="outerAdmin-container">
         <div className="admindashb-container">
+          {isLogin && (
+            <i
+              className="fa-solid fa-bars menuBar"
+              onClick={() => setShowNav(true)}
+            ></i>
+          )}
           <Router>
             {isLogin && (
               <NavBar
                 workers={workers}
                 handleLogOut={() => setIsLogin(!isLogin)}
+                setShowNav={setShowNav}
+                showNav={showNav}
               />
             )}
             <Routes>

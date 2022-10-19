@@ -20,7 +20,7 @@ function SettingsForm(props) {
     let phone = event.target[2].value;
     let birthDate = moment(event.target[3].value).format(format);
     let userObj = {
-      phone: phone,
+      // phone: phone,
       firstName: fName,
       lastName: lName,
       birthDate: birthDate,

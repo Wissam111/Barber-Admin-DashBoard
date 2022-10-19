@@ -13,7 +13,7 @@ function PhoneLogin(props) {
   const [loadLogin, setLoadLogin] = useState(false);
   const handleSubmitPhone = async () => {
     let ph = phoneRef.current.value;
-    console.log(ph);
+
     let authObj = {
       phone: ph,
       isLogin: true,
@@ -21,6 +21,7 @@ function PhoneLogin(props) {
     setLoadLogin(true);
     let res = await SendAuth(authObj);
     let code = "1234";
+    // console.log(res);
     if (res.message == "verification sent") {
       setLoadLogin(false);
       setVerfObj({
@@ -35,13 +36,10 @@ function PhoneLogin(props) {
     }
   };
 
-  const handleVerf = async (event) => {
+  const handleVerf = async (event, inputsCode) => {
     event.preventDefault();
-    let subCode =
-      event.target[0].value +
-      event.target[1].value +
-      event.target[2].value +
-      event.target[3].value;
+
+    let subCode = inputsCode.reduce((a, b) => a + b.value, "");
     let veObj = verfObj;
     veObj.code = subCode;
     setVerfObj(veObj);
@@ -51,7 +49,6 @@ function PhoneLogin(props) {
       setLoadLogin(false);
       props.handleLogin();
       setAuthData(resAuth.authData.user);
-      console.log(resAuth.authData);
       navigate("/main");
     } else {
       window.alert(resAuth.message);

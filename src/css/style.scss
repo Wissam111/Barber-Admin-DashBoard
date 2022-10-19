@@ -7,7 +7,7 @@ body {
 
 .outerAdmin-container {
   width: 100%;
-  height: 63em;
+  min-height: 63em;
   display: flex;
   justify-content: center;
   flex-direction: row;
@@ -24,8 +24,9 @@ body {
   margin-top: 10px;
   padding: 15px 12px;
   width: 95%;
-  height: 85%;
+  height: 50em;
   display: flex;
+  position: relative;
 }
 .homeView-container,
 .workinghours-container,
@@ -229,7 +230,7 @@ body {
   margin: 25px 0;
   font-size: 0.9em;
   font-family: sans-serif;
-  min-width: 600px;
+  // min-width: 600px;
 
   color: black !important;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
@@ -320,7 +321,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  .closeBtn {
+    font-size: 2rem;
+    display: none;
+  }
   img {
     width: 2em;
     margin: 0;
@@ -1013,7 +1017,7 @@ body {
   position: absolute;
   z-index: 9999;
   background: white;
-  min-width: 47em;
+  // min-width: 47em;
   left: 10%;
   top: 50%;
   transform: translate(0, -50%);
@@ -1039,6 +1043,7 @@ body {
 
 .settings-container {
   display: flex;
+  // width: 45em;
   img {
     width: 150px;
     height: 150px;
@@ -1203,12 +1208,19 @@ body {
   margin: 10px 5px;
   margin: 10px 20px;
 }
-
+.menuBar {
+  position: absolute;
+  right: 20px;
+  top: 55px;
+  // border: 2px solid red;
+  z-index: 9999;
+  font-size: 2rem;
+  display: none;
+}
 //************************* responsive ***********************//
 
 @media (max-width: 1480px) {
   .homeView-container {
-    // background: red;
     width: 100%;
   }
 
@@ -1219,8 +1231,6 @@ body {
 
 @media (max-width: 1215px) {
   .homeView-container {
-    flex-wrap: wrap;
-
     .active-appoints {
       width: 100%;
     }
@@ -1245,24 +1255,166 @@ body {
     width: 100%;
   }
 }
-
-@media (max-width: 825px) {
-  .statusPrect-container {
-    .status-container {
+.settingsWrapper {
+  min-width: 50em;
+}
+@media (max-width: 740px) {
+  .admindashb-container {
+    height: 50em;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  .refreshBtn {
+    right: 50px;
+    top: 5px;
+  }
+  .login-container {
+    .innerLogin-cointainer {
+      width: 100%;
+      overflow: hidden;
+    }
+    img {
       display: none;
     }
   }
-  .users-cta {
-    border: 2px solid red;
-    display: none !important;
+  .navbar-container {
+    border-radius: 1em;
+    position: absolute;
+    width: 95%;
+    // right: -500px !important;
+    // top: 0;
+    transition: opacity 1s ease-out;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    // z-index: 99999;
+    .closeBtn {
+      display: block;
+    }
   }
-  .registerform-container {
-    width: 100%;
+  .menuBar {
+    display: block;
   }
-}
 
-@media (max-height: 760px) {
-  .admindashb-container {
-    height: 75%;
+  .homeView-container {
+    flex-direction: column;
+    overflow: scroll;
+    width: 100%;
+
+    .status-container {
+      display: none;
+    }
+    .table-container {
+      display: none;
+    }
+    .homeSection-primary {
+      flex-direction: column;
+      align-items: center;
+    }
+    .charts-container {
+      flex-direction: column;
+    }
+  }
+  .agenda-container {
+    margin: 0;
+    width: 100%;
+    .table-container {
+      margin: 0;
+      width: 100%;
+    }
+    .table-wrapper {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    .appointsview {
+      tr td:nth-child(2),
+      tr td:nth-child(4),
+      tr td:nth-child(5),
+      tr td:nth-child(6) {
+        display: none;
+      }
+      tr th:nth-child(2),
+      tr th:nth-child(4),
+      tr th:nth-child(5),
+      tr th:nth-child(6) {
+        display: none;
+      }
+    }
+  }
+  .workinghours-container {
+    flex-direction: column;
+    overflow-y: scroll;
+    width: 100%;
+
+    .staff-container {
+      width: 100%;
+      .workerView-container {
+        margin: 5px;
+      }
+    }
+  }
+  .settingsWrapper {
+    left: 0%;
+    min-width: 22em;
+    .settings-container {
+      img {
+        display: none;
+      }
+    }
+    .registerform-container {
+      margin: 0;
+      width: 100%;
+      justify-content: left;
+      .register-inputs {
+        justify-content: left;
+
+        width: 100%;
+
+        margin: 0;
+        padding: 0;
+
+        .inputs {
+          width: 100%;
+          left: 0;
+        }
+        .deleteBtn {
+          right: 0;
+        }
+      }
+    }
+    .closeSettings {
+      top: 0;
+      right: 0;
+      z-index: 9999;
+    }
+  }
+
+  .users-container {
+    flex-wrap: wrap;
+    overflow: scroll;
+    padding: 0;
+    width: 100%;
+    .users-cta {
+      width: 100%;
+      height: 100%;
+      margin-top: 5em;
+    }
+    .registerform-container {
+      width: 100%;
+    }
+  }
+  .summery-container {
+    width: 100%;
+    .summery-chart {
+      width: 100%;
+      margin: 0;
+    }
+    .picki {
+      flex-direction: column;
+      margin-left: 0.5em;
+    }
   }
 }

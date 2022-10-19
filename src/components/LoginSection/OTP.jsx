@@ -1,78 +1,78 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
-function OTP(props) {
-  const handleKeyDown = (e, idx) => {
-    const codes = document.querySelectorAll(".code");
-    if (e.key >= 0 && e.key <= 9) {
-      codes[idx].value = "";
-      setTimeout(() => codes[idx + 1].focus(), 10);
-    } else if (e.key === "Backspace") {
-      setTimeout(() => codes[idx - 1].focus(), 10);
-    }
+
+class OTP extends Component {
+  state = {
+    inputsCode: [
+      { id: 0, value: 0 },
+      { id: 1, value: 0 },
+      { id: 2, value: 0 },
+      { id: 3, value: 0 },
+    ],
   };
-  return (
-    <div
-      className="otp-cointainer"
-      onSubmit={(event) => props.handleVerf(event)}
-    >
-      <p>
-        An four digit number has been sent to your phone please verify it below
-      </p>
-      <form className="otp-wrapper">
-        <div className="code-container">
-          <input
-            type="number"
-            class="code"
-            placeholder="0"
-            min="0"
-            max="9"
-            required
-            onKeyDown={handleKeyDown}
-          />
-          <input
-            type="number"
-            class="code"
-            placeholder="0"
-            min="0"
-            max="9"
-            required
-            onKeyDown={handleKeyDown}
-          />
-          <input
-            type="number"
-            class="code"
-            placeholder="0"
-            min="0"
-            max="9"
-            required
-            onKeyDown={handleKeyDown}
-          />
-          <input
-            type="number"
-            class="code"
-            placeholder="0"
-            min="0"
-            max="9"
-            required
-            onKeyDown={handleKeyDown}
-          />
-        </div>
-        {props.loadLogin && (
-          <div className="circle-wrapper">
-            <CircularProgress />
+
+  handleKeyDown = (e) => {
+    const codes = document.querySelectorAll(".code");
+    const inCodes = [...this.state.inputsCode];
+    let id = parseInt(e.target.id);
+    let idCode = inCodes.find((ins) => ins.id == id);
+    if (e.key >= 0 && e.key <= 9) {
+      idCode.value = e.key;
+      codes[id].value = "";
+      setTimeout(() => codes[id + 1].focus(), 10);
+    } else if (e.key === "Backspace") {
+      setTimeout(() => codes[id - 1].focus(), 10);
+    }
+    this.setState({ inputsCode: inCodes });
+    console.log(inCodes);
+  };
+
+  render() {
+    return (
+      <div
+        className="otp-cointainer"
+        onSubmit={(event) =>
+          this.props.handleVerf(event, this.state.inputsCode)
+        }
+      >
+        <p>
+          An four digit number has been sent to your phone please verify it
+          below
+        </p>
+        <form className="otp-wrapper">
+          <div className="code-container">
+            {this.state.inputsCode.map((sinput) => {
+              return (
+                <input
+                  id={sinput.id}
+                  type="number"
+                  class="code"
+                  placeholder="0"
+                  min="0"
+                  max="9"
+                  required
+                  onKeyDown={this.handleKeyDown}
+                />
+              );
+            })}
           </div>
-        )}
-        <div className="loginVerf-container">
-          <input className="loginBtn" type="submit" value={"VERIFY"} />
-          <i
-            class="fa fa-arrow-left"
-            aria-hidden="true"
-            onClick={props.handleBack}
-          ></i>
-        </div>
-      </form>
-    </div>
-  );
+          {this.props.loadLogin && (
+            <div className="circle-wrapper">
+              <CircularProgress />
+            </div>
+          )}
+          <div className="loginVerf-container">
+            <input className="loginBtn" type="submit" value={"VERIFY"} />
+            <i
+              class="fa fa-arrow-left"
+              aria-hidden="true"
+              onClick={this.props.handleBack}
+            ></i>
+          </div>
+        </form>
+      </div>
+    );
+  }
 }
 
 export default OTP;

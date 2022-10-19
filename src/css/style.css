@@ -7,7 +7,7 @@ body {
 
 .outerAdmin-container {
   width: 100%;
-  height: 63em;
+  min-height: 63em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -26,10 +26,11 @@ body {
   margin-top: 10px;
   padding: 15px 12px;
   width: 95%;
-  height: 85%;
+  height: 50em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
 }
 
 .homeView-container,
@@ -296,7 +297,6 @@ body {
   margin: 25px 0;
   font-size: 0.9em;
   font-family: sans-serif;
-  min-width: 600px;
   color: black !important;
   -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
           box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
@@ -398,6 +398,11 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.navbar-container .closeBtn {
+  font-size: 2rem;
+  display: none;
 }
 
 .navbar-container img {
@@ -1314,7 +1319,6 @@ body {
   position: absolute;
   z-index: 9999;
   background: white;
-  min-width: 47em;
   left: 10%;
   top: 50%;
   -webkit-transform: translate(0, -50%);
@@ -1558,6 +1562,15 @@ body {
   margin: 10px 20px;
 }
 
+.menuBar {
+  position: absolute;
+  right: 20px;
+  top: 55px;
+  z-index: 9999;
+  font-size: 2rem;
+  display: none;
+}
+
 @media (max-width: 1480px) {
   .homeView-container {
     width: 100%;
@@ -1568,10 +1581,6 @@ body {
 }
 
 @media (max-width: 1215px) {
-  .homeView-container {
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-  }
   .homeView-container .active-appoints {
     width: 100%;
   }
@@ -1599,22 +1608,175 @@ body {
   }
 }
 
-@media (max-width: 825px) {
-  .statusPrect-container .status-container {
-    display: none;
-  }
-  .users-cta {
-    border: 2px solid red;
-    display: none !important;
-  }
-  .registerform-container {
-    width: 100%;
-  }
+.settingsWrapper {
+  min-width: 50em;
 }
 
-@media (max-height: 760px) {
+@media (max-width: 740px) {
   .admindashb-container {
-    height: 75%;
+    height: 50em;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  .refreshBtn {
+    right: 50px;
+    top: 5px;
+  }
+  .login-container .innerLogin-cointainer {
+    width: 100%;
+    overflow: hidden;
+  }
+  .login-container img {
+    display: none;
+  }
+  .navbar-container {
+    border-radius: 1em;
+    position: absolute;
+    width: 95%;
+    -webkit-transition: opacity 1s ease-out;
+    transition: opacity 1s ease-out;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+  }
+  .navbar-container .closeBtn {
+    display: block;
+  }
+  .menuBar {
+    display: block;
+  }
+  .homeView-container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    overflow: scroll;
+    width: 100%;
+  }
+  .homeView-container .status-container {
+    display: none;
+  }
+  .homeView-container .table-container {
+    display: none;
+  }
+  .homeView-container .homeSection-primary {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .homeView-container .charts-container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .agenda-container {
+    margin: 0;
+    width: 100%;
+  }
+  .agenda-container .table-container {
+    margin: 0;
+    width: 100%;
+  }
+  .agenda-container .table-wrapper {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  .agenda-container .appointsview tr td:nth-child(2),
+  .agenda-container .appointsview tr td:nth-child(4),
+  .agenda-container .appointsview tr td:nth-child(5),
+  .agenda-container .appointsview tr td:nth-child(6) {
+    display: none;
+  }
+  .agenda-container .appointsview tr th:nth-child(2),
+  .agenda-container .appointsview tr th:nth-child(4),
+  .agenda-container .appointsview tr th:nth-child(5),
+  .agenda-container .appointsview tr th:nth-child(6) {
+    display: none;
+  }
+  .workinghours-container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    overflow-y: scroll;
+    width: 100%;
+  }
+  .workinghours-container .staff-container {
+    width: 100%;
+  }
+  .workinghours-container .staff-container .workerView-container {
+    margin: 5px;
+  }
+  .settingsWrapper {
+    left: 0%;
+    min-width: 22em;
+  }
+  .settingsWrapper .settings-container img {
+    display: none;
+  }
+  .settingsWrapper .registerform-container {
+    margin: 0;
+    width: 100%;
+    -webkit-box-pack: left;
+        -ms-flex-pack: left;
+            justify-content: left;
+  }
+  .settingsWrapper .registerform-container .register-inputs {
+    -webkit-box-pack: left;
+        -ms-flex-pack: left;
+            justify-content: left;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .settingsWrapper .registerform-container .register-inputs .inputs {
+    width: 100%;
+    left: 0;
+  }
+  .settingsWrapper .registerform-container .register-inputs .deleteBtn {
+    right: 0;
+  }
+  .settingsWrapper .closeSettings {
+    top: 0;
+    right: 0;
+    z-index: 9999;
+  }
+  .users-container {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    overflow: scroll;
+    padding: 0;
+    width: 100%;
+  }
+  .users-container .users-cta {
+    width: 100%;
+    height: 100%;
+    margin-top: 5em;
+  }
+  .users-container .registerform-container {
+    width: 100%;
+  }
+  .summery-container {
+    width: 100%;
+  }
+  .summery-container .summery-chart {
+    width: 100%;
+    margin: 0;
+  }
+  .summery-container .picki {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin-left: 0.5em;
   }
 }
 /*# sourceMappingURL=style.css.map */

@@ -86,6 +86,7 @@ function Users(props) {
         />
       </div>
       <RegisterForm handleSubmit={handleSubmit} />
+
       {showSettings && (
         <div className="settingsWrapper">
           <Settings
