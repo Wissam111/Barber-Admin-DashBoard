@@ -452,6 +452,19 @@ body {
   width: 100%;
 }
 
+.adminLogo {
+  position: absolute;
+  bottom: 120px;
+  left: 16px;
+}
+
+.adminLogo img {
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  border: 2px solid wheat;
+}
+
 .workinghours-container {
   display: -webkit-box;
   display: -ms-flexbox;

@@ -363,6 +363,19 @@ body {
   width: 100%;
 }
 
+.adminLogo {
+  position: absolute;
+  bottom: 120px;
+  left: 16px;
+
+  img {
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    border: 2px solid wheat;
+  }
+}
+
 //************************* Staff-Working-Hours ***********************//
 
 .workinghours-container {
@@ -1217,6 +1230,7 @@ body {
   font-size: 2rem;
   display: none;
 }
+
 //************************* responsive ***********************//
 
 @media (max-width: 1480px) {

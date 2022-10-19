@@ -24,7 +24,6 @@ class OTP extends Component {
       setTimeout(() => codes[id - 1].focus(), 10);
     }
     this.setState({ inputsCode: inCodes });
-    console.log(inCodes);
   };
 
   render() {

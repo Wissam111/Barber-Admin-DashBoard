@@ -4,13 +4,13 @@ import OTP from "./OTP";
 import APIContext from "../Context/apiContext";
 import { useNavigate } from "react-router-dom";
 function PhoneLogin(props) {
-  const { SendAuth, VerifyAuth, setAuthData, audthData } =
-    useContext(APIContext);
+  const { SendAuth, VerifyAuth } = useContext(APIContext);
   const phoneRef = useRef("");
   const [showPhone, setShowPhone] = useState(true);
   const [verfObj, setVerfObj] = useState({});
   const navigate = useNavigate();
   const [loadLogin, setLoadLogin] = useState(false);
+
   const handleSubmitPhone = async () => {
     let ph = phoneRef.current.value;
 
@@ -21,7 +21,6 @@ function PhoneLogin(props) {
     setLoadLogin(true);
     let res = await SendAuth(authObj);
     let code = "1234";
-    // console.log(res);
     if (res.message == "verification sent") {
       setLoadLogin(false);
       setVerfObj({
@@ -47,8 +46,9 @@ function PhoneLogin(props) {
     let resAuth = await VerifyAuth(veObj);
     if (resAuth.message == "login sucess") {
       setLoadLogin(false);
-      props.handleLogin();
-      setAuthData(resAuth.authData.user);
+      let authData = resAuth.authData;
+      props.handleLogin(authData);
+
       navigate("/main");
     } else {
       window.alert(resAuth.message);

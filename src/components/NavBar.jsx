@@ -3,18 +3,14 @@ import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import APIContext from "./Context/apiContext";
 function NavBar(props) {
-  const { authData } = useContext(APIContext);
-  const [admin, setAdmin] = useState({});
-  // const [showNav, setShowNav] = useState(true);
+  let adminimage = props.admin.image;
   return (
     <div
       className="navbar-container"
-      //  right: props.showNav ? "0" : "-500px"
       style={
         props.showNav ? { height: "100%", opacity: "1", zIndex: "9999" } : {}
       }
     >
-      {/* {props.showNav && ( */}
       <i
         className="fa fa-times closeBtn"
         aria-hidden="true"
@@ -22,7 +18,6 @@ function NavBar(props) {
           props.setShowNav(false);
         }}
       ></i>
-      {/* )} */}
 
       <img className="logo" src={require("../imgs/logobarb.png")} alt="" />
       <ul className="nav-links">
@@ -93,16 +88,18 @@ function NavBar(props) {
             />
           </Link>
         </li>
-        {/* <li onClick={props.handleLogOut} className="logoutLogo">
+
+        <li className="adminLogo">
           <img
             src={
-              admin.image != null
-                ? `https://saloon-ibra-api.herokuapp.com/imgs/${authData.user.image}`
+              props.admin.image != null
+                ? `https://saloon-ibra-api.herokuapp.com/imgs/${props.admin.image}`
                 : require("./../imgs/unknown.png")
             }
             alt=""
           />
-        </li> */}
+        </li>
+
         <li onClick={props.handleLogOut} className="logoutLogo">
           <Link to="/" className="nav-link">
             <img

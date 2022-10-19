@@ -31,14 +31,21 @@ function DashBoard() {
     refetch,
     DeleteUser,
     CreateUser,
+    authData,
+    setAuthData,
   } = useContext(APIContext);
-
   const { timeFormat, dateFormat } = useContext(FORMATContext);
   const [isLogin, setIsLogin] = useState(false);
   // React.useEffect(() => {
   // if (loading) return <CircularProgress />;
   // }, []);
   const [showNav, setShowNav] = useState(false);
+
+  const handleLogin = (authData) => {
+    console.log(authData);
+    setAuthData(authData);
+    setIsLogin(!isLogin);
+  };
   return (
     <Fragment>
       <div className="outerAdmin-container">
@@ -56,13 +63,14 @@ function DashBoard() {
                 handleLogOut={() => setIsLogin(!isLogin)}
                 setShowNav={setShowNav}
                 showNav={showNav}
+                admin={authData.user}
               />
             )}
             <Routes>
               <Route
                 path="/"
                 exact
-                element={<Login handleLogin={() => setIsLogin(!isLogin)} />}
+                element={<Login handleLogin={handleLogin} />}
               />
               <Route
                 path="/main"

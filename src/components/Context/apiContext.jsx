@@ -12,7 +12,12 @@ export function APIContextProvider({ children }) {
   const [authData, setAuthData] = useState({});
   const [doneDealsData, setDoneDealsData] = useState([]);
   const [profitData, setProfitData] = useState([]);
-  const { loading, error, setCurrId, data, refetch } = useFetch();
+
+  // const token =
+  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFiODViNjdmYjkxNjI2M2ZkMzNjMzQiLCJpYXQiOjE2NjUwNjI0MjksImV4cCI6MTY2NzY1NDQyOX0.ipmRmjL3PLcmu75-WgPFyGAvz2xsVwS-Wk7dEVsSsdA";
+  const token = authData.token;
+
+  const { loading, error, setCurrId, data, refetch } = useFetch(token);
 
   useEffect(() => {
     if (data.length == 0) {
@@ -23,7 +28,7 @@ export function APIContextProvider({ children }) {
     setWorkers(data[2].workers);
     setStats(data[3]);
     updateRevenueData(data[4]);
-  }, [data]);
+  }, [data, authData]);
   async function PostTime(appoint) {
     try {
       let res = await fetch(ApiUrl + "appointments", {
@@ -213,7 +218,6 @@ export function APIContextProvider({ children }) {
     setDoneDealsData(doneData);
     setProfitData(pData);
   }
-
   return (
     <APIContext.Provider
       value={{

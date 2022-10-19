@@ -2,14 +2,13 @@ import React, { Component, useEffect, useState } from "react";
 import axios from "axios";
 //working on it
 
-function useFetch() {
+function useFetch(token) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [currId, setCurrId] = useState(false);
   const [data, setData] = useState([]);
   const ApiUrl = "https://saloon-ibra-api.herokuapp.com/api/";
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFiODViNjdmYjkxNjI2M2ZkMzNjMzQiLCJpYXQiOjE2NjUwNjI0MjksImV4cCI6MTY2NzY1NDQyOX0.ipmRmjL3PLcmu75-WgPFyGAvz2xsVwS-Wk7dEVsSsdA";
+  // const token =
+  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFiODViNjdmYjkxNjI2M2ZkMzNjMzQiLCJpYXQiOjE2NjUwNjI0MjksImV4cCI6MTY2NzY1NDQyOX0.ipmRmjL3PLcmu75-WgPFyGAvz2xsVwS-Wk7dEVsSsdA";
   const dataUrls = [
     {
       url: ApiUrl + "appointments",
@@ -57,10 +56,13 @@ function useFetch() {
 
   try {
     useEffect(() => {
-      setLoading(true);
+      if (token == undefined) {
+        return;
+      }
 
+      setLoading(true);
       fetchData();
-    }, [currId]);
+    }, [token]);
   } catch (e) {
     console.log(e);
   }
@@ -72,7 +74,7 @@ function useFetch() {
     // if (loading) return <CircularProgress />;
   };
 
-  return { loading, error, setCurrId, data, refetch };
+  return { loading, error, data, refetch };
 }
 
 export default useFetch;
