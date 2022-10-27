@@ -12,7 +12,7 @@ function Users(props) {
   const [showSettings, setShowSettings] = useState(false);
   const [currUser, setCurrUser] = useState({});
 
-  if (props.loading) return <CircularProgress />;
+  // if (props.loading) return <CircularProgress />;
   const handleChange = (event) => {
     let temp = [...users];
     let tempSearched = temp.filter((user) => {

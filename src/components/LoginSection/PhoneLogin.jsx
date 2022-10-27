@@ -2,7 +2,7 @@ import React, { Component, useState, useContext, useRef } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import OTP from "./OTP";
 import APIContext from "../Context/apiContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,useLocation} from "react-router-dom";
 function PhoneLogin(props) {
   const { SendAuth, VerifyAuth } = useContext(APIContext);
   const phoneRef = useRef("");
@@ -10,7 +10,8 @@ function PhoneLogin(props) {
   const [verfObj, setVerfObj] = useState({});
   const navigate = useNavigate();
   const [loadLogin, setLoadLogin] = useState(false);
-
+ const location = useLocation();
+ const from = location.state?.from?.pathname || "/main";
   const handleSubmitPhone = async () => {
     let ph = phoneRef.current.value;
 
@@ -20,6 +21,7 @@ function PhoneLogin(props) {
     };
     setLoadLogin(true);
     let res = await SendAuth(authObj);
+    console.log(res)
     let code = "1234";
     if (res.message == "verification sent") {
       setLoadLogin(false);
@@ -44,14 +46,13 @@ function PhoneLogin(props) {
     setVerfObj(veObj);
     setLoadLogin(true);
     let resAuth = await VerifyAuth(veObj);
-    if (resAuth.message == "login sucess") {
+    if (resAuth.status ==200) {
       setLoadLogin(false);
-      let authData = resAuth.authData;
+      let authData = resAuth.data.authData;
       props.handleLogin(authData);
-
-      navigate("/main");
+      navigate(from, { replace: true });
     } else {
-      window.alert(resAuth.message);
+      window.alert(resAuth.data.message);
       setLoadLogin(false);
     }
   };

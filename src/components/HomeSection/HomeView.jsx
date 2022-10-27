@@ -11,12 +11,13 @@ import CircularProgress from "@mui/material/CircularProgress";
 import APIContext from "../Context/apiContext";
 import { Link } from "react-router-dom";
 import PercentageCard from "../SummerySection/PercentageCard";
-
+import useRefreshToken from "../../hooks/useRefreshToken";
 function HomeView(props) {
   const [date, setDate] = useState(new Date());
   const [done, setDone] = useState(0);
   const [pending, setPending] = useState(0);
   const [canceled, setCanceled] = useState(0);
+  const refresh = useRefreshToken();
   const {
     appointmentsData,
     timeFormat,
@@ -26,6 +27,7 @@ function HomeView(props) {
     loading,
     stats,
   } = props;
+
   const { users, doneDealsData, profitData } = useContext(APIContext);
 
   function UpdateStats(appointments) {
@@ -59,20 +61,16 @@ function HomeView(props) {
   return (
     <div
       className={
-        loading ? "homeView-container loadingHome" : "homeView-container"
+      "homeView-container"
       }
     >
-      {loading && (
+      {/* {loading && (
         <div className="circle-wrapper">
           <CircularProgress />
         </div>
-      )}
+      )} */}
 
       <div className="date-container">
-        <button onClick={() => refetch()} className="refreshBtn">
-          <i class="fa fa-refresh" aria-hidden="true"></i>
-        </button>
-
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DesktopDatePicker
             label="Pick a date"

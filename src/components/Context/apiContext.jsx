@@ -1,34 +1,39 @@
+import axios from "axios";
 import React, { useContext, useState, useEffect, createContext } from "react";
 import useFetch from "./useFetch";
+import useAuth from "../../hooks/useAuth";
+import Cookies from 'universal-cookie';
+// refTokDate
 const APIContext = createContext();
 const ApiUrl = "https://saloon-ibra-api.herokuapp.com/api/";
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFiODViNjdmYjkxNjI2M2ZkMzNjMzQiLCJpYXQiOjE2NjUwNjI0MjksImV4cCI6MTY2NzY1NDQyOX0.ipmRmjL3PLcmu75-WgPFyGAvz2xsVwS-Wk7dEVsSsdA";
+
 export function APIContextProvider({ children }) {
   const [appointmentsData, setAppointmentsData] = useState([]);
   const [workers, setWorkers] = useState([]);
   const [users, setUsers] = useState([]);
   const [stats, setStats] = useState([]);
-  const [authData, setAuthData] = useState({});
+  const{auth} = useAuth();
+
+
   const [doneDealsData, setDoneDealsData] = useState([]);
   const [profitData, setProfitData] = useState([]);
-
-  // const token =
-  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFiODViNjdmYjkxNjI2M2ZkMzNjMzQiLCJpYXQiOjE2NjUwNjI0MjksImV4cCI6MTY2NzY1NDQyOX0.ipmRmjL3PLcmu75-WgPFyGAvz2xsVwS-Wk7dEVsSsdA";
-  const token = authData.token;
-
-  const { loading, error, setCurrId, data, refetch } = useFetch(token);
+  const cookies = new Cookies();
+  let ifRef = new Date(cookies.get("refTokDate"))>new Date();
+  const [isLogin, setIsLogin] = useState(ifRef?true:false);
+  const token = auth.token;
+  const { loading, error, setCurrId, data, refetch } = useFetch(token,isLogin,setIsLogin);
 
   useEffect(() => {
     if (data.length == 0) {
       return;
     }
+   
     setAppointmentsData(data[0].appointments);
     setUsers(data[1].users);
     setWorkers(data[2].workers);
     setStats(data[3]);
     updateRevenueData(data[4]);
-  }, [data, authData]);
+  }, [data, auth]);
   async function PostTime(appoint) {
     try {
       let res = await fetch(ApiUrl + "appointments", {
@@ -47,6 +52,7 @@ export function APIContextProvider({ children }) {
       console.log(e);
     }
   }
+
   async function DeleteAppoint(appointId) {
     try {
       let res = await fetch(ApiUrl + `appointments/${appointId}`, {
@@ -170,14 +176,14 @@ export function APIContextProvider({ children }) {
       console.log(e);
     }
   }
-  async function SendAuth(appoint) {
+  async function SendAuth(authObj) {
     try {
       let res = await fetch(ApiUrl + "send-auth-verification", {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,
         },
-        body: JSON.stringify(appoint),
+        body: JSON.stringify(authObj),
         method: "POST",
       });
       const g = await res.json();
@@ -187,22 +193,27 @@ export function APIContextProvider({ children }) {
       console.log(e);
     }
   }
-  async function VerifyAuth(appoint) {
-    try {
-      let res = await fetch(ApiUrl + "login-verify-phone", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-        body: JSON.stringify(appoint),
-        method: "POST",
-      });
-      const g = await res.json();
-      refetch();
-      return g;
-    } catch (e) {
-      console.log(e);
-    }
+  async function VerifyAuth(vefObj) {
+
+   const response = await axios.post(ApiUrl+"login-verify-phone",vefObj);
+   console.log(response.data);
+   return response;
+    
+    // try {
+    //   let res = await fetch(ApiUrl + "login-verify-phone", {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: "Bearer " + token,
+    //     },
+    //     body: JSON.stringify(appoint),
+    //     method: "POST",
+    //   });
+    //   const g = await res.json();
+    //   refetch();
+    //   return g;
+    // } catch (e) {
+    //   console.log(e);
+    // }
   }
   function updateRevenueData(revenue) {
     if (!revenue.data) {
@@ -240,8 +251,11 @@ export function APIContextProvider({ children }) {
         DeleteService,
         doneDealsData,
         profitData,
-        setAuthData,
-        authData,
+        isLogin,
+        setIsLogin
+        // RefreshToken,
+        // setAuthData,
+        // authData,
       }}
     >
       {children}

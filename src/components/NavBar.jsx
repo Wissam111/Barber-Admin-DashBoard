@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import APIContext from "./Context/apiContext";
 function NavBar(props) {
-  let adminimage = props.admin.image;
+  // let adminimage = props.admin.image;
   return (
     <div
       className="navbar-container"
@@ -89,7 +89,7 @@ function NavBar(props) {
           </Link>
         </li>
 
-        <li className="adminLogo">
+        {/* <li className="adminLogo">
           <img
             src={
               props.admin.image != null
@@ -98,7 +98,7 @@ function NavBar(props) {
             }
             alt=""
           />
-        </li>
+        </li> */}
 
         <li onClick={props.handleLogOut} className="logoutLogo">
           <Link to="/" className="nav-link">

@@ -12,7 +12,7 @@ function Agenda(props) {
   const [date, setDate] = useState(state ? state.fromDate : new Date());
   const { appointmentsData, timeFormat, dateFormat, DeleteAppoint, loading } =
     props;
-  if (loading) return <CircularProgress />;
+  // if (loading) return <CircularProgress />;
   return (
     <div className="agenda-container">
       <div className="date-container">
