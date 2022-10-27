@@ -41,7 +41,7 @@ function NavBar(props) {
             }}
           >
             <i
-              class="fa-solid fa-calendar-days"
+              className="fa-solid fa-calendar-days"
               style={{ fontSize: "1.5rem" }}
             ></i>
           </Link>
@@ -82,23 +82,23 @@ function NavBar(props) {
             }}
           >
             <img
-              class="chartLogo"
+              className="chartLogo"
               src={require("../imgs/line-chart.png")}
               alt=""
             />
           </Link>
         </li>
 
-        {/* <li className="adminLogo">
+        <li className="adminLogo">
           <img
             src={
-              props.admin.image != null
-                ? `https://saloon-ibra-api.herokuapp.com/imgs/${props.admin.image}`
+              props.admin?.image
+                ? `https://saloon-ibra-api.herokuapp.com/imgs/${props.admin?.image}`
                 : require("./../imgs/unknown.png")
             }
             alt=""
           />
-        </li> */}
+        </li>
 
         <li onClick={props.handleLogOut} className="logoutLogo">
           <Link to="/" className="nav-link">

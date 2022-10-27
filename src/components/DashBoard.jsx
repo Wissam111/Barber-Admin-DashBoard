@@ -1,4 +1,4 @@
-import React, {  useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import APIContext from "./Context/apiContext";
 import FORMATContext from "./Context/formatContext";
 import "react-calendar/dist/Calendar.css";
@@ -18,7 +18,7 @@ import Login from "./pages/Login";
 import Summery from "./pages/Summery";
 import { Fragment } from "react";
 import useAuth from "../hooks/useAuth";
-import Cookies from 'universal-cookie';
+import Cookies from "universal-cookie";
 function DashBoard() {
   const {
     appointmentsData,
@@ -33,43 +33,44 @@ function DashBoard() {
     DeleteUser,
     CreateUser,
     isLogin,
-    setIsLogin
-    // authData,
-    // setAuthData,
+    setIsLogin,
   } = useContext(APIContext);
   const cookies = new Cookies();
   const { timeFormat, dateFormat } = useContext(FORMATContext);
-  // const [isLogin, setIsLogin] = useState(false);
-  const {auth,setAuth} = useAuth();
-  // React.useEffect(() => {
-  // if (loading) return <CircularProgress />;
-  // }, []);
+  const { auth, setAuth } = useAuth();
+  const [refresh, setRefresh] = useState(false);
   const [showNav, setShowNav] = useState(false);
 
   const handleLogin = (authData) => {
-    console.log(authData);
     setAuth(authData);
-    cookies.set('refreshToken', authData.refresh_token);
-    cookies.set('refTokDate', authData.expireDateRefreshToken);
+    cookies.set("refreshToken", authData.refresh_token);
+    cookies.set("refTokDate", authData.expireDateRefreshToken);
+    cookies.set("admin", authData?.user);
     setIsLogin(!isLogin);
+  };
+  const handleLogOut = () => {
+    setIsLogin(!isLogin);
+    cookies.set("refreshToken", "");
+    cookies.set("refTokDate", "");
+    cookies.set("admin", {});
   };
 
   return (
     <Fragment>
       <div className="outerAdmin-container">
-        {isLogin&&<button onClick={() => refetch()} className="refreshBtn">
-          <i class="fa fa-refresh" aria-hidden="true"></i>
-        </button>}
+        {isLogin && (
+          <button onClick={() => refetch()} className="refreshBtn">
+            <i class="fa fa-refresh" aria-hidden="true"></i>
+          </button>
+        )}
         {loading && (
           <div className="loadingHome">
-             <div className="circle-wrapper">
+            <div className="circle-wrapper">
               <CircularProgress />
-             </div>
+            </div>
           </div>
-       
-      )}
+        )}
         <div className={"admindashb-container"}>
-      
           {isLogin && (
             <i
               className="fa-solid fa-bars menuBar"
@@ -77,102 +78,102 @@ function DashBoard() {
             ></i>
           )}
           {/* <Router> */}
-            {isLogin && (
-              <NavBar
-                workers={workers}
-                handleLogOut={() => setIsLogin(!isLogin)}
-                setShowNav={setShowNav}
-                showNav={showNav}
-                admin={auth.user}
-              />
-            )}
-            <Routes>
-              <Route
-                path="/"
-                exact
-                element={<Login handleLogin={handleLogin} />}
-              />
-              <Route
-                path="/main"
-                exact
-                element={
-                  isLogin ? (
-                    <Home
-                      appointmentsData={appointmentsData}
-                      timeFormat={timeFormat}
-                      dateFormat={dateFormat}
-                      DeleteAppoint={DeleteAppoint}
-                      // users={users}
-                      refetch={refetch}
-                      loading={loading}
-                      stats={stats}
-                    />
-                  ) : (
-                    <Navigate to="/" />
-                  )
-                }
-              />
-              <Route
-                path="/agenda"
-                exact
-                element={
-                  isLogin ? (
-                    <Agenda
-                      appointmentsData={appointmentsData}
-                      timeFormat={timeFormat}
-                      dateFormat={dateFormat}
-                      DeleteAppoint={DeleteAppoint}
-                      users={users}
-                      loading={loading}
-                    />
-                  ) : (
-                    <Navigate to="/" />
-                  )
-                }
-              />
-              <Route
-                path="/staff"
-                exact
-                element={
-                  isLogin ? (
-                    <Staff
-                      workers={workers}
-                      appointmentsData={appointmentsData}
-                      timeFormat={timeFormat}
-                      dateFormat={dateFormat}
-                      PostTime={PostTime}
-                      DeleteAppoint={DeleteAppoint}
-                      UpdateStatus={UpdateStatus}
-                      DeleteUser={DeleteUser}
-                    />
-                  ) : (
-                    <Navigate to="/" />
-                  )
-                }
-              />
-              <Route
-                path="/users"
-                exact
-                element={
-                  isLogin ? (
-                    <Users
-                      users={users}
-                      dateFormat={dateFormat}
-                      DeleteUser={DeleteUser}
-                      CreateUser={CreateUser}
-                      loading={loading}
-                    />
-                  ) : (
-                    <Navigate to="/" />
-                  )
-                }
-              />
-              <Route
-                path="/summery"
-                exact
-                element={isLogin ? <Summery /> : <Navigate to="/" />}
-              />
-            </Routes>
+          {isLogin && (
+            <NavBar
+              workers={workers}
+              handleLogOut={handleLogOut}
+              setShowNav={setShowNav}
+              showNav={showNav}
+              admin={cookies.get("admin")}
+            />
+          )}
+          <Routes>
+            <Route
+              path="/"
+              exact
+              element={<Login handleLogin={handleLogin} />}
+            />
+            <Route
+              path="/main"
+              exact
+              element={
+                isLogin ? (
+                  <Home
+                    appointmentsData={appointmentsData}
+                    timeFormat={timeFormat}
+                    dateFormat={dateFormat}
+                    DeleteAppoint={DeleteAppoint}
+                    // users={users}
+                    refetch={refetch}
+                    loading={loading}
+                    stats={stats}
+                  />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
+            <Route
+              path="/agenda"
+              exact
+              element={
+                isLogin ? (
+                  <Agenda
+                    appointmentsData={appointmentsData}
+                    timeFormat={timeFormat}
+                    dateFormat={dateFormat}
+                    DeleteAppoint={DeleteAppoint}
+                    users={users}
+                    loading={loading}
+                  />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
+            <Route
+              path="/staff"
+              exact
+              element={
+                isLogin ? (
+                  <Staff
+                    workers={workers}
+                    appointmentsData={appointmentsData}
+                    timeFormat={timeFormat}
+                    dateFormat={dateFormat}
+                    PostTime={PostTime}
+                    DeleteAppoint={DeleteAppoint}
+                    UpdateStatus={UpdateStatus}
+                    DeleteUser={DeleteUser}
+                  />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
+            <Route
+              path="/users"
+              exact
+              element={
+                isLogin ? (
+                  <Users
+                    users={users}
+                    dateFormat={dateFormat}
+                    DeleteUser={DeleteUser}
+                    CreateUser={CreateUser}
+                    loading={loading}
+                  />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
+            <Route
+              path="/summery"
+              exact
+              element={isLogin ? <Summery /> : <Navigate to="/" />}
+            />
+          </Routes>
           {/* </Router> */}
         </div>
       </div>

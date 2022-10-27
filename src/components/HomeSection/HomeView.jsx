@@ -7,17 +7,14 @@ import TextField from "@mui/material/TextField";
 import StatusCard from "./StatusCard";
 import ActiveAppointments from "./ActiveAppointments";
 import Customers from "../CustomerSection/Customers";
-import CircularProgress from "@mui/material/CircularProgress";
 import APIContext from "../Context/apiContext";
 import { Link } from "react-router-dom";
 import PercentageCard from "../SummerySection/PercentageCard";
-import useRefreshToken from "../../hooks/useRefreshToken";
 function HomeView(props) {
   const [date, setDate] = useState(new Date());
   const [done, setDone] = useState(0);
   const [pending, setPending] = useState(0);
   const [canceled, setCanceled] = useState(0);
-  const refresh = useRefreshToken();
   const {
     appointmentsData,
     timeFormat,
@@ -59,17 +56,7 @@ function HomeView(props) {
   }, [date, appointmentsData, doneDealsData, profitData]);
 
   return (
-    <div
-      className={
-      "homeView-container"
-      }
-    >
-      {/* {loading && (
-        <div className="circle-wrapper">
-          <CircularProgress />
-        </div>
-      )} */}
-
+    <div className={"homeView-container"}>
       <div className="date-container">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DesktopDatePicker

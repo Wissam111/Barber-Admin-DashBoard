@@ -17,7 +17,6 @@ function Home(props) {
       timeFormat={timeFormat}
       dateFormat={dateFormat}
       DeleteAppoint={DeleteAppoint}
-      // users={users}
       refetch={refetch}
       loading={loading}
       stats={stats}

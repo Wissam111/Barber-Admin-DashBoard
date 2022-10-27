@@ -2,8 +2,8 @@ import axios from "axios";
 import React, { useContext, useState, useEffect, createContext } from "react";
 import useFetch from "./useFetch";
 import useAuth from "../../hooks/useAuth";
-import Cookies from 'universal-cookie';
-// refTokDate
+import Cookies from "universal-cookie";
+
 const APIContext = createContext();
 const ApiUrl = "https://saloon-ibra-api.herokuapp.com/api/";
 
@@ -12,27 +12,26 @@ export function APIContextProvider({ children }) {
   const [workers, setWorkers] = useState([]);
   const [users, setUsers] = useState([]);
   const [stats, setStats] = useState([]);
-  const{auth} = useAuth();
-
+  const { auth } = useAuth();
 
   const [doneDealsData, setDoneDealsData] = useState([]);
   const [profitData, setProfitData] = useState([]);
   const cookies = new Cookies();
-  let ifRef = new Date(cookies.get("refTokDate"))>new Date();
-  const [isLogin, setIsLogin] = useState(ifRef?true:false);
+  let ifRef = new Date(cookies.get("refTokDate")) > new Date();
+  const [isLogin, setIsLogin] = useState(ifRef ? true : false);
   const token = auth.token;
-  const { loading, error, setCurrId, data, refetch } = useFetch(token,isLogin,setIsLogin);
+  const { loading, data, refetch } = useFetch(token, isLogin, setIsLogin);
 
   useEffect(() => {
     if (data.length == 0) {
       return;
     }
-   
+
     setAppointmentsData(data[0].appointments);
     setUsers(data[1].users);
     setWorkers(data[2].workers);
     setStats(data[3]);
-    updateRevenueData(data[4]);
+    updateRevenueData(data[4].data);
   }, [data, auth]);
   async function PostTime(appoint) {
     try {
@@ -123,6 +122,7 @@ export function APIContextProvider({ children }) {
       const g = await res.json();
       console.log(g);
       refetch();
+      return g;
     } catch (e) {
       console.log(e);
     }
@@ -194,34 +194,21 @@ export function APIContextProvider({ children }) {
     }
   }
   async function VerifyAuth(vefObj) {
-
-   const response = await axios.post(ApiUrl+"login-verify-phone",vefObj);
-   console.log(response.data);
-   return response;
-    
-    // try {
-    //   let res = await fetch(ApiUrl + "login-verify-phone", {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Authorization: "Bearer " + token,
-    //     },
-    //     body: JSON.stringify(appoint),
-    //     method: "POST",
-    //   });
-    //   const g = await res.json();
-    //   refetch();
-    //   return g;
-    // } catch (e) {
-    //   console.log(e);
-    // }
+    try {
+      const response = await axios.post(ApiUrl + "login-verify-phone", vefObj);
+      console.log(response.data);
+      return response;
+    } catch (e) {
+      console.log(e);
+    }
   }
   function updateRevenueData(revenue) {
-    if (!revenue.data) {
-      return;
-    }
+    // if (!revenue.data) {
+    //   return;
+    // }
     let pData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     let doneData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    revenue.data.forEach((rev) => {
+    revenue.forEach((rev) => {
       pData.splice(rev.month - 1, 0, rev.revenue);
       doneData.splice(rev.month - 1, 0, rev.count);
     });
@@ -252,10 +239,7 @@ export function APIContextProvider({ children }) {
         doneDealsData,
         profitData,
         isLogin,
-        setIsLogin
-        // RefreshToken,
-        // setAuthData,
-        // authData,
+        setIsLogin,
       }}
     >
       {children}

@@ -985,8 +985,7 @@ body {
   color: red;
 }
 
-.registerform-container .input-wrapper admin
-input {
+.registerform-container .input-wrapper admin input {
   border: 1px solid gray;
   width: 80%;
   height: 3vh;

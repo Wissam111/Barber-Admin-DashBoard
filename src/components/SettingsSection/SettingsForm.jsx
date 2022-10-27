@@ -3,7 +3,7 @@ import moment from "moment/moment";
 import APIContext from "../Context/apiContext";
 import AddServiceComp from "./AddServiceComp";
 function SettingsForm(props) {
-  const { user, isWorker, handleDeleteUser } = props;
+  const { user, isWorker, handleDeleteUser, handleExitSettings } = props;
   const [workerServs, setWorkerServs] = useState(user.services);
   const { UpdateUser, AddService, DeleteService } = useContext(APIContext);
   const handleDeleteServ = (title) => {
@@ -12,38 +12,54 @@ function SettingsForm(props) {
     });
     setWorkerServs(tempServs);
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     let format = "yyyy-MM-DDTHH:mm:ssZZ";
     let fName = event.target[0].value;
     let lName = event.target[1].value;
     let phone = event.target[2].value;
     let birthDate = moment(event.target[3].value).format(format);
-    let userObj = {
-      // phone: phone,
-      firstName: fName,
-      lastName: lName,
-      birthDate: birthDate,
-      role: user.role,
-    };
-    UpdateUser(user._id, userObj);
-
-    if (isWorker) {
-      user.services.forEach((wServ) => {
-        let s = workerServs.find((serv) => {
-          return serv._id == wServ._id;
-        });
-        if (!s) {
-          DeleteService(wServ._id);
-        }
-      });
-      workerServs.forEach((serv) => {
-        console.log(serv);
-        if (!serv._id) {
-          AddService(serv);
-        }
-      });
+    let changePhone = phone != user.phone;
+    let userObj = {};
+    if (changePhone) {
+      userObj = {
+        firstName: fName,
+        lastName: lName,
+        birthDate: birthDate,
+        phone: phone,
+        role: user.role,
+      };
+    } else {
+      userObj = {
+        firstName: fName,
+        lastName: lName,
+        birthDate: birthDate,
+        role: user.role,
+      };
     }
+    let res = await UpdateUser(user._id, userObj);
+    if (res.message === "update success") {
+      if (isWorker) {
+        user.services.forEach((wServ) => {
+          let s = workerServs.find((serv) => {
+            return serv._id == wServ._id;
+          });
+          if (!s) {
+            DeleteService(wServ._id);
+          }
+        });
+        workerServs.forEach((serv) => {
+          console.log(serv);
+          if (!serv._id) {
+            AddService(serv);
+          }
+        });
+      }
+      window.alert(res.message);
+    } else {
+      window.alert(res.message);
+    }
+    handleExitSettings();
   };
   const handleAddService = (newServData, setShowAddServ) => {
     let _serv = workerServs.find((service) => {
@@ -59,14 +75,6 @@ function SettingsForm(props) {
     setShowAddServ(false);
     setWorkerServs(temp);
   };
-  // const handleDeleteUser = async () => {
-  //   if (window.confirm("Are you sure you want to delete this user?")) {
-  //     let res = await DeleteUser(user._id);
-  //     console.log(res);
-  //     window.alert(res.message);
-  //     props.handleExitSettings();
-  //   }
-  // };
 
   return (
     <div

@@ -1,10 +1,8 @@
 import React, { Component, useEffect, useState } from "react";
-// import axios from "axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-//working on it
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
-function useFetch(token,isLogin,setIsLogin) {
+function useFetch(token, isLogin, setIsLogin) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState([]);
@@ -13,8 +11,6 @@ function useFetch(token,isLogin,setIsLogin) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // const token =
-  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFiODViNjdmYjkxNjI2M2ZkMzNjMzQiLCJpYXQiOjE2NjUwNjI0MjksImV4cCI6MTY2NzY1NDQyOX0.ipmRmjL3PLcmu75-WgPFyGAvz2xsVwS-Wk7dEVsSsdA";
   const dataUrls = [
     {
       url: ApiUrl + "appointments",
@@ -52,12 +48,10 @@ function useFetch(token,isLogin,setIsLogin) {
         });
         setData(tempData);
       })
-      .catch((err) => {      
+      .catch((err) => {
         setError(err);
-        // refetch();
-        navigate('/', { state: { from: location }, replace: true });
+        navigate("/", { state: { from: location }, replace: true });
         setIsLogin(false);
-      
       })
       .finally(() => {
         setLoading(false);
@@ -71,22 +65,17 @@ function useFetch(token,isLogin,setIsLogin) {
       }
       setLoading(true);
       fetchData();
-     
-   
-
     }, [token]);
   } catch (e) {
     console.log(e);
   }
 
   const refetch = () => {
-    if(!isLogin){
+    if (!isLogin) {
       return;
     }
     setLoading(true);
     fetchData();
-
-    // if (loading) return <CircularProgress />;
   };
 
   return { loading, error, data, refetch };

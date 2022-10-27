@@ -1,7 +1,6 @@
-import { useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import Customers from "../CustomerSection/Customers";
 import RegisterForm from "../CustomerSection/RegisterForm";
-import CircularProgress from "@mui/material/CircularProgress";
 import APIContext from "../Context/apiContext";
 import moment from "moment/moment";
 import Settings from "../SettingsSection/Settings";
@@ -12,7 +11,10 @@ function Users(props) {
   const [showSettings, setShowSettings] = useState(false);
   const [currUser, setCurrUser] = useState({});
 
-  // if (props.loading) return <CircularProgress />;
+  useEffect(() => {
+    setSearchedUsers(users);
+  }, [users]);
+
   const handleChange = (event) => {
     let temp = [...users];
     let tempSearched = temp.filter((user) => {
@@ -25,7 +27,6 @@ function Users(props) {
     setSearchedUsers(tempSearched);
   };
   const handleSettings = (customer) => {
-    console.log("hhh");
     setShowSettings(true);
     setCurrUser(customer);
   };
