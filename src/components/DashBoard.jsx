@@ -91,7 +91,13 @@ function DashBoard() {
             <Route
               path="/"
               exact
-              element={<Login handleLogin={handleLogin} />}
+              element={
+                !isLogin ? (
+                  <Login handleLogin={handleLogin} />
+                ) : (
+                  <Navigate to="/main" />
+                )
+              }
             />
             <Route
               path="/main"
