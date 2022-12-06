@@ -6,7 +6,8 @@ function useFetch(token, isLogin, setIsLogin) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState([]);
-  const ApiUrl = "https://saloon-ibra-api.herokuapp.com/api/";
+  const ApiUrl =
+    "http://ec2-13-231-177-94.ap-northeast-1.compute.amazonaws.com:8080/api/";
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const location = useLocation();

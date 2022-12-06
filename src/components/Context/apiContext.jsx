@@ -5,7 +5,8 @@ import useAuth from "../../hooks/useAuth";
 import Cookies from "universal-cookie";
 
 const APIContext = createContext();
-const ApiUrl = "https://saloon-ibra-api.herokuapp.com/api/";
+const ApiUrl =
+  "http://ec2-13-231-177-94.ap-northeast-1.compute.amazonaws.com:8080/api/";
 
 export function APIContextProvider({ children }) {
   const [appointmentsData, setAppointmentsData] = useState([]);

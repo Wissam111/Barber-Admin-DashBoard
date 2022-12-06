@@ -1,13 +1,12 @@
-import axios from 'axios';
-const BASE_URL = "https://saloon-ibra-api.herokuapp.com/api"
-;
-
+import axios from "axios";
+const BASE_URL =
+  "http://ec2-13-231-177-94.ap-northeast-1.compute.amazonaws.com:8080/api";
 export default axios.create({
-    baseURL: BASE_URL
+  baseURL: BASE_URL,
 });
 
 export const axiosPrivate = axios.create({
-    baseURL: BASE_URL,
-    headers: { 'Content-Type': 'application/json' },
-    // withCredentials: true
+  baseURL: BASE_URL,
+  headers: { "Content-Type": "application/json" },
+  // withCredentials: true
 });
