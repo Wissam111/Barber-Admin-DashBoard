@@ -1,6 +1,6 @@
 import axios from "axios";
 const BASE_URL =
-  "http://ec2-13-231-177-94.ap-northeast-1.compute.amazonaws.com:8080/api";
+  "http://ec2-13-231-177-94.ap-northeast-1.compute.amazonaws.com/api/";
 export default axios.create({
   baseURL: BASE_URL,
 });

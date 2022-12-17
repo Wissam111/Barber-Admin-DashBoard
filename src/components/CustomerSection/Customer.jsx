@@ -8,7 +8,7 @@ function Customer(props) {
       <img
         src={
           customer.image != null
-            ? `http://ec2-13-231-177-94.ap-northeast-1.compute.amazonaws.com:8080/imgs/${customer.image}`
+            ? `http://ec2-13-231-177-94.ap-northeast-1.compute.amazonaws.com/imgs/${customer.image}`
             : require("./../../imgs/unknown.png")
         }
         alt=""

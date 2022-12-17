@@ -6,7 +6,7 @@ import Cookies from "universal-cookie";
 
 const APIContext = createContext();
 const ApiUrl =
-  "http://ec2-13-231-177-94.ap-northeast-1.compute.amazonaws.com:8080/api/";
+  "http://ec2-13-231-177-94.ap-northeast-1.compute.amazonaws.com/api/";
 
 export function APIContextProvider({ children }) {
   const [appointmentsData, setAppointmentsData] = useState([]);
@@ -187,6 +187,7 @@ export function APIContextProvider({ children }) {
         body: JSON.stringify(authObj),
         method: "POST",
       });
+
       const g = await res.json();
       refetch();
       return g;

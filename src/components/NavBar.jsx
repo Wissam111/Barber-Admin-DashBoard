@@ -93,7 +93,7 @@ function NavBar(props) {
           <img
             src={
               props.admin?.image
-                ? `http://ec2-13-231-177-94.ap-northeast-1.compute.amazonaws.com:8080/imgs/${props.admin?.image}`
+                ? `http://ec2-13-231-177-94.ap-northeast-1.compute.amazonaws.com/imgs/${props.admin?.image}`
                 : require("./../imgs/unknown.png")
             }
             alt=""

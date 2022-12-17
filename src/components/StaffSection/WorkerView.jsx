@@ -8,7 +8,7 @@ function WorkerView(props) {
         className="workerImg"
         src={
           worker.image != null
-            ? `http://ec2-13-231-177-94.ap-northeast-1.compute.amazonaws.com:8080/imgs/${worker.image}`
+            ? `http://ec2-13-231-177-94.ap-northeast-1.compute.amazonaws.com/imgs/${worker.image}`
             : require("./../../imgs/unknown.png")
         }
         alt=""
