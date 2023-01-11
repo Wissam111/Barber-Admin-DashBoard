@@ -31,14 +31,15 @@ function NavBar() {
             <img src={require("../../assets/icons/employee.png")} />
           </Link>
         </li>
-        {/* <li>
-          <Link to="/" className="nav-link">
-            <img src={require("../../../assets/icons/histyoryIcon.png")} />
-          </Link>
-        </li> */}
+
         <li>
           <Link to="/users" className="nav-link">
             <img src={require("../../assets/icons/group.png")} />
+          </Link>
+        </li>
+        <li>
+          <Link to="/revenue" className="nav-link">
+            <img src={require("../../assets/icons/line-chart.png")} />
           </Link>
         </li>
       </ul>

@@ -31,7 +31,7 @@ function PercentageCard(props) {
   );
   return (
     <div className="percentagecard-container">
-      <Link to="/summery" className="chartLink">
+      <Link to="/revenue" className="chartLink">
         <i class="fa-solid fa-chart-line"></i>
       </Link>
       <div className="prec-leftcol">

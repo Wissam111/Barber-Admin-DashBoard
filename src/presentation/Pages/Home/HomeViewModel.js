@@ -47,7 +47,7 @@ const HomeViewModel = () => {
       console.log(error);
     }
   };
-  const getRevenu = async () => {
+  const getRevenue = async () => {
     try {
       const { data } = await dashboardRepository.getRevenu();
       updateRevenueData(data.data);
@@ -77,10 +77,13 @@ const HomeViewModel = () => {
   const updateRevenueData = (revenue) => {
     let pData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     let doneData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    console.log(revenue);
     revenue.forEach((rev) => {
       pData.splice(rev.month - 1, 0, rev.revenue);
       doneData.splice(rev.month - 1, 0, rev.count);
     });
+
+    console.log(pData);
 
     setDoneDealsData(doneData);
     setProfitData(pData);
@@ -134,7 +137,7 @@ const HomeViewModel = () => {
       await getAppointments();
       await getUsers();
       await getStats();
-      await getRevenu();
+      await getRevenue();
       setLoading(false);
     };
     HomeInit();

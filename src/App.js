@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./presentation/Pages/Home/Home";
 import NavBar from "./presentation/components/NavBar";
 import Entry from "./presentation/Pages/Entry/Entry";
@@ -6,7 +6,7 @@ import ProtectedRoute from "./presentation/components/ProtectedRoute ";
 import { useAuthContext } from "./hooks/useAuthContext";
 import LoadingScreen from "./presentation/components/LoadingScreen";
 import Agenda from "./presentation/Pages/Agenda/Agenda";
-
+import Revenue from "./presentation/Pages/Revenue/Revenue";
 import "./css/style.css";
 
 import { useLoadingContext } from "./hooks/useLoadingContext";
@@ -24,14 +24,17 @@ function App() {
         <Route exact path="/home" element={<ProtectedRoute />}>
           <Route exact path="/home" element={<Home />} />
         </Route>
-        <Route exact path="/agenda" element={<Agenda />}>
+        <Route exact path="/agenda" element={<ProtectedRoute />}>
           <Route exact path="/agenda" element={<Agenda />} />
         </Route>
-        <Route exact path="/staff" element={<Staff />}>
+        <Route exact path="/staff" element={<ProtectedRoute />}>
           <Route exact path="/staff" element={<Staff />} />
         </Route>
-        <Route exact path="/users" element={<Users />}>
+        <Route exact path="/users" element={<ProtectedRoute />}>
           <Route exact path="/users" element={<Users />} />
+        </Route>
+        <Route exact path="/revenue" element={<ProtectedRoute />}>
+          <Route exact path="/revenue" element={<Revenue />} />
         </Route>
       </Routes>
     </div>

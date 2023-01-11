@@ -442,8 +442,8 @@ body {
 }
 
 .nav-link img {
-  width: 31px;
-  height: 31px;
+  width: 30px;
+  height: 30px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -1620,9 +1620,13 @@ body {
 }
 
 .summery-chart {
-  width: 70%;
   margin: 10px 5px;
   margin: 10px 20px;
+}
+
+.Chart-container {
+  height: 100%;
+  height: 100%;
 }
 
 .menuBar {
@@ -1632,6 +1636,11 @@ body {
   z-index: 9999;
   font-size: 2rem;
   display: none;
+}
+
+.summery-container {
+  width: 100%;
+  height: 100%;
 }
 
 .loading-screen-wrapper {
