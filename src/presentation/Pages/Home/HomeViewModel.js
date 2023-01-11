@@ -25,6 +25,7 @@ const HomeViewModel = () => {
   const getAppointments = async () => {
     try {
       const { data } = await appointmentRepository.getAppointments();
+      updateStats(data.appointments);
       setAppointmentsData(data.appointments);
     } catch (error) {
       console.log(error);
@@ -42,6 +43,7 @@ const HomeViewModel = () => {
   const getStats = async () => {
     try {
       const { data } = await dashboardRepository.getStats();
+
       setStats(data);
     } catch (error) {
       console.log(error);
@@ -63,6 +65,7 @@ const HomeViewModel = () => {
       const { status, data } = await appointmentRepository.updateStatus(
         appoint
       );
+
       console.log(data);
       objInfo = status;
     } catch (error) {
@@ -83,8 +86,6 @@ const HomeViewModel = () => {
       doneData.splice(rev.month - 1, 0, rev.count);
     });
 
-    console.log(pData);
-
     setDoneDealsData(doneData);
     setProfitData(pData);
   };
@@ -96,6 +97,7 @@ const HomeViewModel = () => {
       );
       if (status == 200) {
         window.alert("Appointment deleted successfully");
+        refresh();
       }
     } catch (error) {
       window.alert(error.message);
