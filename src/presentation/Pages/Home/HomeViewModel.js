@@ -4,6 +4,7 @@ import UserRepository from "../../../repository/UserRepository";
 import DashboardRepository from "../../../repository/DashboardRepository";
 import { useLoadingContext } from "../../../hooks/useLoadingContext";
 import moment from "moment";
+import { useAuthContext } from "../../../hooks/useAuthContext";
 
 const HomeViewModel = () => {
   const [date, setDate] = useState(new Date());
@@ -16,14 +17,14 @@ const HomeViewModel = () => {
   const [appointmentsData, setAppointmentsData] = useState([]);
   const [profitData, setProfitData] = useState([]);
   const { setLoading } = useLoadingContext();
-
+  const { authData } = useAuthContext();
+  const [refreshKey, setRefreshKey] = useState(0);
   const appointmentRepository = AppointmentRepository();
   const userRepository = UserRepository();
   const dashboardRepository = DashboardRepository();
   const getAppointments = async () => {
     try {
       const { data } = await appointmentRepository.getAppointments();
-      // console.log(data.appointments);
       setAppointmentsData(data.appointments);
     } catch (error) {
       console.log(error);
@@ -41,7 +42,6 @@ const HomeViewModel = () => {
   const getStats = async () => {
     try {
       const { data } = await dashboardRepository.getStats();
-      console.log(data);
       setStats(data);
     } catch (error) {
       console.log(error);
@@ -50,7 +50,6 @@ const HomeViewModel = () => {
   const getRevenu = async () => {
     try {
       const { data } = await dashboardRepository.getRevenu();
-      console.log(data);
       updateRevenueData(data.data);
     } catch (error) {
       console.log(error);
@@ -59,13 +58,20 @@ const HomeViewModel = () => {
 
   const updateStatus = async (appoint) => {
     setLoading(true);
+    let objInfo;
     try {
-      const { data } = await appointmentRepository.updateStatus(appoint);
+      const { status, data } = await appointmentRepository.updateStatus(
+        appoint
+      );
       console.log(data);
+      objInfo = status;
     } catch (error) {
       console.log(error);
+      objInfo = error.message;
+      // window.alert(error.message);
     }
     setLoading(false);
+    return objInfo;
   };
 
   const updateRevenueData = (revenue) => {
@@ -80,7 +86,18 @@ const HomeViewModel = () => {
     setProfitData(pData);
   };
 
-  const handleDeleteAppointment = async (appointId) => {};
+  const handleDeleteAppointment = async (appointId) => {
+    try {
+      const { status, data } = await appointmentRepository.deleteAppointment(
+        appointId
+      );
+      if (status == 200) {
+        window.alert("Appointment deleted successfully");
+      }
+    } catch (error) {
+      window.alert(error.message);
+    }
+  };
 
   const updateStats = (appointments) => {
     let done = 0;
@@ -90,14 +107,14 @@ const HomeViewModel = () => {
       let format = "MM/DD/YYYY";
       let d = moment(appoint.start_time).format(format);
       let appD = moment(date).format(format);
-      if (d == appD) {
-        if (appoint.status == "done") {
+      if (d === appD) {
+        if (appoint.status === "done") {
           done++;
-        } else if (appoint.status == "canceled") {
+        } else if (appoint.status === "canceled") {
           canceled++;
         } else if (
-          appoint.status == "in-progress" ||
-          appoint.status == "hold"
+          appoint.status === "in-progress" ||
+          appoint.status === "hold"
         ) {
           pending++;
         }
@@ -107,6 +124,9 @@ const HomeViewModel = () => {
     setCanceled(canceled);
     setDone(done);
   };
+  const refresh = () => {
+    setRefreshKey((prevKey) => prevKey + 1);
+  };
 
   useEffect(() => {
     const HomeInit = async () => {
@@ -114,11 +134,11 @@ const HomeViewModel = () => {
       await getAppointments();
       await getUsers();
       await getStats();
-      // await getRevenu();
+      await getRevenu();
       setLoading(false);
     };
     HomeInit();
-  }, []);
+  }, [refreshKey]);
 
   useEffect(() => {
     updateStats(appointmentsData);
@@ -138,6 +158,7 @@ const HomeViewModel = () => {
     updateStats,
     stats,
     updateStatus,
+    refresh,
   };
 };
 

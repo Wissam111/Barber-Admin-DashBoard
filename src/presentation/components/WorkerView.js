@@ -1,5 +1,3 @@
-import React, { Component } from "react";
-
 function WorkerView(props) {
   const { worker, handleStaffScheduler, handleSettings } = props;
   return (

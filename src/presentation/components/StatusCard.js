@@ -1,7 +1,5 @@
-import React, { Component } from "react";
-
 function StatusCard(props) {
-  const { status, statsNumber, imgUrl, className } = props;
+  const { status, statsNumber, imgUrl } = props;
 
   return (
     <div className={"status-container "}>

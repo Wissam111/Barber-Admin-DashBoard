@@ -3,7 +3,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import dayjs, { Dayjs } from "dayjs";
 import TextField from "@mui/material/TextField";
-
+import RefreshButton from "../../components/RefreshButton";
 import StatusCard from "../../components/StatusCard";
 import ActiveAppointments from "../../components/ActiveAppointments";
 import Customers from "../../components/Customers";
@@ -11,7 +11,6 @@ import PercentageCard from "../../components/PercentageCard";
 
 import HomeViewModel from "./HomeViewModel";
 import { Link } from "react-router-dom";
-
 function Home() {
   const {
     appointmentsData,
@@ -27,39 +26,11 @@ function Home() {
     updateStats,
     stats,
     updateStatus,
+    refresh,
   } = HomeViewModel();
-
-  //   const { users, doneDealsData, profitData } = useContext(APIContext);
-
-  //   function UpdateStats(appointments) {
-  //     let done = 0;
-  //     let pending = 0;
-  //     let canceled = 0;
-  //     appointments.forEach((appoint) => {
-  //       let d = dateFormat(new Date(appoint.start_time), "MM/DD/YYYY");
-  //       let appD = dateFormat(new Date(date), "MM/DD/YYYY");
-  //       if (d == appD) {
-  //         if (appoint.status == "done") {
-  //           done++;
-  //         } else if (appoint.status == "canceled") {
-  //           canceled++;
-  //         } else if (
-  //           appoint.status == "in-progress" ||
-  //           appoint.status == "hold"
-  //         ) {
-  //           pending++;
-  //         }
-  //       }
-  //     });
-  //     setPending(pending);
-  //     setCanceled(canceled);
-  //     setDone(done);
-  //   }
-  //   React.useEffect(() => {
-  //     UpdateStats(appointmentsData);
-  //   }, [date, appointmentsData, doneDealsData, profitData]);
   return (
     <div className="page-container">
+      <RefreshButton refresh={refresh} />
       <div className="homeView-container">
         <div className="date-container">
           <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -116,7 +87,7 @@ function Home() {
             <StatusCard
               imgUrl={require("../../../assets/icons/cd-scetch.png")}
               status={"Total number of users "}
-              statsNumber={stats?.customersCount}
+              statsNumber={users.length}
             />
             <div className="recent-customers">
               <div className="recent-cta">

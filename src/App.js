@@ -11,29 +11,30 @@ import "./css/style.css";
 
 import { useLoadingContext } from "./hooks/useLoadingContext";
 import Staff from "./presentation/Pages/Staff/Staff";
-
+import Users from "./presentation/Pages/Users/Users";
 function App() {
   const { authData } = useAuthContext();
   const { loading } = useLoadingContext();
   return (
-    <BrowserRouter>
-      <div className="app-wrapper">
-        {loading && <LoadingScreen />}
-        {authData && <NavBar />}
-        <Routes>
-          <Route exact path="/" element={<Entry />} />
-          <Route exact path="/home" element={<ProtectedRoute />}>
-            <Route exact path="/home" element={<Home />} />
-          </Route>
-          <Route exact path="/agenda" element={<Agenda />}>
-            <Route exact path="/agenda" element={<Agenda />} />
-          </Route>
-          <Route exact path="/staff" element={<Staff />}>
-            <Route exact path="/staff" element={<Staff />} />
-          </Route>
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <div className="app-wrapper">
+      {loading && <LoadingScreen />}
+      {authData && <NavBar />}
+      <Routes>
+        <Route exact path="/" element={<Entry />} />
+        <Route exact path="/home" element={<ProtectedRoute />}>
+          <Route exact path="/home" element={<Home />} />
+        </Route>
+        <Route exact path="/agenda" element={<Agenda />}>
+          <Route exact path="/agenda" element={<Agenda />} />
+        </Route>
+        <Route exact path="/staff" element={<Staff />}>
+          <Route exact path="/staff" element={<Staff />} />
+        </Route>
+        <Route exact path="/users" element={<Users />}>
+          <Route exact path="/users" element={<Users />} />
+        </Route>
+      </Routes>
+    </div>
   );
 }
 

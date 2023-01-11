@@ -3,6 +3,8 @@ import UserRepository from "../../../repository/UserRepository";
 import { useState, useEffect } from "react";
 import { useLoadingContext } from "../../../hooks/useLoadingContext";
 import moment from "moment/moment";
+import ServiceRepository from "../../../repository/ServiceRepository";
+
 const StaffViewModel = () => {
   const [workers, setWorkers] = useState([]);
   const [currWorker, setCurrWorker] = useState({});
@@ -13,16 +15,19 @@ const StaffViewModel = () => {
   const [isBooked, setIsBooked] = useState(false);
   const [appointmentsData, setAppointmentsData] = useState([]);
   const { setLoading } = useLoadingContext();
-  const [schedulerData, setSchedulerData] = useState([]);
+  const [workerAppointments, setWorkerAppointments] = useState([]);
+  const [refreshKey, setRefreshKey] = useState(0);
+  const [refreshAppointsKey, setRefreshAppointsKey] = useState(0);
 
   const appointmentRepository = AppointmentRepository();
   const userRepository = UserRepository();
+  const serviceRepository = ServiceRepository();
 
   const getAppointments = async () => {
     try {
       const { data } = await appointmentRepository.getAppointments();
-      // console.log(data.appointments);
       setAppointmentsData(data.appointments);
+      return data.appointments;
     } catch (error) {
       console.log(error);
     }
@@ -38,18 +43,15 @@ const StaffViewModel = () => {
   };
 
   const createAppointment = async (appoint) => {
-    let objInfo;
     try {
       const { status, data } = await appointmentRepository.createAppointment(
         appoint
       );
-      console.log(data);
-      objInfo = { status, data };
+
+      return { status, data };
     } catch (error) {
-      console.log(error);
-      objInfo = error.message;
+      window.alert(error.message);
     }
-    return objInfo;
   };
   const deleteUser = async (userId) => {
     let objInfo;
@@ -79,24 +81,57 @@ const StaffViewModel = () => {
 
   const updateStatus = async (appoint) => {
     setLoading(true);
-    let objInfo;
     try {
       const { status, data } = await appointmentRepository.updateStatus(
         appoint
       );
+
+      return { status, data };
+    } catch (error) {
+      console.log(error);
+      window.alert(error.message);
+    }
+
+    setLoading(false);
+  };
+
+  const addService = async (servObj) => {
+    try {
+      const { data } = await serviceRepository.addService(servObj);
       console.log(data);
-      let objInfo = { status, data };
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const deleteService = async (servId) => {
+    try {
+      const { data } = await serviceRepository.deleteService(servId);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const updateUser = async (userId, userObj) => {
+    let objInfo;
+    try {
+      const { status, data } = await userRepository.updateUser(userId, userObj);
+
+      objInfo = status;
     } catch (error) {
       console.log(error);
       objInfo = error.message;
     }
-
-    setLoading(false);
+    refresh();
     return objInfo;
   };
 
   const handleStaffScheduler = (worker) => {
-    const currWorkerAppoints = appointmentsData.filter((appoint) => {
+    setCurrWorker(worker);
+    filterDataByWorker(worker, appointmentsData);
+  };
+
+  const filterDataByWorker = (worker, appoints) => {
+    const currWorkerAppoints = appoints.filter((appoint) => {
       if (!appoint.worker) {
         return false;
       }
@@ -106,8 +141,7 @@ const StaffViewModel = () => {
       let schAppoint = createSchAppoint(appoint);
       return schAppoint;
     });
-    setCurrWorker(worker);
-    setSchedulerData(schData);
+    setWorkerAppointments(schData);
   };
 
   const createSchAppoint = (appoint) => {
@@ -129,7 +163,6 @@ const StaffViewModel = () => {
   };
 
   const commitChanges = async ({ added, changed, deleted }) => {
-    let _tempSchData = [...schedulerData];
     if (added) {
       let currDate = moment(added.startDate).format("yyyy-MM-DD");
       let startDate = compineDT(currDate, added.startDate);
@@ -139,14 +172,10 @@ const StaffViewModel = () => {
         start_time: `${startDate}`,
         end_time: `${endDate}`,
       };
-      let { status, data } = await createAppointment(appoint);
+      const { status, data } = await createAppointment(appoint);
       if (status == 201) {
-        window.alert("appointment created Successfully");
-        let appointSch = createSchAppoint(data.appointment);
-        _tempSchData.push(appointSch);
-        setSchedulerData(_tempSchData);
-      } else {
-        window.alert(status);
+        window.alert("appointment created successfully");
+        refreshAppointments();
       }
     }
     if (deleted != null) {
@@ -162,17 +191,14 @@ const StaffViewModel = () => {
       let res = await deleteUser(userId);
       window.alert(res.message);
       setShowSettings(false);
+      refresh();
     }
   };
   const handleDeleteAppoint = async (appointId) => {
-    let _tempSchData = [...schedulerData];
     let status = await deleteAppoint(appointId);
     if (status == 200) {
-      let newSc = _tempSchData.filter((appoint) => {
-        return appoint.id != appointId;
-      });
-      setSchedulerData(newSc);
       window.alert("appointment deleted successfully");
+      refreshAppointments();
     } else {
       window.alert(status);
     }
@@ -183,21 +209,12 @@ const StaffViewModel = () => {
       appointmentId: id,
       status: "free",
     };
-    let newschData = schedulerData.map((appoint) => {
-      if (appoint.id == id) {
-        appoint.title = "Not Booked";
-        appoint.color = "orange";
-      }
-      return appoint;
-    });
 
-    let status = await updateStatus(objAppo);
-    if (status == 201) {
+    let { status } = await updateStatus(objAppo);
+    if (status == 200) {
       setShowAppointCard(false);
-      setSchedulerData(newschData);
       window.alert("Appointment UnBooked Successfully");
-    } else {
-      window.alert(status);
+      refreshAppointments();
     }
   };
   const handleBook = async (id, selectedServ) => {
@@ -211,38 +228,42 @@ const StaffViewModel = () => {
       status: "hold",
       service: selectedServ,
     };
-    let newschData = schedulerData.map((appoint) => {
-      if (appoint.id == id) {
-        appoint.title = "Booked";
-        appoint.color = "green";
-      }
-
-      return appoint;
-    });
-
-    let res = await updateStatus(objAppo);
-    if (res.message == "appointment status updated") {
+    const { status, data } = await updateStatus(objAppo);
+    console.log(status);
+    if (status == 200) {
       setShowAppointCard(false);
-      setSchedulerData(newschData);
       window.alert("Appointment Booked Successfully");
-    } else {
-      window.alert(res.message);
+      refreshAppointments();
     }
   };
-
+  const refresh = () => {
+    setRefreshKey((prevKey) => prevKey + 1);
+  };
+  const refreshAppointments = () => {
+    setRefreshAppointsKey((prevKey) => prevKey + 1);
+  };
   useEffect(() => {
     const StaffInit = async () => {
       setLoading(true);
-      await getAppointments();
       await getWorkers();
+      await getAppointments();
       setLoading(false);
     };
     StaffInit();
-  }, []);
+  }, [refreshKey]);
+  useEffect(() => {
+    const AppointsRefreshInit = async () => {
+      setLoading(true);
+      const appoints = await getAppointments();
+      filterDataByWorker(currWorker, appoints);
+      setLoading(false);
+    };
+    AppointsRefreshInit();
+  }, [refreshAppointsKey]);
 
   return {
     workers,
-    schedulerData,
+    workerAppointments,
     appointmentsData,
     handleStaffScheduler,
     currWorker,
@@ -260,6 +281,10 @@ const StaffViewModel = () => {
     handleDeleteUser,
     commitChanges,
     handleSettings,
+    addService,
+    deleteService,
+    updateUser,
+    refresh,
   };
 };
 

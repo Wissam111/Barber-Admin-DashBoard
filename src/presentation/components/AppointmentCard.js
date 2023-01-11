@@ -20,18 +20,12 @@ function AppointmentCard(props) {
     setPosition(_position);
   }, [appointment]);
   return (
-    <div
-      className="appointCard-wrapper"
-      style={{
-        left: `${position.left - 370}px`,
-        top: `${position.top - 50}px`,
-      }}
-    >
+    <div className="appointCard-wrapper">
       <div className="appointCard-container">
         <i className="fa fa-times closeBtn" onClick={handleCloseAppoint}></i>
         <ul>
           <li className="cusName">
-            {appointment.customer
+            {appointment?.customer
               ? ` ${appointment.customer.lastName} 
                 
                 ${appointment.customer.firstName}`

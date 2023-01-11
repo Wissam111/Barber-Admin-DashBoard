@@ -1,14 +1,16 @@
-import React, { Component, useState, useContext, useRef } from "react";
+import { useState, useRef } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import OTP from "./OTP";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLoadingContext } from "../../hooks/useLoadingContext";
+import { useNavigate } from "react-router-dom";
 function PhoneLogin(props) {
   const { handleLogin, handleVerify, handleShowOTP, showOTP } = props;
   const phoneRef = useRef("");
+  const { loading } = useLoadingContext();
 
   // const [showPhone, setShowPhone] = useState(true);
   const navigate = useNavigate();
-  const [loadLogin, setLoadLogin] = useState(false);
+  // const [loadLogin, setLoadLogin] = useState(false);
 
   return (
     <div className="phonelogin-container">
@@ -21,9 +23,9 @@ function PhoneLogin(props) {
             ref={phoneRef}
             required
           />
-          {loadLogin && (
+          {/* {loading && (
             <div className="circle-wrapper">{<CircularProgress />}</div>
-          )}
+          )} */}
           <button
             className="loginBtn"
             onClick={() => handleLogin(phoneRef.current.value)}
@@ -37,7 +39,7 @@ function PhoneLogin(props) {
         <OTP
           handleBack={handleShowOTP}
           handleVerify={handleVerify}
-          //   loadLogin={loadLogin}
+          loadLogin={loading}
         />
       )}
     </div>

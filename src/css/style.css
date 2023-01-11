@@ -214,7 +214,7 @@ body {
       touch-action: manipulation;
   position: absolute;
   right: 6%;
-  top: 5%;
+  top: 3%;
   z-index: 99999;
 }
 
@@ -239,7 +239,7 @@ body {
   border-radius: 0.4em;
   font-weight: lighter;
   position: relative;
-  margin: 5px 0;
+  margin: 40px 5px 0 0;
 }
 
 .precentage-wrapper {
@@ -471,8 +471,8 @@ body {
   border-radius: 7px;
 }
 
-.nav-links .active {
-  background: #8a9ea0;
+.nav-links li:hover {
+  background: #cac98f;
 }
 
 .workinghours-container {
@@ -540,6 +540,7 @@ body {
 .workerSettings {
   position: absolute;
   right: 0;
+  padding: 2px;
   top: 10px;
   font-size: 1.3rem;
   cursor: pointer;
@@ -632,6 +633,8 @@ body {
   border-radius: 0.3em;
   z-index: 9999;
   padding: 10px 5px;
+  left: 40em;
+  top: 20em;
 }
 
 .appointCard-wrapper ul {
@@ -747,6 +750,7 @@ body {
   display: flex;
   position: absolute;
   right: 0;
+  top: 4px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -754,6 +758,7 @@ body {
 
 .customer-action .fa {
   margin: 0;
+  padding: 4px;
 }
 
 .customer-action button {
@@ -856,7 +861,7 @@ body {
 }
 
 .users-container .users-cta {
-  width: 30%;
+  width: 310px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -875,7 +880,7 @@ body {
 }
 
 .users-container .customers-container {
-  width: 100%;
+  width: 300px;
   height: 60vh;
   overflow-y: scroll;
   padding-right: 40px;
@@ -918,17 +923,18 @@ body {
   -webkit-box-pack: left;
       -ms-flex-pack: left;
           justify-content: left;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  width: 100%;
+  margin: 1em 0 1em 0;
+  width: 400px;
   height: 4vh;
 }
 
 .users-container .search-container input {
-  width: 50%;
+  width: 60%;
   height: 100%;
   background: none;
   font-weight: bold;
+  margin-left: 3em;
+  border-radius: 5px;
 }
 
 .usersLogo {
@@ -936,6 +942,11 @@ body {
 }
 
 .registerform-container {
+  background: white;
+  background-position: center;
+  background-size: cover;
+  width: 40em;
+  height: 40em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -944,11 +955,15 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
   position: relative;
-  width: 42em !important;
-  height: 40em;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
           box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  width: 50%;
+}
+
+.registerform-container .services-container {
+  margin-left: 2em;
 }
 
 .registerform-container h1 {
@@ -972,6 +987,7 @@ body {
   gap: 1em;
   -webkit-box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
           box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  padding: 5px;
 }
 
 .registerform-container .input-wrapper {
@@ -983,15 +999,25 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
   margin: 20px 30px;
+  width: 300px;
   margin-right: 2em;
 }
 
 .registerform-container .input-wrapper input {
-  border-radius: 2px;
-  width: 120px;
-  height: 20px;
-  -webkit-box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-          box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  width: 215px;
+  height: 43px;
+  background: none;
+  border: none;
+  background: #fefbfb;
+  -webkit-box-shadow: 5px 5px 20px rgba(176, 164, 150, 0.76);
+          box-shadow: 5px 5px 20px rgba(176, 164, 150, 0.76);
+  border-radius: 6px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 21px;
+  padding: 5px 10px 0 5px;
+  color: rgba(0, 0, 0, 0.35);
 }
 
 .registerform-container .input-wrapper .checkBoxlabel:after {
@@ -1371,7 +1397,8 @@ body {
 .settingsWrapper .closeSettings {
   cursor: pointer;
   position: absolute;
-  right: 30px;
+  right: 25px;
+  top: 10px;
   font-size: 1.4rem;
 }
 
@@ -1396,7 +1423,12 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  padding: 10px 3px;
+  -webkit-box-pack: right;
+      -ms-flex-pack: right;
+          justify-content: right;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
 
 .services-container .service-container {
@@ -1418,9 +1450,9 @@ body {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -1610,5 +1642,58 @@ body {
   left: 81px;
   z-index: 999999;
   opacity: 0.5;
+}
+
+.select-file-wrapper {
+  width: 215px;
+  /* height: 43px; */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 5px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  /* border: 2px solid red; */
+}
+
+.select-file-wrapper label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.select-file-wrapper label img {
+  width: 21px;
+}
+
+.select-file-wrapper p {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  size: 14px;
+  color: rgba(0, 0, 0, 0.35);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.add-userImage-primary {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
 }
 /*# sourceMappingURL=style.css.map */

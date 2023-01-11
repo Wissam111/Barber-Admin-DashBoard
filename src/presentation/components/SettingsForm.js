@@ -1,6 +1,8 @@
-import React, { useState, useContext } from "react";
+import { useState } from "react";
 import moment from "moment/moment";
 import AddServiceComp from "./AddServiceComp.js";
+import SelectImageView from "./SelectImageView.js";
+
 function SettingsForm(props) {
   const {
     user,
@@ -10,9 +12,13 @@ function SettingsForm(props) {
     updateUser,
     addService,
     deleteService,
+    refresh,
+    uploadImage,
   } = props;
-  const [workerServs, setWorkerServs] = useState(user.services);
 
+  //selectedFile?.data
+  const [workerServs, setWorkerServs] = useState(user.services);
+  const [selectedFile, setSelectedFile] = useState(null);
   const handleDeleteServ = (title) => {
     let tempServs = workerServs.filter((ser) => {
       return ser.title != title;
@@ -44,8 +50,10 @@ function SettingsForm(props) {
         role: user.role,
       };
     }
-    let res = await updateUser(user._id, userObj);
-    if (res.message === "update success") {
+    let status = await updateUser(user._id, userObj);
+    // await uploadImage(selectedFile);
+    console.log(status);
+    if (status == 200) {
       if (isWorker) {
         user.services.forEach((wServ) => {
           let s = workerServs.find((serv) => {
@@ -56,16 +64,16 @@ function SettingsForm(props) {
           }
         });
         workerServs.forEach((serv) => {
-          console.log(serv);
           if (!serv._id) {
             addService(serv);
           }
         });
       }
-      window.alert(res.message);
+      window.alert("User update successfully");
     } else {
-      window.alert(res.message);
+      window.alert(status);
     }
+    refresh();
     handleExitSettings();
   };
   const handleAddService = (newServData, setShowAddServ) => {
@@ -83,6 +91,19 @@ function SettingsForm(props) {
     setWorkerServs(temp);
   };
 
+  const onSelectFile = (e) => {
+    if (!e.target.files || e.target.files.length == 0) {
+      setSelectedFile(undefined);
+      return;
+    }
+    const selectedFile = {
+      preview: URL.createObjectURL(e.target.files[0]),
+      data: e.target.files[0],
+    };
+    console.log(selectedFile);
+    setSelectedFile(selectedFile);
+  };
+
   return (
     <div
       className="registerform-container"
@@ -93,6 +114,11 @@ function SettingsForm(props) {
         aria-hidden="true"
         onClick={props.handleExitSettings}
       ></i>
+      {/* <SelectImageView
+        currImg={user?.image}
+        onSelectFile={onSelectFile}
+        selectedFile={selectedFile}
+      /> */}
       <form className="register-inputs">
         <div className="inputs">
           <div className="input-wrapper">

@@ -11,7 +11,6 @@ function ActiveAppointments(props) {
     sliceNumb,
     updateStatus,
   } = props;
-  // const { UpdateStatus } = useContext(APIContext);
   const [appointments, setAppointments] = useState([]);
   React.useEffect(() => {
     function filterCurrentDayData() {
@@ -57,7 +56,15 @@ function ActiveAppointments(props) {
       }
 
       tempAppoint.status = "done";
-      updateStatus({ appointmentId: appoint._id, status: "done" });
+      const { status } = updateStatus({
+        appointmentId: appoint._id,
+        status: "done",
+      });
+      if (status == 201) {
+        tempAppoint.status = "done";
+      } else {
+        event.target.checked = false;
+      }
     } else {
       tempAppoint.status = "in-progress";
       updateStatus({ appointmentId: appoint._id, status: "in-progress" });

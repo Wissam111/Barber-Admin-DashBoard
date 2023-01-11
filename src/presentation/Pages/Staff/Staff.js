@@ -1,6 +1,4 @@
-import React, { Component, useState, useContext, useRef } from "react";
 import Paper from "@mui/material/Paper";
-import moment from "moment/moment";
 import AppointmentCard from "../../components/AppointmentCard";
 import StaffView from "../../components/StaffView";
 import {
@@ -9,7 +7,8 @@ import {
   IntegratedEditing,
 } from "@devexpress/dx-react-scheduler";
 import StaffViewModel from "./StaffViewModel";
-import Settings from "../../components/Settings";
+import SettingsForm from "../../components/SettingsForm";
+import RefreshButton from "../../components/RefreshButton";
 
 import {
   Scheduler,
@@ -22,10 +21,10 @@ import {
   CurrentTimeIndicator,
 } from "@devexpress/dx-react-scheduler-material-ui";
 
-function Staff(props) {
+function Staff() {
   const {
     workers,
-    schedulerData,
+    workerAppointments,
     appointmentsData,
     handleStaffScheduler,
     currWorker,
@@ -43,6 +42,10 @@ function Staff(props) {
     handleDeleteUser,
     commitChanges,
     handleSettings,
+    addService,
+    deleteService,
+    updateUser,
+    refresh,
   } = StaffViewModel();
 
   function Appointment({ children, style, data, ...restProps }) {
@@ -76,6 +79,8 @@ function Staff(props) {
         return app._id == props.id;
       });
 
+      console.log(appd);
+      console.log(props.id);
       setShowAppointCard(true);
       setCurrAppoint(appd);
       setIsBooked(isBooked);
@@ -89,6 +94,7 @@ function Staff(props) {
 
   return (
     <div className="page-container">
+      <RefreshButton refresh={refresh} />
       <div className="workinghours-container">
         <StaffView
           workers={workers}
@@ -103,7 +109,7 @@ function Staff(props) {
           )}
 
           <Paper>
-            <Scheduler height={680} data={schedulerData}>
+            <Scheduler height={680} data={workerAppointments}>
               <ViewState defaultCurrentDate={new Date()} />
               <Toolbar />
               <DateNavigator />
@@ -123,11 +129,15 @@ function Staff(props) {
         </div>
         {showSettings && (
           <div className="settingsWrapper">
-            <Settings
+            <SettingsForm
               handleExitSettings={() => setShowSettings(false)}
               user={workerSetting}
               isWorker={true}
               handleDeleteUser={handleDeleteUser}
+              addService={addService}
+              deleteService={deleteService}
+              updateUser={updateUser}
+              refresh={refresh}
             />
           </div>
         )}

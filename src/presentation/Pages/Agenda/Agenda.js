@@ -5,15 +5,19 @@ import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React, { Component, useState } from "react";
 import { useLocation } from "react-router-dom";
-import HomeViewModel from "../Home/HomeViewModel";
+import AgendaViewModel from "./AgendaViewModel";
+import RefreshButton from "../../components/RefreshButton";
+
 function Agenda(props) {
   const location = useLocation();
   const { state } = location != null ? location : null;
   const [date, setDate] = useState(state ? state.fromDate : new Date());
-  const { appointmentsData, DeleteAppoint, updateStatus } = HomeViewModel();
+  const { appointementsData, updateStatus, deleteAppoint, refresh } =
+    AgendaViewModel();
 
   return (
     <div className="page-container">
+      <RefreshButton refresh={refresh} />
       <div className="agenda-container">
         <div className="date-container">
           <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -30,8 +34,8 @@ function Agenda(props) {
 
         <ActiveAppointments
           date={date}
-          appointmentsData={appointmentsData}
-          DeleteAppoint={DeleteAppoint}
+          appointmentsData={appointementsData}
+          DeleteAppoint={deleteAppoint}
           updateStatus={updateStatus}
         />
       </div>

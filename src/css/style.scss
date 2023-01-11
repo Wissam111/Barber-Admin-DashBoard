@@ -166,7 +166,7 @@ body {
   touch-action: manipulation;
   position: absolute;
   right: 6%;
-  top: 5%;
+  top: 3%;
   z-index: 99999;
   // margin: 10px 20px;
 }
@@ -188,7 +188,7 @@ body {
   border-radius: 0.4em;
   font-weight: lighter;
   position: relative;
-  margin: 5px 0;
+  margin: 40px 5px 0 0;
 }
 .precentage-wrapper {
   width: 120px;
@@ -365,8 +365,8 @@ body {
   align-items: center;
   border-radius: 7px;
 }
-.nav-links .active {
-  background: #8a9ea0;
+.nav-links li:hover {
+  background: #cac98f;
 }
 
 //************************* Staff-Working-Hours ***********************//
@@ -417,6 +417,7 @@ body {
 .workerSettings {
   position: absolute;
   right: 0;
+  padding: 2px;
   top: 10px;
   font-size: 1.3rem;
   cursor: pointer;
@@ -488,6 +489,8 @@ body {
   border-radius: 0.3em;
   z-index: 9999;
   padding: 10px 5px;
+  left: 40em;
+  top: 20em;
 
   ul {
     display: flex;
@@ -570,10 +573,11 @@ body {
   display: flex;
   position: absolute;
   right: 0;
-
+  top: 4px;
   align-items: center;
   .fa {
     margin: 0;
+    padding: 4px;
   }
   button {
     background: none;
@@ -648,7 +652,7 @@ body {
   }
 
   .users-cta {
-    width: 30%;
+    width: 310px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -657,7 +661,8 @@ body {
     padding: 0.5em;
   }
   .customers-container {
-    width: 100%;
+    // width: 100%;
+    width: 300px;
     height: 60vh;
     overflow-y: scroll;
     padding-right: 40px;
@@ -686,61 +691,76 @@ body {
     display: flex;
     align-items: flex-start;
     justify-content: left;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    width: 100%;
+    margin: 1em 0 1em 0;
+    width: 400px;
     height: 4vh;
     input {
-      width: 50%;
+      width: 60%;
       height: 100%;
       background: none;
       font-weight: bold;
+      margin-left: 3em;
+      border-radius: 5px;
     }
   }
 }
 .usersLogo {
   font-size: 2.5rem;
 }
+
 .registerform-container {
+  // border: 2px solid red;
+  background: white;
+  background-position: center;
+  background-size: cover;
+  width: 40em;
+  height: 40em;
   display: flex;
   flex-direction: column;
   position: relative;
-  // border: 2px solid red;
-  width: 42em !important;
-  height: 40em;
-  // box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-  //   rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-  //   rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  align-items: center;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  .services-container {
+    margin-left: 2em;
+  }
   h1 {
     text-align: center;
     color: gray;
   }
-  width: 50%;
   .register-inputs {
     display: flex;
     margin: 15px 50px;
     flex-direction: column;
-    // min-height: 60%;
     align-items: center;
     position: relative;
     gap: 1em;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    // border: 2px solid red;
+    padding: 5px;
   }
   .input-wrapper {
     display: flex;
     flex-direction: column;
     margin: 20px 30px;
     // width: 100%;
-
+    // border: 2px solid red;
+    width: 300px;
     // border: 1px solid black;
     margin-right: 2em;
     input {
-      border-radius: 2px;
-      width: 120px;
-      height: 20px;
-      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+      width: 215px;
+      height: 43px;
+      background: none;
+      border: none;
+      background: #fefbfb;
+      box-shadow: 5px 5px 20px rgba(176, 164, 150, 0.76);
+      border-radius: 6px;
+      font-style: normal;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 21px;
+      padding: 5px 10px 0 5px;
+
+      color: rgba(0, 0, 0, 0.35);
     }
 
     .checkBoxlabel:after {
@@ -1052,7 +1072,8 @@ body {
   .closeSettings {
     cursor: pointer;
     position: absolute;
-    right: 30px;
+    right: 25px;
+    top: 10px;
     font-size: 1.4rem;
   }
 
@@ -1073,7 +1094,9 @@ body {
 .services-container {
   width: 100%;
   justify-content: space-between;
-  padding: 10px 3px;
+  justify-content: right;
+  // padding: 10px 3px;
+  align-items: flex-end;
   .service-container {
     border: 1px solid rgb(193, 190, 190);
     min-width: 50px;
@@ -1088,7 +1111,7 @@ body {
   .servWrapper {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     margin-top: 1em;
     gap: 1em;
@@ -1248,4 +1271,44 @@ body {
   left: 81px;
   z-index: 999999;
   opacity: 0.5;
+}
+
+//select image View
+
+.select-file-wrapper {
+  width: 215px;
+  /* height: 43px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  // margin-top: 10px;
+  flex-direction: column;
+  // margin-bottom: 20px;
+  /* border: 2px solid red; */
+  // position: absolute;
+}
+.select-file-wrapper label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+.select-file-wrapper label img {
+  width: 21px;
+}
+
+.select-file-wrapper p {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  size: 14px;
+  color: rgba(0, 0, 0, 0.35);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+.add-userImage-primary {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
 }

@@ -5,23 +5,23 @@ import { BsFillTrashFill } from "react-icons/bs";
 function CustomerRow(props) {
   const { appoint, handleDelete, handleDone } = props;
 
-  const updateCurrState = () => {
-    const today = new Date();
-    const startDate = new Date(appoint.start_time);
-    const endDate = new Date(appoint.end_time);
+  // const updateCurrState = () => {
+  //   const today = new Date();
+  //   const startDate = new Date(appoint.start_time);
+  //   const endDate = new Date(appoint.end_time);
 
-    if (appoint.status == "canceled") {
-      return "canceled";
-    } else if (appoint.status == "done") {
-      return "Done";
-    }
-    // 17:30 18:00  18:01
-    if (today >= startDate && today <= endDate) {
-      return "In Progress";
-    } else if (appoint.status != "done") {
-      return "Pending";
-    }
-  };
+  //   if (appoint.status == "canceled") {
+  //     return "canceled";
+  //   } else if (appoint.status == "done") {
+  //     return "Done";
+  //   }
+  //   // 17:30 18:00  18:01
+  //   if (today >= startDate && today <= endDate) {
+  //     return "In Progress";
+  //   } else if (appoint.status != "done") {
+  //     return "Pending";
+  //   }
+  // };
 
   return (
     <tr className="customerow-container">
@@ -43,19 +43,19 @@ function CustomerRow(props) {
         className={
           appoint.status == "done"
             ? "DoneState"
-            : updateCurrState() == "canceled"
+            : appoint.status == "canceled"
             ? "CanceledState"
-            : updateCurrState() == "Pending"
+            : appoint.status == "pending"
             ? "notStartedState"
             : "ProgresState"
         }
       >
-        {updateCurrState()}
+        {appoint.status == "hold" ? "pending" : appoint.status}
       </td>
       <td className="workerName">
         {appoint.worker
           ? appoint.worker.firstName + " " + appoint.worker.lastName
-          : "non"}
+          : "no-one"}
       </td>
       <td className="actionTd">
         <button className="moreInfoBtn" onClick={() => handleDelete(appoint)}>
